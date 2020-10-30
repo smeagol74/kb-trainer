@@ -1,0 +1,36 @@
+@import "../../_theme";
+
+.TrainerLine {
+	padding: $margin-lg;
+	background: $color-dark-gray;
+	border-radius: $radius-lg;
+
+  .TrainerLine__typing {
+		background: $color-page-background;
+		padding: $margin-lg;
+		border-radius: $radius-sm;
+		margin-bottom: $margin-lg;
+	}
+
+	.TrainerLine__info {
+		background: $color-page-background;
+		padding: $margin-sm $margin-lg;
+		font-size: 0.9rem;
+		color: $color-light-gray;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.TrainerLine__info-item {
+		margin: 0 $margin-lg;
+		&:first-of-type {
+			margin-left: 0;
+		}
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+	.TrainerLine__info-center {
+		flex: 1;
+	}
+}

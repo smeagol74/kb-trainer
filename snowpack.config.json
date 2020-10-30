@@ -1,0 +1,17 @@
+{
+	"extends": "@snowpack/app-scripts-preact",
+	"plugins": [
+		["@snowpack/plugin-webpack"],
+		[
+			"@snowpack/plugin-run-script",
+			{
+				"cmd": "tsc --noEmit",
+				"watch": "$1 --watch"
+			}
+		],
+		["snowpack-plugin-sass"]
+	],
+	"devOptions": {
+		"port": 3000
+	}
+}

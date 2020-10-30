@@ -1,0 +1,70 @@
+@import "../../_theme";
+
+$color-error: $color-red;
+$color-current: $color-white;
+$color-typed: $color-gray;
+$color-enter: $color-white;
+$fw-typed: 300;
+$fw-future: 400;
+$fw-current: 600;
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap');
+
+.TypingChar {
+	font-family: 'Fira Code', monospace;
+	font-weight: $fw-future;
+	font-size: 1.5rem;
+	border-bottom: 2px transparent;
+	padding-bottom: 4px;
+
+	&.TypingChar--current {
+		border-bottom: 2px solid $color-current;
+		font-weight: $fw-current;
+		color: $color-current;
+
+		&.TypingChar--error {
+			color: $color-error;
+			border-color: $color-error;
+		}
+	}
+
+	&.TypingChar--kbd {
+		border: 1px solid $color-light-gray;
+		padding: 4px;
+		border-radius: 4px;
+
+		&.TypingChar--current {
+			border-color: $color-current;
+
+			&.TypingChar--error {
+				color: $color-error;
+				border-color: $color-error;
+			}
+		}
+	}
+
+	&.TypingChar--typed {
+		color: $color-typed;
+		font-weight: $fw-typed;
+	}
+
+	&.TypingChar--space {
+		width: $margin-lg;
+	}
+
+	&:last-child {
+		margin-left: $margin-sm;
+		color: $color-enter;
+		font-size: x-large;
+
+		&.TypingChar--current {
+			color: $color-current;
+
+			&.TypingChar--error {
+				color: $color-error;
+				border-color: $color-error;
+			}
+		}
+	}
+
+}
