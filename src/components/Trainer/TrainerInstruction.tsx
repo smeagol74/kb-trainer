@@ -7,16 +7,21 @@ export interface ITrainerInstructionProps {
 	onStart: VoidCallback
 }
 
-export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({onStart}) => {
+export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({ onStart }) => {
 
 	useEffect(() => {
 		function _onKeydown(event: KeyboardEvent) {
-			onStart();
+			if (event.key == ' ') {
+				onStart();
+			} else {
+				console.log(event.key);
+			}
 		}
+
 		window.addEventListener('keydown', _onKeydown);
 		return () => {
 			window.removeEventListener('keydown', _onKeydown);
-		}
+		};
 	}, [onStart]);
 
 	return <div className="TrainerInstruction">

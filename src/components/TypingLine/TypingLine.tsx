@@ -5,12 +5,19 @@ import { TypingChar } from './TypingChar';
 import { h } from 'preact';
 import './TypingLine.scss';
 
+export interface ITypingLineResults {
+	complete: Dict<number>;
+	errors: Dict<number>;
+}
+
 export interface ITypingLineProps {
 	/**
 	 *
 	 */
 	text: string[];
-	onComplete: () => void;
+	onComplete: (results: ITypingLineResults) => void;
+	onType: (complete: number) => void;
+	onError: (errors: number) => void;
 }
 
 const Modifier: Dict<boolean> = {
@@ -22,37 +29,59 @@ const Modifier: Dict<boolean> = {
 
 const PARA = '¶';
 const SHIFT = '⇧';
-const ALT= '⌥';
+const ALT = '⌥';
 const CTRL = '⌃';
 const CMD = '⌘';
 
+function _key(value: string, ...aliases: string[]): Dict<string> {
+	const res: Dict<string> = {
+		[value.toLowerCase()]: value,
+	};
+	_(aliases).each((alias) => {
+		res[alias.toLowerCase()] = value;
+	});
+	return res;
+}
+
+function _fkeys(): Dict<string> {
+	const res: Dict<string> = {};
+	for(let i = 1; i <= 24; i++) {
+		const value = `F${i}`;
+		res[`f${i}`] = value;
+		res[`f-${i}`] = value;
+	}
+	return res;
+}
+
 const Mod: Dict<string> = {
-	// shiftKey
-	[SHIFT]: 'Shift',
-	shift: 'Shift',
-	// altKey
-	[ALT]: 'Alt',
-	alt: 'Alt',
-	option: 'Alt',
-	// ctrlKey
-	[CTRL]: 'Control',
-	ctrl: 'Control',
-	control: 'Control',
-	// metaKey
-	[CMD]: 'Meta',
-	cmd: 'Meta',
-	command: 'Meta',
-	win: 'Meta',
+	..._key('Shift', SHIFT),
+	..._key('Alt', ALT, 'option'),
+	..._key('Control', CTRL, 'ctrl'),
+	..._key('Meta', CMD, 'cmd', 'command', 'win'),
+};
+
+const Special: Dict<string> = {
+	..._key('Backspace', 'back'),
+	..._key('Enter', 'return'),
+	..._key('Escape', 'esc'),
+	..._fkeys(),
+	..._key('Tab'),
+	..._key('PageUp', 'pgup'),
+	..._key('PageDown', 'pgdn'),
+	..._key('Home'),
+	..._key('End'),
 };
 
 
 export function _charMatches(char: string, event: KeyboardEvent): boolean {
 	if (char.length === 1) {
 		if (char === PARA) {
-		  return event.key === 'Enter';
+			return event.key === 'Enter';
 		} else {
 			return char === event.key;
 		}
+	} else if (Special[char]) {
+		return event.key === Special[char];
 	} else {
 		const symbols = char.split('+');
 		let result = true;
@@ -67,11 +96,50 @@ export function _charMatches(char: string, event: KeyboardEvent): boolean {
 	}
 }
 
-export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text , onComplete}) => {
+function _incCharStats(idx: number, char: string, errors: number[], result: ITypingLineResults) {
+	result.complete[char] = result.complete[char] ?? 0;
+	result.errors[char] = result.errors[char] ?? 0;
+	result.complete[char] += 1;
+	result.errors[char] += errors[idx];
+}
+
+function _mkResults(errors: number[], text: string[]): ITypingLineResults {
+
+	const result: ITypingLineResults = {
+		complete: {
+			Enter: 1
+		}	,
+		errors: {
+			Enter: errors[text.length]
+		}
+	};
+	_.each(text, (char, idx) => {
+		if (char.length === 1) {
+			_incCharStats(idx, char.toLowerCase(), errors, result);
+			if (char === char.toUpperCase()) {
+				_incCharStats(idx, 'Shift', errors, result);
+			}
+		} else {
+			_(char.split('+'))
+				.map(c => Mod[c] ?? Special[c] ?? c)
+				.each(c => _incCharStats(idx, c, errors, result));
+		}
+	})
+	return result;
+}
+
+export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComplete, onType, onError }) => {
 
 	const [pos, setPos] = useState<number>(0);
 	const [errors, setErrors] = useState<number[]>(new Array(text.length + 1).fill(0));
 	const keypress = useRef<(event: KeyboardEvent) => void>();
+	const complete = useRef<() => void>();
+
+	useEffect(() => {
+		complete.current = () => {
+			onComplete(_mkResults(errors, text));
+		}
+	}, [onComplete, errors, text]);
 
 	useEffect(() => {
 		keypress.current = (event) => {
@@ -85,20 +153,25 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text , onCom
 
 				if (_charMatches(char, event)) {
 					if (pos >= text.length) {
-						onComplete();
+						complete.current();
 					} else {
-						setPos((prev) => prev + 1);
+						setPos((prev) => {
+							const res = prev + 1;
+							onType(res);
+							return res;
+						});
 					}
 				} else {
 					setErrors((prev) => {
 						const res = [...prev];
 						res[pos] += 1;
+						onError(_(res).filter(v => v > 0).size());
 						return res;
 					});
 				}
 			}
 		};
-	});
+	}, [onComplete, setErrors, setPos, onType, onError]);
 
 	useEffect(() => {
 		const _onKeypress = (event: KeyboardEvent) => {
@@ -123,7 +196,7 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text , onCom
 			char: PARA,
 			isCurrent: pos === text.length,
 			isTyped: false,
-			hasErrors: errors[pos]
-		}}/>
+			hasErrors: errors[pos],
+		}} />
 	</div>;
 };
