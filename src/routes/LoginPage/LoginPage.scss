@@ -1,0 +1,62 @@
+@import '../../_theme';
+
+.LoginPage {
+	@extend .page;
+
+	.LoginPage__body {
+		@extend .page__body;
+	}
+
+	.LoginPage__form {
+		@extend .light-box;
+
+		h3 {
+			margin: 0 0 $margin-sm;
+		}
+	}
+
+	.LoginPage__form-list {
+		@extend .dark-box;
+
+		margin-bottom: $margin-lg;
+
+		ul {
+			margin-block-start: 0;
+			margin-block-end: 0;
+			padding-inline-start: 0;
+			list-style: none;
+		}
+
+		li {
+			@extend .dark-button;
+			margin-bottom: $margin-sm;
+
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.LoginPage__form-register {
+		@extend .dark-box;
+	}
+
+	.LoginPage__form-group {
+		@extend .form-group-horiz;
+
+		label {
+			width: 50px;
+			text-align: right;
+			margin-right: $margin-lg;
+		}
+
+		input {
+			flex: 1;
+		}
+	}
+
+	.LoginPage__form-register-button {
+		@extend .dark-button;
+		width: 100%;
+	}
+}

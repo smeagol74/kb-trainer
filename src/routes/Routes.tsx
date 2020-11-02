@@ -1,15 +1,15 @@
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import { route, Router, RouterOnChangeArgs } from 'preact-router';
-import { Home } from './Home/Home';
-import { Login } from './Login/Login';
 import { useCallback, useContext } from 'preact/hooks';
 import { rt, url } from './sitemap';
 import _ from 'lodash';
 import { UserContext } from '../App';
-import { About } from './About/About';
-import { Keyboard } from './Keyboard/Keyboard';
-import { Practice } from './Practice/Practice';
+import { PracticePage } from './PracticePage/PracticePage';
+import { KeyboardPage } from './KeyboardPage/KeyboardPage';
+import { AboutPage } from './AboutPage/AboutPage';
+import { LoginPage } from './LoginPage/LoginPage';
+import { HomePage } from './HomePage/HomePage';
 
 export interface IRoutesProps {
 }
@@ -25,10 +25,10 @@ export const Routes: FunctionalComponent<IRoutesProps> = () => {
 	}, [user]);
 
 	return (<Router onChange={onRouteChange}>
-		<Home path={rt.home} />
-		<Login path={rt.login} />
-		<About path={rt.about} />
-		<Keyboard path={rt.keyboard}/>
-		<Practice path={rt.practice}/>
+		<HomePage path={rt.home} />
+		<LoginPage path={rt.login} />
+		<AboutPage path={rt.about} />
+		<KeyboardPage path={rt.keyboard}/>
+		<PracticePage path={rt.practice}/>
 	</Router>);
 };

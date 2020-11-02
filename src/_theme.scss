@@ -4,7 +4,62 @@ $color-light-gray: #aaaaaa;
 $color-white: #ffffff;
 $color-gray: #999999;
 $color-red: #ff6666;
+$color-black: #000000;
 $radius-lg: 8px;
 $radius-sm: 4px;
 $margin-lg: 20px;
 $margin-sm: 6px;
+
+
+.page {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.page__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.light-box {
+	padding: $margin-lg;
+	background: $color-dark-gray;
+	border-radius: $radius-lg;
+}
+
+.dark-box {
+	background: $color-page-background;
+	padding: $margin-lg;
+	border-radius: $radius-sm;
+}
+
+.dark-button {
+	background: $color-page-background;
+	border: 1px solid $color-gray;
+	border-radius: $radius-sm;
+	padding: $margin-sm;
+	cursor: pointer;
+	color: $color-white;
+
+	&:hover {
+		background: $color-black;
+		border-color: $color-white;
+	}
+
+}
+
+.form-group-horiz {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: $margin-sm;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}

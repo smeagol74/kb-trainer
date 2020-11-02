@@ -1,17 +1,21 @@
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
-import './Home.scss';
+import './HomePage.scss';
 import type { RoutableProps } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
 import type { Keyboard } from '../../components/Db/Keyboard';
 import { useState } from 'preact/hooks';
 
-export const Home: FunctionalComponent<RoutableProps> = () => {
+export const HomePage: FunctionalComponent<RoutableProps> = () => {
 
-	const [keyboards, setKeyboards] = useState<Keyboard[]>([]);
+	const [myKeyboards, setMyKeyboards] = useState<Keyboard[]>([]);
+	const [otherKeyboards, setOtherKeyboards] = useState<Keyboard[]>([]);
 
-	return <div className="Home">
-		<div className="Home__body">
+
+
+	return <div className="HomePage">
+		<div className="HomePage__body">
+
 		</div>
 		<Menu />
 	</div>;

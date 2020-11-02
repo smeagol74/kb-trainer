@@ -1,21 +1,17 @@
 @import "../../_theme";
 
 .TrainerInstruction {
-	padding: $margin-lg;
-	background: $color-dark-gray;
-	border-radius: $radius-lg;
+	@extend .light-box;
 
 	.TrainerInstruction__button {
-		background: $color-page-background;
-		padding: $margin-lg;
-		border-radius: $radius-sm;
+		@extend .dark-box;
 		text-align: center;
 		margin-bottom: $margin-lg;
 		font-size: 1.5rem;
 	}
 
 	.TrainerInstruction__message {
-		background: $color-page-background;
+		@extend .dark-box;
 		padding: $margin-sm $margin-lg;
 		text-align: center;
 		font-size: 0.9rem;
