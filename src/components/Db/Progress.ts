@@ -1,5 +1,5 @@
 export interface Progress {
-	id: number;
+	id?: number;
 	user: string;
 	keyboard: string;
 	date: string;

@@ -1,3 +1,12 @@
-.Menu {
+@import '../../_theme';
 
+.Menu {
+	width: 100%;
+	padding: $margin-sm;
+
+	.Menu__logo {
+		color: $color-white;
+		text-decoration: none;
+		margin-right: $margin-lg;
+	}
 }

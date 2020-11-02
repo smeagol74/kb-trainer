@@ -3,7 +3,7 @@ import { Finger, sk } from '../Keyboard';
 
 export const adv_ru: Keyboard = {
 	id: 'adv_ru',
-	name: 'Русская',
+	name: 'Русская ЙЦУКЕН',
 	description: 'Обычная русская раскладка, тренировка для десятипальцевого набора',
 	strokes: {
 		initial: 100,
@@ -24,6 +24,7 @@ export const adv_ru: Keyboard = {
 		sk(Finger.C, 'я'),
 		sk(Finger.C, 'ё', 'ъ'),
 		sk(Finger.A, 'х'),
+		sk(Finger.C, 'Shift')
 	],
 	vocabulary: 'random',
 };

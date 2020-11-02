@@ -20,7 +20,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 	const nameRef = useRef<HTMLInputElement>();
 
 	useEffect(() => {
-		Db.user.list().then(setUsers);
+		Db.user.toArray().then(setUsers);
 	}, [setUsers]);
 
 	const onSelectUser = useCallback((user: User) => {
