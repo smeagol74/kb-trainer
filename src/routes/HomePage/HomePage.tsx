@@ -21,20 +21,20 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 	useEffect(() => {
 
 		function _queryCounts(keyboards: Keyboard[]) {
-			const promises: PromiseLike<number|Keyboard[]>[] =_(keyboards).map(kb => Db.progress.where({
+			const promises: PromiseLike<number | Keyboard[]>[] = _(keyboards).map(kb => Db.progress.where({
 				user: user?.id,
 				keyboard: kb.id,
 			}).count())
 				.value();
 			return Promise.all([
 				Promise.resolve(keyboards),
-				...promises
-			])
+				...promises,
+			]);
 		}
 
-		function _splitKeyboards(res: (Keyboard[]|number)[]) {
+		function _splitKeyboards(res: (Keyboard[] | number)[]) {
 			const keyboards = res[0] as Keyboard[];
-			const counts =  _.filter(res, v => Number.isInteger(v));
+			const counts = _.filter(res, v => Number.isInteger(v));
 
 			const my: Keyboard[] = [];
 			const other: Keyboard[] = [];
@@ -45,14 +45,14 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 				} else {
 					other.push(keyboard);
 				}
-			})
+			});
 			return {
 				my,
-				other
-			}
+				other,
+			};
 		}
 
-		function _saveToState({my, other}: {my: Keyboard[], other: Keyboard[]}) {
+		function _saveToState({ my, other }: { my: Keyboard[], other: Keyboard[] }) {
 			setMyKeyboards(my);
 			setOtherKeyboards(other);
 		}
@@ -66,20 +66,22 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 
 	return <div className="HomePage">
 		<div className="HomePage__body">
-			{!_.isEmpty(myKeyboards) && <div className="HomePage__my-keyboards">
-				<h4>My keyboards progress</h4>
-				{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
-					key: idx,
-					keyboard
-				}}/>)}
-			</div>}
-			{!_.isEmpty(otherKeyboards) && <div className="HomePage__other-keyboards">
-				<h4>Available keyboards</h4>
-				{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
-					key: idx,
-					keyboard
-				}}/>)}
-			</div>}
+			<div className="HomePage__frame">
+				{!_.isEmpty(myKeyboards) && <div className="HomePage__my-keyboards">
+					<h3>My keyboards progress</h3>
+					{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
+						key: idx,
+						keyboard,
+					}} />)}
+				</div>}
+				{!_.isEmpty(otherKeyboards) && <div className="HomePage__other-keyboards">
+					<h3>Available keyboards</h3>
+					{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
+						key: idx,
+						keyboard,
+					}} />)}
+				</div>}
+			</div>
 		</div>
 		<Menu />
 	</div>;

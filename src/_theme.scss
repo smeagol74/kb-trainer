@@ -46,12 +46,12 @@ $margin-sm: 6px;
 	padding: $margin-sm;
 	cursor: pointer;
 	color: $color-white;
+	text-decoration: none;
 
 	&:hover {
 		background: $color-black;
 		border-color: $color-white;
 	}
-
 }
 
 .form-group-horiz {
@@ -62,4 +62,16 @@ $margin-sm: 6px;
 	&:last-of-type {
 		margin-bottom: 0;
 	}
+}
+
+.icon-white-sm {
+	width: 16px;
+	height: 16px;
+	fill: $color-white;
+}
+
+.icon-white-lg {
+	width: 24px;
+	height: 24px;
+	fill: $color-white;
 }

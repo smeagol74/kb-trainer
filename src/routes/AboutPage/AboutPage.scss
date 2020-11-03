@@ -2,4 +2,8 @@
 
 .AboutPage {
 	@extend .page;
+
+	.AboutPage__body {
+		@extend .page__body;
+	}
 }

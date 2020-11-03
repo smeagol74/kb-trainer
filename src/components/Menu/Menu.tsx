@@ -7,6 +7,7 @@ import { url } from '../../routes/sitemap';
 import { h } from 'preact';
 import { Logo } from '../Logo/Logo';
 import _ from 'lodash';
+import { Icon } from '../Icon/Icon';
 
 export interface IMenuProps {}
 
@@ -21,7 +22,9 @@ export const Menu: FunctionalComponent<IMenuProps> = ({children}) => {
 	return <div className="Menu">
 		<Link className="Menu__logo" href={url.about}><Logo/></Link>
 		{!_.isNil(user) && <Link className="Menu__user" href={url.home}>{user?.name}</Link>}
+		<div className="Menu__spacer"/>
 		{children}
-		{!_.isNil(user) && <button className="Menu__logout" onClick={onExit}>Exit</button>}
+		<div className="Menu__spacer"/>
+		{!_.isNil(user) && <button className="Menu__logout" onClick={onExit}><Icon className="Menu__logout-icon" img="door-6"/> Exit</button>}
 	</div>
 }

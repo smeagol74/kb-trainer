@@ -8,8 +8,8 @@ import { url } from '../sitemap';
 export const AboutPage: FunctionalComponent = () => {
 	return <div className="AboutPage">
 		<div className="AboutPage__body">
-			About
-			<Link href={url.home}>Start</Link>
+			<p>Here is some motivation text about the project!</p>
+			<Link href={url.home} className="dark-button">Start</Link>
 		</div>
 		<Menu/>
 	</div>

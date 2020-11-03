@@ -1,0 +1,14 @@
+@import '../../_theme';
+
+.Logo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+
+	.Logo__img {
+		@extend .icon-white-lg;
+	}
+	.Logo__caption {
+	}
+}

@@ -3,10 +3,34 @@
 .Menu {
 	width: 100%;
 	padding: $margin-sm;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-content: center;
+	background: $color-dark-gray;
 
 	.Menu__logo {
 		color: $color-white;
 		text-decoration: none;
 		margin-right: $margin-lg;
+	}
+
+	.Menu__user {
+		color: $color-white;
+		text-decoration: none;
+		margin-right: $margin-lg;
+	}
+
+	.Menu__logout {
+		@extend .dark-button;
+		margin-left: $margin-lg;
+	}
+
+	.Menu__logout-icon {
+		@extend .icon-white-sm;
+	}
+
+	.Menu__spacer {
+		flex: 1;
 	}
 }
