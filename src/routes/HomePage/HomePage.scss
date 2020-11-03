@@ -26,4 +26,24 @@
 	.HomePage__my-keyboards + .HomePage__other-keyboards {
 		margin-top: $margin-lg;
 	}
+
+	.HomePage__group-list {
+		border: 1px solid $color-gray;
+		border-radius: $radius-sm;
+		background: $color-dark-gray;
+	}
+
+	.HomePage__group-list-item {
+		padding: $margin-sm;
+		border-bottom: 1px solid $color-gray;
+		cursor: pointer;
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+
+		&:hover {
+			background: $color-page-background;
+		}
+	}
 }

@@ -69,17 +69,23 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 			<div className="HomePage__frame">
 				{!_.isEmpty(myKeyboards) && <div className="HomePage__my-keyboards">
 					<h3>My keyboards progress</h3>
-					{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
-						key: idx,
-						keyboard,
-					}} />)}
+					<div className="HomePage__group-list">
+						{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
+							key: idx,
+							className: 'HomePage__group-list-item',
+							keyboard,
+						}} />)}
+					</div>
 				</div>}
 				{!_.isEmpty(otherKeyboards) && <div className="HomePage__other-keyboards">
 					<h3>Available keyboards</h3>
-					{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
-						key: idx,
-						keyboard,
-					}} />)}
+					<div className="HomePage__group-list">
+						{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
+							key: idx,
+							className: 'HomePage__group-list-item',
+							keyboard,
+						}} />)}
+					</div>
 				</div>}
 			</div>
 		</div>

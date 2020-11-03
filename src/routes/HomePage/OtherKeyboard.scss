@@ -1,3 +1,43 @@
-.OtherKeyboard {
+@import '../../_theme';
 
+.OtherKeyboard {
+	@extend .flex-row;
+
+	.OtherKeyboard__desc {
+		@extend .flex-col;
+		flex: 1;
+	}
+
+	.OtherKeyboard__desc-title {
+		font-weight: bold;
+		font-size: 1.2rem;
+		margin-bottom: $margin-sm;
+	}
+
+	.OtherKeyboard__desc-title-icon {
+		@extend .icon-white-lg;
+		margin-bottom: -4px;
+		margin-right: $margin-sm * 1.5;
+	}
+
+	.OtherKeyboard__desc-value {
+		color: $color-light-gray;
+	}
+
+	.OtherKeyboard__block {
+		@extend .flex-col;
+		width: 50px;
+	}
+
+	.OtherKeyboard__block-label {
+		font-size: 0.7rem;
+		text-align: center;
+	}
+
+	.OtherKeyboard__block-value {
+		flex: 1;
+		font-size: 2rem;
+		text-align: center;
+		vertical-align: middle;
+	}
 }

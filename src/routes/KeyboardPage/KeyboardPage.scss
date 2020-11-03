@@ -2,4 +2,49 @@
 
 .KeyboardPage {
 	@extend .page;
+
+	.KeyboardPage__body {
+		@extend .page__body;
+	}
+
+	.KeyboardPage__box {
+		@extend .light-box;
+		max-width: 900px;
+	}
+
+	.KeyboardPage__header {
+		@extend .dark-box;
+		@extend .flex-row;
+	}
+
+	.KeyboardPage__details {
+		@extend .dark-box;
+	}
+
+	.KeyboardPage__options {
+		@extend .dark-box;
+	}
+
+	.KeyboardPage__desc {
+		flex: 1;
+	}
+
+	.KeyboardPage__title-icon {
+		@extend .icon-white-lg;
+		margin-bottom: -4px;
+		margin-right: $margin-sm * 1.5;
+	}
+
+	.KeyboardPage__title {
+		margin: 0;
+	}
+
+	.KeyboardPage__description {
+		margin-top: $margin-sm;
+		color: $color-light-gray;
+	}
+
+	.KeyboardPage__start-button {
+		@extend .dark-button;
+	}
 }

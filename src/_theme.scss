@@ -37,6 +37,11 @@ $margin-sm: 6px;
 	background: $color-page-background;
 	padding: $margin-lg;
 	border-radius: $radius-sm;
+	margin-bottom: $margin-lg;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .dark-button {
@@ -51,6 +56,12 @@ $margin-sm: 6px;
 	&:hover {
 		background: $color-black;
 		border-color: $color-white;
+	}
+
+	.Icon {
+		fill: $color-white;
+		width: 24px;
+		height: 24px;
 	}
 }
 
@@ -74,4 +85,23 @@ $margin-sm: 6px;
 	width: 24px;
 	height: 24px;
 	fill: $color-white;
+}
+
+.group-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.group-list-item {
+
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
 }
