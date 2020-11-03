@@ -11,7 +11,7 @@ $margin-lg: 20px;
 $margin-sm: 6px;
 
 
-.page {
+@mixin page {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -19,21 +19,24 @@ $margin-sm: 6px;
 	justify-content: center;
 }
 
-.page__body {
+@mixin page__body {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
-.light-box {
+@mixin light-box {
 	padding: $margin-lg;
 	background: $color-dark-gray;
 	border-radius: $radius-lg;
 }
 
-.dark-box {
+@mixin dark-box {
 	background: $color-page-background;
 	padding: $margin-lg;
 	border-radius: $radius-sm;
@@ -44,9 +47,9 @@ $margin-sm: 6px;
 	}
 }
 
-.dark-button {
+@mixin dark-button {
 	background: $color-page-background;
-	border: 1px solid $color-gray;
+	border: 1px solid $color-dark-gray;
 	border-radius: $radius-sm;
 	padding: $margin-sm;
 	cursor: pointer;
@@ -55,17 +58,19 @@ $margin-sm: 6px;
 
 	&:hover {
 		background: $color-black;
-		border-color: $color-white;
+		border-color: $color-gray;
+
+		.Icon {
+			fill: $color-white;
+		}
 	}
 
 	.Icon {
-		fill: $color-white;
-		width: 24px;
-		height: 24px;
+		fill: $color-light-gray;
 	}
 }
 
-.form-group-horiz {
+@mixin form-group-horiz {
 	display: flex;
 	flex-direction: row;
 	margin-bottom: $margin-sm;
@@ -75,33 +80,43 @@ $margin-sm: 6px;
 	}
 }
 
-.icon-white-sm {
+.Icon-sm {
+	width: 16px;
+	height: 16px;
+}
+
+.Icon-lg {
+	width: 24px;
+	height: 24px;
+}
+
+@mixin icon-white-sm {
 	width: 16px;
 	height: 16px;
 	fill: $color-white;
 }
 
-.icon-white-lg {
+@mixin icon-white-lg {
 	width: 24px;
 	height: 24px;
 	fill: $color-white;
 }
 
-.group-list {
+@mixin group-list {
 	display: flex;
 	flex-direction: column;
 }
 
-.group-list-item {
+@mixin group-list-item {
 
 }
 
-.flex-row {
+@mixin flex-row {
 	display: flex;
 	flex-direction: row;
 }
 
-.flex-col {
+@mixin flex-col {
 	display: flex;
 	flex-direction: column;
 }

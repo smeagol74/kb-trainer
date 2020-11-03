@@ -1,5 +1,13 @@
 @import '../../_theme';
 
 .PracticePage {
-	@extend .page;
+	@include page;
+
+	.PracticePage__body {
+		@include page__body;
+	}
+
+	.PracticePage__menu-button {
+		@include dark-button;
+	}
 }

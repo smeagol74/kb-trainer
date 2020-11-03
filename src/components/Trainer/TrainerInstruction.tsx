@@ -7,7 +7,7 @@ export interface ITrainerInstructionProps {
 	onStart: VoidCallback
 }
 
-export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({ onStart }) => {
+export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({ onStart, children }) => {
 
 	useEffect(() => {
 		function _onKeydown(event: KeyboardEvent) {
@@ -25,6 +25,7 @@ export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> =
 	}, [onStart]);
 
 	return <div className="TrainerInstruction">
+		{children && <div className="TrainerInstruction__title">{children}</div>}
 		<div className="TrainerInstruction__button">Press space bar to start</div>
 		<div className="TrainerInstruction__message">Take home row position</div>
 	</div>;

@@ -7,7 +7,8 @@
 	flex-direction: row;
 	align-items: center;
 	align-content: center;
-	background: $color-dark-gray;
+	background: $color-page-background;
+	border-top: 1px solid $color-dark-gray;
 
 	.Menu__logo {
 		color: $color-white;
@@ -22,12 +23,12 @@
 	}
 
 	.Menu__logout {
-		@extend .dark-button;
+		@include dark-button;
 		margin-left: $margin-lg;
 	}
 
 	.Menu__logout-icon {
-		@extend .icon-white-sm;
+		@include icon-white-sm;
 	}
 
 	.Menu__spacer {

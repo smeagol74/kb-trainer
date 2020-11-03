@@ -4,7 +4,8 @@ import clsx from 'clsx';
 
 export interface IIconProps {
 	className?: string;
-	img: 'keyboard-13' | 'door-6' | 'keyboard-4' | 'rocket-19'
+	img: 'keyboard-13' | 'door-6' | 'keyboard-4' | 'rocket-19' | 'chart-5' | 'education-1';
+	size?: 'sm' | 'lg';
 }
 
 const path = {
@@ -34,15 +35,23 @@ const path = {
 		'1.703c-.243-.244-.243-.64 0-.883.242-.244.64-.244.885 0 .242.243.241.639 0 .883-.245.243-.642.243-.885 0zm-6.492 ' +
 		'9.024c-1.734 1.844-3.656 2.787-5.72 2.787-3.2 0-5.624-2.354-5.624-5.311 0-1.485.611-3.122 2.043-4.689-3.201 ' +
 		'5.137 1.126 10.128 6.694 4.607l.765.765c-.91 1.061-1.661 1.977-2.971 2.638 1.344.057 2.87-.745 4.017-1.593l.796.796z',
+	'chart-5': 'M7 24h-6v-6h6v6zm8-9h-6v9h6v-9zm8-4h-6v13h6v-13zm0-11l-6 1.221 1.716 1.708-6.85 6.733-3.001-3.002-7.841 ' +
+		'7.797 1.41 1.418 6.427-6.39 2.991 2.993 8.28-8.137 1.667 1.66 1.201-6.001z',
+	'education-1': 'M20 12.875v5.068c0 2.754-5.789 4.057-9 4.057-3.052 0-9-1.392-9-4.057v-6.294l9 4.863 ' +
+		'9-3.637zm-8.083-10.875l-12.917 5.75 12 6.5 11-4.417v7.167h2v-8.25l-12.083-6.75zm13.083 20h-4c.578-1 1-2.5 ' +
+		'1-4h2c0 1.516.391 2.859 1 4z',
 };
 
 /**
  * Icon from https://iconmonstr.com/
  */
-export const Icon: FunctionalComponent<IIconProps> = ({ className, img }) => {
+export const Icon: FunctionalComponent<IIconProps> = ({ className, img, size }) => {
 	return (<svg {...{
 		xmlns: 'http://www.w3.org/2000/svg',
-		className: clsx('Icon', className),
+		className: clsx('Icon', className, {
+			'Icon-sm': size === 'sm',
+			'Icon-lg': size === 'lg',
+		}),
 		viewBox: '0 0 24 24',
 	}}>
 		<path d={path[img]} />

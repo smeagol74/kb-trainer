@@ -25,6 +25,6 @@ export const Menu: FunctionalComponent<IMenuProps> = ({children}) => {
 		<div className="Menu__spacer"/>
 		{children}
 		<div className="Menu__spacer"/>
-		{!_.isNil(user) && <button className="Menu__logout" onClick={onExit}><Icon className="Menu__logout-icon" img="door-6"/> Exit</button>}
+		{!_.isNil(user) && <button className="Menu__logout" onClick={onExit}><Icon img="door-6" size="sm"/> Exit</button>}
 	</div>
 }

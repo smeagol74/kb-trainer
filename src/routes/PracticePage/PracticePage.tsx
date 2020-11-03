@@ -1,14 +1,60 @@
 import './PracticePage.scss';
 import type { FunctionalComponent } from 'preact';
-import type { RoutableProps } from 'preact-router';
-import { Menu } from '../../components/Menu/Menu';
 import { h } from 'preact';
-import { Trainer } from '../../components/Trainer/Trainer';
+import type { RoutableProps } from 'preact-router';
+import { route } from 'preact-router';
+import { Menu } from '../../components/Menu/Menu';
+import { Trainer, TrainerState } from '../../components/Trainer/Trainer';
+import { url } from '../sitemap';
+import { useEffect, useState } from 'preact/hooks';
+import type { Keyboard } from '../../components/Db/Keyboard';
+import _ from 'lodash';
+import { Db } from '../../components/Db/Db';
 
-export const PracticePage: FunctionalComponent<RoutableProps> = ({}) => {
+export interface IPracticePageProps extends RoutableProps {
+	id?: string;
+}
+
+export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) => {
+	const [state, setState] = useState<TrainerState>(TrainerState.NEW);
+	const [keyboard, setKeyboard] = useState<Keyboard | undefined>(undefined);
+
+	useEffect(() => {
+		if (!_.isEmpty(id)) {
+			Db.keyboard.get(id!)
+				.then(setKeyboard);
+		}
+	}, [id, setKeyboard]);
+
+	function _onCancelTraining() {
+		route(url.keyboard(id!));
+	}
+
+	function _onRestartLesson() {
+		setState(TrainerState.BETWEEN_LESSONS);
+	}
+
+	function _onPause() {
+		setState(TrainerState.PAUSED);
+	}
 
 	return <div className="PracticePage">
-		<Trainer/>
-		<Menu/>
-	</div>
-}
+		<div className="PracticePage__body">
+			{keyboard && <Trainer {...{
+				state,
+				setState,
+				keyboard,
+			}} />}
+		</div>
+		<Menu>
+			{TrainerState.NEW === state &&
+			<button className="PracticePage__menu-button" onClick={_onCancelTraining}>Cancel Training</button>}
+			{TrainerState.IN_LESSON === state &&
+			<button className="PracticePage__menu-button" onClick={_onRestartLesson}>Restart Lesson</button>}
+			{TrainerState.IN_LESSON === state &&
+			<button className="PracticePage__menu-button" onClick={_onPause}>Pause</button>}
+			{TrainerState.BETWEEN_LESSONS === state &&
+			<button className="PracticePage__menu-button" onClick={_onCancelTraining}>Stop Training</button>}
+		</Menu>
+	</div>;
+};

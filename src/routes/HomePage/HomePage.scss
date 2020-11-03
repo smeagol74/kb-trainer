@@ -1,14 +1,14 @@
 @import "../../_theme";
 
 .HomePage {
-	@extend .page;
+	@include page;
 
 	.HomePage__body {
-		@extend .page__body;
+		@include page__body;
 	}
 
 	.HomePage__frame {
-		@extend .light-box;
+		@include light-box;
 
 		h3 {
 			margin: 0 0 $margin-sm;
@@ -16,11 +16,11 @@
 	}
 
 	.HomePage__my-keyboards {
-		@extend .dark-box;
+		@include dark-box;
 	}
 
 	.HomePage__other-keyboards {
-		@extend .dark-box;
+		@include dark-box;
 	}
 
 	.HomePage__my-keyboards + .HomePage__other-keyboards {

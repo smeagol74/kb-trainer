@@ -7,7 +7,7 @@
 	align-content: center;
 
 	.Logo__img {
-		@extend .icon-white-lg;
+		@include icon-white-lg;
 	}
 	.Logo__caption {
 	}

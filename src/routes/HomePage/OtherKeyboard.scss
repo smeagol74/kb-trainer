@@ -1,10 +1,10 @@
 @import '../../_theme';
 
 .OtherKeyboard {
-	@extend .flex-row;
+	@include flex-row;
 
 	.OtherKeyboard__desc {
-		@extend .flex-col;
+		@include flex-col;
 		flex: 1;
 	}
 
@@ -15,7 +15,7 @@
 	}
 
 	.OtherKeyboard__desc-title-icon {
-		@extend .icon-white-lg;
+		@include icon-white-lg;
 		margin-bottom: -4px;
 		margin-right: $margin-sm * 1.5;
 	}
@@ -25,7 +25,7 @@
 	}
 
 	.OtherKeyboard__block {
-		@extend .flex-col;
+		@include flex-col;
 		width: 50px;
 	}
 

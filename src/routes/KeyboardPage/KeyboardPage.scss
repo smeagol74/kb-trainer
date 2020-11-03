@@ -1,28 +1,26 @@
 @import '../../_theme';
 
 .KeyboardPage {
-	@extend .page;
+	@include page;
 
 	.KeyboardPage__body {
-		@extend .page__body;
+		@include page__body;
 	}
 
 	.KeyboardPage__box {
-		@extend .light-box;
+		@include light-box;
 		max-width: 900px;
+		width: calc(100% - 40px);
 	}
 
 	.KeyboardPage__header {
-		@extend .dark-box;
-		@extend .flex-row;
+		@include dark-box;
+		@include flex-row;
 	}
 
 	.KeyboardPage__details {
-		@extend .dark-box;
-	}
-
-	.KeyboardPage__options {
-		@extend .dark-box;
+		@include dark-box;
+		@include flex-row;
 	}
 
 	.KeyboardPage__desc {
@@ -30,7 +28,7 @@
 	}
 
 	.KeyboardPage__title-icon {
-		@extend .icon-white-lg;
+		@include icon-white-lg;
 		margin-bottom: -4px;
 		margin-right: $margin-sm * 1.5;
 	}
@@ -45,6 +43,31 @@
 	}
 
 	.KeyboardPage__start-button {
-		@extend .dark-button;
+		@include dark-button;
 	}
+
+	.KeyboardPage__options {
+		@include dark-box;
+		@include flex-row;
+	}
+
+	.KeyboardPage__options-form {
+		flex: 1;
+	}
+
+	.KeyboardPage__details-view {
+		flex: 1;
+
+		kbd {
+			border: 1px solid $color-dark-gray;
+			padding: $margin-sm/3 $margin-sm;
+			border-radius: $radius-sm;
+			margin: 0 $margin-sm/2;
+		}
+	}
+
+	.KeyboardPage__stats-button {
+		@include dark-button;
+	}
+
 }

@@ -1,14 +1,14 @@
 @import '../../_theme';
 
 .LoginPage {
-	@extend .page;
+	@include page;
 
 	.LoginPage__body {
-		@extend .page__body;
+		@include page__body;
 	}
 
 	.LoginPage__form {
-		@extend .light-box;
+		@include light-box;
 
 		h3 {
 			margin: 0 0 $margin-sm;
@@ -16,7 +16,7 @@
 	}
 
 	.LoginPage__form-list {
-		@extend .dark-box;
+		@include dark-box;
 
 		margin-bottom: $margin-lg;
 
@@ -28,7 +28,7 @@
 		}
 
 		li {
-			@extend .dark-button;
+			@include dark-button;
 			margin-bottom: $margin-sm;
 
 			&:last-of-type {
@@ -38,11 +38,11 @@
 	}
 
 	.LoginPage__form-register {
-		@extend .dark-box;
+		@include dark-box;
 	}
 
 	.LoginPage__form-group {
-		@extend .form-group-horiz;
+		@include form-group-horiz;
 
 		label {
 			width: 50px;
@@ -56,7 +56,7 @@
 	}
 
 	.LoginPage__form-register-button {
-		@extend .dark-button;
+		@include dark-button;
 		width: 100%;
 	}
 }

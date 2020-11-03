@@ -1,9 +1,9 @@
 @import '../../_theme';
 
 .AboutPage {
-	@extend .page;
+	@include page;
 
 	.AboutPage__body {
-		@extend .page__body;
+		@include page__body;
 	}
 }
