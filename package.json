@@ -11,8 +11,10 @@
 		"serve": "sirv build --port 3000 --cors --single"
 	},
 	"dependencies": {
+		"chart.js": "^2.9.4",
 		"clsx": "^1.1.1",
 		"dexie": "^3.0.2",
+		"js-logger": "^1.6.0",
 		"lodash": "^4.17.20",
 		"luxon": "^1.25.0",
 		"preact": "^10.5.2",
@@ -23,6 +25,7 @@
 		"@snowpack/plugin-webpack": "^2.0.12",
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/preact": "^2.0.0",
+		"@types/chart.js": "^2.9.27",
 		"@types/enzyme": "^3.10.7",
 		"@types/jest": "^26.0.14",
 		"@types/lodash": "^4.14.163",

@@ -6,7 +6,7 @@ export const adv_en: Keyboard = {
 	name: 'English QWERTY',
 	description: 'Generic English layout for touch typing.',
 	strokes: {
-		initial: 100,
+		initial: 20,
 		final: 2000,
 	},
 	script: [

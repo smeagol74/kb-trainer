@@ -2,6 +2,9 @@ import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 import './TrainerInstruction.scss';
+import jsLogger from 'js-logger';
+
+const log = jsLogger.get('TrainerInstruction');
 
 export interface ITrainerInstructionProps {
 	onStart: VoidCallback
@@ -14,7 +17,7 @@ export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> =
 			if (event.key == ' ') {
 				onStart();
 			} else {
-				console.log(event.key);
+				log.debug('_onKeydown:', event.key);
 			}
 		}
 

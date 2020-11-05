@@ -1,0 +1,10 @@
+@import '../../_theme';
+
+.SummaryChart {
+	@include flex-row;
+	justify-content: center;
+	align-items: center;
+
+	.SummaryChart__chart {
+	}
+}

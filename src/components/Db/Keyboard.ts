@@ -26,12 +26,12 @@ export interface KeyboardStrokes {
 	final: number;
 }
 
-export interface KeyboardScript {
+export interface KeyboardLesson {
 	keys: string[],
 	finger: Finger
 }
 
-export function sk(finger: Finger, ...keys: string[]): KeyboardScript {
+export function sk(finger: Finger, ...keys: string[]): KeyboardLesson {
 	return {
 		keys,
 		finger
@@ -43,6 +43,14 @@ export interface Keyboard {
 	name: string,
 	description: string,
 	strokes: KeyboardStrokes,
-	script: KeyboardScript[],
+	script: KeyboardLesson[],
 	vocabulary: string
 }
+
+export const FCaption = {
+	[Finger.P]: 'Thumb',
+	[Finger.I]: 'Index',
+	[Finger.M]: 'Middle',
+	[Finger.A]: 'Ring',
+	[Finger.C]: 'Pinky',
+};

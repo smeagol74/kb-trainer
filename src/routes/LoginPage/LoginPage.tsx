@@ -29,13 +29,19 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 	}, [setUser]);
 
 	const onRegisterClick = useCallback(() => {
-		const user = {
+		const user: User = {
 			id: idRef.current.value,
 			name: nameRef.current.value,
+			keyboards: {},
 		};
 		if (!_.isEmpty(user.id) && !_.isEmpty(user.name)) {
-			Db.user.put(user).then(() => {
-				onSelectUser(user);
+			Db.user.get(user.id).then(dbUser => {
+				if (!_.isEmpty(dbUser)) {
+					user.keyboards = dbUser!.keyboards;
+				}
+				Db.user.put(user).then(() => {
+					onSelectUser(user);
+				});
 			});
 		}
 	}, [setUser, onSelectUser]);

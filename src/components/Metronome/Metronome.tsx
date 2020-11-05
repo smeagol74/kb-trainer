@@ -3,7 +3,10 @@ import { h } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 // @ts-ignore
 import worker from './Metronome.worker.js';
-import tick from './tick.wav';
+
+import jsLogger from 'js-logger';
+
+const log = jsLogger.get('Metronome');
 
 const NOTE_LENGTH = 0.05;
 const NOTE_FREQ = 340;
@@ -52,7 +55,7 @@ export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm }) => {
 					play.current();
 				}
 			} else {
-				console.log('message:', e.data);
+				log.debug('message:', e.data);
 			}
 		};
 

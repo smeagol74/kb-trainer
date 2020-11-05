@@ -12,19 +12,12 @@ import _ from 'lodash';
 import { OtherKeyboard } from '../HomePage/OtherKeyboard';
 import { url } from '../sitemap';
 import { route } from 'preact-router';
-import { Finger } from '../../components/Db/Keyboard';
+import { FCaption, Finger } from '../../components/Db/Keyboard';
 
 export interface IKeyboardPageProps extends RoutableProps {
 	id?: string;
 }
 
-const FCaption = {
-	[Finger.P]: 'Thumb',
-	[Finger.I]: 'Index',
-	[Finger.M]: 'Middle',
-	[Finger.A]: 'Ring',
-	[Finger.C]: 'Pinky',
-};
 
 export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) => {
 

@@ -13,7 +13,8 @@ function _cpm(chars: number, time: DateTime) {
 
 export interface ITrainerLineProps {
 	onComplete: (res: ITypingLineResults) => void,
-	text: string[]
+	text: string[],
+	metronome: number
 }
 
 export interface ITrainerLineState {
@@ -28,10 +29,9 @@ export interface ITrainerLineState {
 		complete: number
 	},
 	message: string;
-	bpm: number;
 }
 
-export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text }) => {
+export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text , metronome}) => {
 
 	const [errors, setErrors] = useState({
 		total: 0,
@@ -47,7 +47,6 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 	});
 	const [state, setState] = useState({
 		message: '',
-		bpm: 100,
 	});
 
 	const _onType = useCallback((complete: number) => {
@@ -78,7 +77,7 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 	}, [setTime]);
 
 	return <div className="TrainerLine">
-		<Metronome bpm={state.bpm} />
+		<Metronome bpm={metronome} />
 		<div className="TrainerLine__typing">
 			<TypingLine {...{
 				onComplete: onComplete,

@@ -1,7 +1,16 @@
 .TypingLine {
   display: flex;
 	flex-direction: row;
-	justify-content: center;
 	align-items: baseline;
 	height: 43px;
+	overflow: hidden;
+
+	.TypingChar {
+		&:first-child {
+			margin-left: 50%;
+		}
+		&:last-child {
+			padding-right: 50%;
+		}
+	}
 }
