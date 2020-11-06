@@ -190,26 +190,23 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComp
 
 	useEffect(() => {
 		keypress.current = (event) => {
-			if (!Modifier[event.key]) {
-				log.debug('_onKeypress', event);
+			const char = pos < text.length ? text[pos] : PARA;
+			if (_charMatches(char, event)) {
 				event.stopImmediatePropagation();
 				event.preventDefault();
 				event.stopPropagation();
-
-				const char = pos < text.length ? text[pos] : PARA;
-
-				if (_charMatches(char, event)) {
-					if (pos >= text.length) {
-						complete.current();
-					} else {
-						setPos((prev) => {
-							const res = prev + 1;
-							onType(res);
-							window.dispatchEvent(new ScrollCharIntoViewEvent({ charIndex: res }));
-							return res;
-						});
-					}
+				if (pos >= text.length) {
+					complete.current();
 				} else {
+					setPos((prev) => {
+						const res = prev + 1;
+						onType(res);
+						window.dispatchEvent(new ScrollCharIntoViewEvent({ charIndex: res }));
+						return res;
+					});
+				}
+			} else {
+				if (!Modifier[event.key] || Modifier[Mod[char]]) {
 					setErrors((prev) => {
 						const res = [...prev];
 						res[pos] += 1;

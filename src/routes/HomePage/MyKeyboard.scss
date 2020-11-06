@@ -1,3 +1,43 @@
-.MyKeyboard {
+@import '../../_theme';
 
+.MyKeyboard {
+	@include flex-row;
+
+	.MyKeyboard__desc {
+		@include flex-col;
+		flex: 1;
+	}
+
+	.MyKeyboard__desc-title {
+		font-weight: bold;
+		font-size: 1.2rem;
+		margin-bottom: $margin-sm;
+	}
+
+	.MyKeyboard__desc-title-icon {
+		@include icon-white-lg;
+		margin-bottom: -4px;
+		margin-right: $margin-sm * 1.5;
+	}
+
+	.MyKeyboard__desc-value {
+		color: $color-light-gray;
+	}
+
+	.MyKeyboard__block {
+		@include flex-col;
+		width: 50px;
+	}
+
+	.MyKeyboard__block-label {
+		font-size: 0.7rem;
+		text-align: center;
+	}
+
+	.MyKeyboard__block-value {
+		flex: 1;
+		font-size: 2rem;
+		text-align: center;
+		vertical-align: middle;
+	}
 }
