@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { TextGenerator } from './TextGenerator';
 import type { ITypingLineResults } from '../TypingLine/TypingLine';
 import jsLogger from 'js-logger';
+import { sumMerge } from '../../utils/stats';
 
 const log = jsLogger.get('StudyCourse');
 
@@ -33,16 +34,17 @@ export interface ISummaryData {
 	}
 }
 
+export interface IStudyStats {
+	strokes: Dict<number>;
+	errors: Dict<number>;
+}
+
 export interface IStudyCourseOptions {
 	user: User;
 	keyboard: Keyboard;
+	stats: IStudyStats;
 	onSetUser: StateUpdater<User | undefined>;
-}
-
-export function _sumMerge(dest: Dict<number>, src: Dict<number>) {
-	_.each(src, (value, key) => {
-		dest[key] = (dest[key] ?? 0) + value;
-	});
+	lesson?: number;
 }
 
 export class StudyCourse {
@@ -51,27 +53,24 @@ export class StudyCourse {
 	private user: User;
 	private onSetUser: StateUpdater<User | undefined>;
 	private lessonIdx: number;
-	private metronome: number;
+	private readonly metronome: number;
 	private text: string[];
-	private stats: ITypingLineResults;
-	private lastStats?: ITypingLineResults;
+	private readonly stats: IStudyStats;
+	private lastStats?: IStudyStats;
 
 	constructor(props: IStudyCourseOptions) {
 		log.debug('constructor', props);
 		this.keyboard = props.keyboard;
 		this.user = props.user;
 		this.onSetUser = props.onSetUser;
-		this.lessonIdx = this.user.keyboards[this.keyboard.id]?.lesson ?? 0;
+		this.lessonIdx = props.lesson ?? this.user.keyboards[this.keyboard.id]?.lesson ?? 0;
 		this.metronome = this.user.keyboards[this.keyboard.id]?.metronome ?? 100;
 		this.text = [];
-		this.stats = {
-			complete: {},
-			errors: {},
-		};
+		this.stats = props.stats;
 	}
 
 	private statsKeyStrokesWithErrors(key: string): number {
-		const strokes = this.stats.complete[key] ?? 0;
+		const strokes = this.stats.strokes[key] ?? 0;
 		const errors = this.stats.errors[key] ?? 0;
 		const res = strokes - (errors * ERROR_EXTRA_STROKES);
 		return Math.max(res, 0);
@@ -105,23 +104,23 @@ export class StudyCourse {
 		log.debug(keys);
 		let result: string[] = [];
 		const strokes = _.map(keys, k => this.statsKeyStrokesWithErrors(k));
-		log.debug('strokes', strokes);
-		let total = _.sum(strokes);
-		if (total <= 1) {
-			total = 1;
-		}
-		log.debug('total');
-		const rstrokes = _(strokes).map(s => s > 0 ? s : 1).map(s => (total - s) / total).value();
+		log.debug('strokes:', strokes);
+		const total = _.sum(strokes);
+		const max = _.max(strokes) ?? 0;
+		const min = _.min(strokes) ?? 0;
+		log.debug('total:', total, 'max:', max, 'min:', min);
+		const minRStroke = Math.max((max - min) / 20, 1);
+		const rstrokes = (total > 0)
+			? _(strokes)
+				.map(s => Math.max(max - s, minRStroke))
+				.map(s => Math.round(s / total * STROKES_FOR_GENERATOR))
+				.value()
+			: _(strokes)
+				.map(() => 1)
+				.value();
 		log.debug('rstrokes', rstrokes);
-		let rtotal = _.sum(rstrokes);
-		if (rtotal <= 1) {
-			rtotal = 1;
-		}
-		log.debug('rtotal');
-		const nrstrokes = _(rstrokes).map(s => Math.round(s / rtotal * STROKES_FOR_GENERATOR)).value();
-		log.debug('nrstrokes', nrstrokes);
 		_.each(keys, (k, i) => {
-			const len = nrstrokes[i] + 1;
+			const len = rstrokes[i];
 			result = result.concat(_.fill(new Array(len), k));
 		});
 		return result;
@@ -147,9 +146,13 @@ export class StudyCourse {
 		return this.lessonIdx + 1;
 	}
 
+	getLessonIdx(): number {
+		return this.lessonIdx;
+	}
+
 	private sumMergeStats(stats: ITypingLineResults) {
-		_sumMerge(this.stats.complete, stats.complete);
-		_sumMerge(this.stats.errors, stats.errors);
+		sumMerge(this.stats.strokes, stats.strokes);
+		sumMerge(this.stats.errors, stats.errors);
 		log.debug('sumMergeStats', this.stats);
 	}
 
@@ -175,7 +178,7 @@ export class StudyCourse {
 	}
 
 	hasSummary(): boolean {
-		return !_.isEmpty(this.stats.complete);
+		return !_.isEmpty(this.stats.strokes);
 	}
 
 	summary(): ISummaryData {
@@ -184,13 +187,13 @@ export class StudyCourse {
 			keys,
 			total: {
 				strokes: _.map(keys, k => this.statsKeyStrokesWithErrors(k)),
-				errors: _.map(keys, k => (this.stats.errors[k] ?? 0) * ERROR_EXTRA_STROKES),
+				errors: _.map(keys, k => this.stats.errors[k] ?? 0),
 			},
 		};
 		if (this.lastStats) {
 			result.lesson = {
-				strokes: _.map(keys, k => this.lastStats?.complete[k] ?? 0),
-				errors: _.map(keys, k => (this.lastStats?.errors[k] ?? 0) * ERROR_EXTRA_STROKES),
+				strokes: _.map(keys, k => this.lastStats?.strokes[k] ?? 0),
+				errors: _.map(keys, k => this.lastStats?.errors[k] ?? 0),
 			};
 		}
 		return result;

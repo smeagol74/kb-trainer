@@ -11,27 +11,20 @@ function _cpm(chars: number, time: DateTime) {
 	return Math.round(chars / minutes);
 }
 
+export interface ITrainerLineResults {
+	strokes: Dict<number>,
+	errors: Dict<number>,
+	cpm: number,
+	time: number;
+}
+
 export interface ITrainerLineProps {
-	onComplete: (res: ITypingLineResults) => void,
+	onComplete: (res: ITrainerLineResults) => void,
 	text: string[],
 	metronome: number
 }
 
-export interface ITrainerLineState {
-	errors: {
-		total: number,
-		perc: number
-	},
-	start: DateTime,
-	time: string,
-	chars: {
-		total: number,
-		complete: number
-	},
-	message: string;
-}
-
-export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text , metronome}) => {
+export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text, metronome }) => {
 
 	const [errors, setErrors] = useState({
 		total: 0,
@@ -65,22 +58,31 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 	}, [chars.complete, setErrors]);
 
 	useEffect(() => {
-		const timer = setInterval(()=>{
+		const timer = setInterval(() => {
 			setTime(prev => ({
 				...prev,
-				display: DateTime.local().diff(prev.start).toFormat('m:ss')
-			}))
+				display: DateTime.local().diff(prev.start).toFormat('m:ss'),
+			}));
 		}, 1000);
-		return ()=>{
+		return () => {
 			clearInterval(timer);
-		}
+		};
 	}, [setTime]);
+
+	function _onComplete(res: ITypingLineResults) {
+		onComplete({
+			strokes: res.strokes,
+			errors: res.errors,
+			cpm: _cpm(chars.complete, time.start),
+			time: DateTime.local().diff(time.start).as('seconds'),
+		});
+	}
 
 	return <div className="TrainerLine">
 		<Metronome bpm={metronome} />
 		<div className="TrainerLine__typing">
 			<TypingLine {...{
-				onComplete: onComplete,
+				onComplete: _onComplete,
 				onType: _onType,
 				onError: _onError,
 				text,

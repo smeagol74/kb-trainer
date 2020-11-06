@@ -9,7 +9,7 @@ import jsLogger from 'js-logger';
 const log = jsLogger.get('TypingLine');
 
 export interface ITypingLineResults {
-	complete: Dict<number>;
+	strokes: Dict<number>;
 	errors: Dict<number>;
 }
 
@@ -100,9 +100,9 @@ export function _charMatches(char: string, event: KeyboardEvent): boolean {
 }
 
 function _incCharStats(idx: number, char: string, errors: number[], result: ITypingLineResults) {
-	result.complete[char] = result.complete[char] ?? 0;
+	result.strokes[char] = result.strokes[char] ?? 0;
 	result.errors[char] = result.errors[char] ?? 0;
-	result.complete[char] += 1;
+	result.strokes[char] += 1;
 	result.errors[char] += errors[idx];
 }
 
@@ -113,7 +113,7 @@ export function _isShifted(char: string): boolean {
 function _mkResults(errors: number[], text: string[]): ITypingLineResults {
 
 	const result: ITypingLineResults = {
-		complete: {
+		strokes: {
 			Enter: 1,
 		},
 		errors: {

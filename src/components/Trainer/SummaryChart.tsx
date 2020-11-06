@@ -18,7 +18,7 @@ function _mkTotalData(data: ISummaryData): ChartData {
 		labels: data.keys,
 		datasets: [
 			{
-				label: 'Total Strokes',
+				label: 'Strokes',
 				backgroundColor: 'rgba(179,181,198,0.2)',
 				borderColor: 'rgba(179,181,198,1)',
 				pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -36,7 +36,7 @@ function _mkLessonData(data: ISummaryData): ChartData {
 		labels: data.keys,
 		datasets: [
 			{
-				label: 'Lesson Strokes',
+				label: 'Strokes',
 				backgroundColor: 'rgba(179,181,198,0.2)',
 				borderColor: 'rgba(179,181,198,1)',
 				pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -44,6 +44,16 @@ function _mkLessonData(data: ISummaryData): ChartData {
 				pointHoverBackgroundColor: '#fff',
 				pointHoverBorderColor: 'rgba(179,181,198,1)',
 				data: data.lesson!.strokes,
+			},
+			{
+				label: 'Errors',
+				backgroundColor: 'rgba(255,99,132,0.2)',
+				borderColor: 'rgba(255,99,132,1)',
+				pointBackgroundColor: 'rgba(255,99,132,1)',
+				pointBorderColor: '#fff',
+				pointHoverBackgroundColor: '#fff',
+				pointHoverBorderColor: 'rgba(255,99,132,1)',
+				data: data.lesson!.errors,
 			},
 		],
 	};
@@ -62,8 +72,12 @@ export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) 
 					type: 'radar',
 					data: _mkTotalData(data),
 					options: {
+						title: {
+							text: 'Total',
+							display: true,
+						},
 						legend: {
-							position: 'top',
+							position: 'bottom',
 							labels: {
 								fontColor: '#fff',
 							},
@@ -96,8 +110,12 @@ export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) 
 					type: 'radar',
 					data: _mkLessonData(data),
 					options: {
+						title: {
+							text: 'Last session',
+							display: true,
+						},
 						legend: {
-							position: 'top',
+							position: 'bottom',
 							labels: {
 								fontColor: '#fff',
 							},

@@ -7,5 +7,6 @@ export interface Progress {
 	errors: Dict<number>;
 	metronome: number;
 	cpm: number;
-	wpm: number;
+	time: number;
+	lesson: number;
 }
