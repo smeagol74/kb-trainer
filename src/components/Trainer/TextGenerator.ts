@@ -13,7 +13,7 @@ const vocabulary: Dict<(chars: string[], canCapitalize: boolean) => string[]> = 
 			if (canCapitalize && i===0 && rand(0, 9) > 5) {
 				char = char.toUpperCase();
 			}
-			result.push(chars[rand(0, chars.length -1)]);
+			result.push(char);
 		}
 		return result;
 	}

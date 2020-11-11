@@ -13,6 +13,7 @@ const NOTE_FREQ = 340;
 const FADE_IN = 0.01;
 const FADE_OUT = 0.01;
 const OSC_TYPE = 'sine';
+const VOLUME = 0;
 
 function _playNote(context: AudioContext) {
 	const o = context.createOscillator();
@@ -22,7 +23,7 @@ function _playNote(context: AudioContext) {
 	g.connect(context.destination);
 	const t = context.currentTime;
 	o.frequency.setTargetAtTime(NOTE_FREQ, t, FADE_IN);
-	g.gain.setTargetAtTime(1, t, FADE_OUT);
+	g.gain.setTargetAtTime(VOLUME, t, FADE_OUT);
 	g.gain.setTargetAtTime(0, t + NOTE_LENGTH - 2 * FADE_OUT, FADE_OUT);
 	o.start(t);
 	o.stop(t + NOTE_LENGTH);
@@ -33,7 +34,7 @@ export interface IMetronomeProps {
 }
 
 export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm }) => {
-	const [timeWorker] = useState<Worker>(new Worker(worker));
+	const [timeWorker, setTimeWorker] = useState<Worker | undefined>(undefined);
 	const play = useRef<() => void>();
 
 	useEffect(() => {
@@ -43,13 +44,19 @@ export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm }) => {
 		};
 		return () => {
 			context.close();
-		}
+		};
 	}, []);
 
 	useEffect(() => {
 		const ms = bpm > 0 ? 60000.0 / bpm : 0;
-
-		timeWorker.onmessage = (e) => {
+		if (timeWorker) {
+			timeWorker.postMessage({ interval: ms });
+		}
+	}, [timeWorker, bpm]);
+	useEffect(() => {
+		const wk = new Worker(worker);
+		wk.postMessage('start');
+		wk.onmessage = (e) => {
 			if (e.data === 'tick') {
 				if (play.current) {
 					play.current();
@@ -58,14 +65,12 @@ export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm }) => {
 				log.debug('message:', e.data);
 			}
 		};
-
-		timeWorker.postMessage({ interval: ms });
-	}, [timeWorker, bpm]);
-	useEffect(() => {
-		timeWorker.postMessage('start');
+		setTimeWorker(wk);
 		return () => {
-			timeWorker.postMessage('stop');
-		}
-	}, [bpm]);
+			wk.postMessage('stop');
+			wk.terminate();
+			setTimeWorker(undefined);
+		};
+	}, []);
 	return null;
 };

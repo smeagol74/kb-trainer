@@ -83,8 +83,8 @@ export function _charMatches(char: string, event: KeyboardEvent): boolean {
 		} else {
 			return char === event.key;
 		}
-	} else if (Special[char]) {
-		return event.key === Special[char];
+	} else if (Special[char.toLowerCase()]) {
+		return event.key === Special[char.toLowerCase()];
 	} else {
 		const symbols = char.split('+');
 		let result = true;

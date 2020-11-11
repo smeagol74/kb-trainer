@@ -19,7 +19,7 @@ const Key = {
 };
 
 const ERROR_EXTRA_STROKES = 10;
-const WORDS_FOR_LINE = 10;
+const WORDS_FOR_LINE = 30;
 const STROKES_FOR_GENERATOR = 10000;
 
 export interface ISummaryData {
@@ -109,11 +109,12 @@ export class StudyCourse {
 		const max = _.max(strokes) ?? 0;
 		const min = _.min(strokes) ?? 0;
 		log.debug('total:', total, 'max:', max, 'min:', min);
-		const minRStroke = Math.max((max - min) / 20, 1);
+		const minRStroke = (keys.length > 2) ? Math.max((max - min) / 20, 1) : (max - min);
+		const midRStroke = (keys.length > 2) ? 0 : Math.max((max - min) / 5, 1);
 		const rstrokes = (total > 0)
 			? _(strokes)
 				.map(s => Math.max(max - s, minRStroke))
-				.map(s => Math.round(s / total * STROKES_FOR_GENERATOR))
+				.map(s => Math.round((midRStroke + s) / total * STROKES_FOR_GENERATOR))
 				.value()
 			: _(strokes)
 				.map(() => 1)
@@ -168,7 +169,7 @@ export class StudyCourse {
 		this.sumMergeStats(res);
 		const lesson = this.getLesson();
 		if (this.isLessonComplete(lesson.keys, _(res.errors).values().sum())) {
-			this.lessonIdx += 1;
+			this.lessonIdx = Math.min(this.lessonIdx + 1, this.keyboard.script.length - 1);
 		}
 		this.text = [];
 		this.lastStats = res;
