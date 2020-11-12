@@ -1,0 +1,15 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: src/routes/HomePage/HomePage.tsx:82
+msgid "Available keyboards"
+msgstr ""
+
+#: src/components/Menu/Menu.tsx:44
+msgid "Exit"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:72
+msgid "My keyboards progress"
+msgstr ""

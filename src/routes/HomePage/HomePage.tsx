@@ -6,7 +6,7 @@ import { Menu } from '../../components/Menu/Menu';
 import type { Keyboard } from '../../components/Db/Keyboard';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { Db } from '../../components/Db/Db';
-import { UserContext } from '../../App';
+import { i18nContext, UserContext } from '../../App';
 import _ from 'lodash';
 import { MyKeyboard } from './MyKeyboard';
 import { OtherKeyboard } from './OtherKeyboard';
@@ -17,6 +17,7 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 	const [otherKeyboards, setOtherKeyboards] = useState<Keyboard[]>([]);
 
 	const { user } = useContext(UserContext);
+	const { __ } = useContext(i18nContext);
 
 	useEffect(() => {
 
@@ -68,7 +69,7 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 		<div className="HomePage__body">
 			<div className="HomePage__frame">
 				{!_.isEmpty(myKeyboards) && <div className="HomePage__my-keyboards">
-					<h3>My keyboards progress</h3>
+					<h3>{__('My keyboards progress')}</h3>
 					<div className="HomePage__group-list">
 						{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
 							key: idx,
@@ -78,7 +79,7 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 					</div>
 				</div>}
 				{!_.isEmpty(otherKeyboards) && <div className="HomePage__other-keyboards">
-					<h3>Available keyboards</h3>
+					<h3>{__('Available keyboards')}</h3>
 					<div className="HomePage__group-list">
 						{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
 							key: idx,

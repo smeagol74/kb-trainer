@@ -8,7 +8,9 @@
 		"test": "jest",
 		"format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss,md}\"",
 		"lint": "prettier --check \"src/**/*.{json,js,jsx,ts,tsx,css,scss,md}\"",
-		"serve": "sirv build --port 3000 --cors --single"
+		"serve": "sirv build --port 3000 --cors --single",
+		"pot": "node ./i18n/extract.js",
+		"po2json": "node ./i18n/convert.js"
 	},
 	"dependencies": {
 		"chart.js": "^2.9.4",
@@ -32,10 +34,12 @@
 		"@types/luxon": "^1.25.0",
 		"enzyme": "^3.11.0",
 		"enzyme-adapter-preact-pure": "^2.2.3",
+		"gettext-extractor": "^3.5.3",
 		"husky": "^4.3.0",
 		"jest": "^26.4.2",
 		"lint-staged": "^10.4.0",
 		"node-sass": "^4.14.1",
+		"po2json": "^0.4.5",
 		"prettier": "^2.1.2",
 		"sirv-cli": "^1.0.6",
 		"snowpack": "^2.11.1",
