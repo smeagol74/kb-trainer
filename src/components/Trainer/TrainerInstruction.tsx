@@ -1,8 +1,9 @@
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { useContext, useEffect } from 'preact/hooks';
 import './TrainerInstruction.scss';
 import jsLogger from 'js-logger';
+import { i18nContext } from '../../App';
 
 const log = jsLogger.get('TrainerInstruction');
 
@@ -11,6 +12,8 @@ export interface ITrainerInstructionProps {
 }
 
 export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({ onStart, children }) => {
+
+	const { __ } = useContext(i18nContext);
 
 	useEffect(() => {
 		function _onKeydown(event: KeyboardEvent) {
@@ -29,7 +32,10 @@ export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> =
 
 	return <div className="TrainerInstruction">
 		{children && <div className="TrainerInstruction__title">{children}</div>}
-		<div className="TrainerInstruction__button">Press space bar to start</div>
-		<div className="TrainerInstruction__message">Take home row position</div>
+		<div className="TrainerInstruction__button">{__('Press space bar to start')}</div>
+		<div
+			className="TrainerInstruction__message">{__('Make sure you have proper keyboard layout selected. ' +
+			'Find required keys on keyboard and place your hands in proper position. ' +
+			'Prepare to start.')}</div>
 	</div>;
 };

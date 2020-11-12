@@ -1,13 +1,12 @@
-import { FunctionalComponent, h, Key } from 'preact';
+import { FunctionalComponent, h } from 'preact';
 import type { StateUpdater } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import { ITrainerLineResults, TrainerLine } from './TrainerLine';
 import { TrainerInstruction } from './TrainerInstruction';
 import './Trainer.scss';
-import type { ITypingLineResults } from '../TypingLine/TypingLine';
 import type { Keyboard } from '../Db/Keyboard';
 import { Icon } from '../Icon/Icon';
 import { IStudyStats, StudyCourse } from './StudyCourse';
-import { useContext, useEffect, useState } from 'preact/hooks';
 import { UserContext } from '../../App';
 import _ from 'lodash';
 import { LessonLabel } from './LessonLabel';
@@ -118,7 +117,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		{TrainerState.NEW === state && <TrainerInstruction {...{
 			onStart: _onStart,
 		}} >
-			<Icon img="rocket-19" size="lg" /> New training session. {sessionLabel}
+			{sessionLabel}
 		</TrainerInstruction>}
 		{TrainerState.BETWEEN_LESSONS === state && <TrainerInstruction {...{
 			onStart: _onStart,

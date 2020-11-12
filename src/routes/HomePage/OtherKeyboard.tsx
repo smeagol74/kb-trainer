@@ -21,12 +21,13 @@ export const OtherKeyboard: FunctionalComponent<IOtherKeyboardProps> = ({ keyboa
 
 	return <div className={clsx('OtherKeyboard', className)} onClick={_onClick}>
 		<div className="OtherKeyboard__desc">
-			<div className='OtherKeyboard__desc-title'><Icon  className="OtherKeyboard__desc-title-icon" img="keyboard-4"/>{keyboard.name}</div>
+			<div className='OtherKeyboard__desc-title'><Icon className="OtherKeyboard__desc-title-icon"
+																											 img="keyboard-4" />{keyboard.name}</div>
 			<div className="OtherKeyboard__desc-value">{keyboard.description}</div>
 		</div>
 		<div className="OtherKeyboard__block">
 			<div className="OtherKeyboard__block-label">keys:</div>
-			<div className="OtherKeyboard__block-value">{_(keyboard.script).map('keys').flatten().size()}</div>
+			<div className="OtherKeyboard__block-value">{_(keyboard.lessons).flatten().size()}</div>
 		</div>
 	</div>;
 };

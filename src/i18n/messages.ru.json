@@ -5,5 +5,8 @@
   },
   "Available keyboards": "Доступные клавиатуры",
   "Exit": "Выход",
-  "My keyboards progress": "Мой прогресс"
+  "Lesson %1.": "Урок №%1.",
+  "Make sure you have proper keyboard layout selected. Find required keys on keyboard and place your hands in proper position. Prepare to start.": "Убедитесь, что выбрана верная клавиатура. Найдите требуемые клавиши на клавиатуре и разместите руки в стартовую позицию. Приготовьтесь начать.",
+  "My keyboards progress": "Мой прогресс",
+  "Press space bar to start": "Нажмите пробел, чтобы начать занятие"
 }

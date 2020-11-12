@@ -12,7 +12,6 @@ import _ from 'lodash';
 import { OtherKeyboard } from '../HomePage/OtherKeyboard';
 import { url } from '../sitemap';
 import { route } from 'preact-router';
-import { FCaption, Finger } from '../../components/Db/Keyboard';
 
 export interface IKeyboardPageProps extends RoutableProps {
 	id?: string;
@@ -56,10 +55,9 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 				{!_.isNil(keyboard) && <OtherKeyboard keyboard={keyboard} className="KeyboardPage__header" />}
 				<div className="KeyboardPage__details">
 					<div className="KeyboardPage__details-view">
-						{_.map(keyboard?.script, (s, idx) => <div key={idx}>
+						{_.map(keyboard?.lessons, (s, idx) => <div key={idx}>
 							<strong>Lesson {idx + 1}:</strong>
-							{_.map(s.keys, (k, kidx) => <kbd key={`${idx}-${kidx}`}>{k}</kbd>)}
-							<i>({FCaption[s.finger]})</i>
+							{_.map(s, (k, kidx) => <kbd key={`${idx}-${kidx}`}>{k}</kbd>)}
 						</div>)}
 					</div>
 					{haveStats && <div className="KeyboardPage__details-controls">

@@ -27,7 +27,7 @@ export const MyKeyboard: FunctionalComponent<IMyKeyboardProps> = ({ keyboard, cl
 		</div>
 		<div className="MyKeyboard__block">
 			<div className="MyKeyboard__block-label">keys:</div>
-			<div className="MyKeyboard__block-value">{_(keyboard.script).map('keys').flatten().size()}</div>
+			<div className="MyKeyboard__block-value">{_(keyboard.lessons).flatten().size()}</div>
 		</div>
 	</div>;
 };

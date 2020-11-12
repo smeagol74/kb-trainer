@@ -3,12 +3,12 @@ import type { Keyboard } from './Keyboard';
 import type { Progress } from './Progress';
 import type { User } from './User';
 
-import { adv_en } from './Init/adv_en';
-import { adv_punct_en } from './Init/adv_punct_en';
-import { adv_ru } from './Init/adv_ru';
-import { adv_punct_ru } from './Init/adv_punct_ru';
-import { adv_specials } from './Init/adv_specials';
-import { adv_numbers } from './Init/adv_numbers';
+import { en } from './keyboards/en';
+import { punct_en } from './keyboards/punct_en';
+import { ru } from './keyboards/ru';
+import { punct_ru } from './keyboards/punct_ru';
+import { specials_mac } from './keyboards/specials_mac';
+import { numbers } from './keyboards/numbers';
 
 class DexieDb extends Dexie {
 
@@ -31,12 +31,12 @@ class DexieDb extends Dexie {
 
 	loadDefaults() {
 		return Db.keyboard.bulkPut([
-			adv_en,
-			adv_punct_en,
-			adv_ru,
-			adv_punct_ru,
-			adv_specials,
-			adv_numbers
+			en,
+			punct_en,
+			ru,
+			punct_ru,
+			specials_mac,
+			numbers,
 		]);
 	}
 

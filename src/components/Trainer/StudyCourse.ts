@@ -1,11 +1,12 @@
 import type { Keyboard, KeyboardLesson } from '../Db/Keyboard';
-import type { User } from '../Db/User';
+import type { User, UserKeyboard } from '../Db/User';
 import type { StateUpdater } from 'preact/hooks';
 import _ from 'lodash';
 import { TextGenerator } from './TextGenerator';
 import type { ITypingLineResults } from '../TypingLine/TypingLine';
 import jsLogger from 'js-logger';
 import { sumMerge } from '../../utils/stats';
+import { DEFAULT_USER_KEYBOARD } from '../Db/User';
 
 const log = jsLogger.get('StudyCourse');
 
@@ -19,8 +20,8 @@ const Key = {
 };
 
 const ERROR_EXTRA_STROKES = 10;
-const WORDS_FOR_LINE = 30;
 const STROKES_FOR_GENERATOR = 10000;
+const VOCABULARY = 'random';
 
 export interface ISummaryData {
 	keys: string[],
@@ -53,18 +54,18 @@ export class StudyCourse {
 	private user: User;
 	private onSetUser: StateUpdater<User | undefined>;
 	private lessonIdx: number;
-	private readonly metronome: number;
 	private text: string[];
 	private readonly stats: IStudyStats;
 	private lastStats?: IStudyStats;
+	private config: UserKeyboard;
 
 	constructor(props: IStudyCourseOptions) {
 		log.debug('constructor', props);
 		this.keyboard = props.keyboard;
 		this.user = props.user;
 		this.onSetUser = props.onSetUser;
-		this.lessonIdx = props.lesson ?? this.user.keyboards[this.keyboard.id]?.lesson ?? 0;
-		this.metronome = this.user.keyboards[this.keyboard.id]?.metronome ?? 100;
+		this.config = this.user.keyboards?.[this.keyboard.id] ?? DEFAULT_USER_KEYBOARD;
+		this.lessonIdx = props.lesson ?? this.config.lesson ?? 0;
 		this.text = [];
 		this.stats = props.stats;
 	}
@@ -79,7 +80,7 @@ export class StudyCourse {
 	private isInitialLessonComplete(keys: string[]): boolean {
 		let result = true;
 		_(keys).filter(key => key !== Key.shift).each(key => {
-			result = result && (this.keyboard.strokes.initial < this.statsKeyStrokesWithErrors(key));
+			result = result && (this.config.strokes.initial < this.statsKeyStrokesWithErrors(key));
 		});
 		return result;
 	}
@@ -90,10 +91,10 @@ export class StudyCourse {
 			shift: false,
 		};
 		const lesson = this.getLesson();
-		if (this.isInitialLessonComplete(lesson.keys)) {
-			result.keys = _(this.keyboard.script).slice(0, this.lessonIdx + 1).map('keys').flatten().value();
+		if (this.isInitialLessonComplete(lesson)) {
+			result.keys = _(this.keyboard.lessons).slice(0, this.lessonIdx + 1).flatten().value();
 		} else {
-			result.keys = lesson.keys;
+			result.keys = lesson;
 		}
 		result.shift = _.indexOf(result.keys, Key.shift) > -1;
 		result.keys = _.filter(result.keys, c => c !== Key.shift);
@@ -130,17 +131,22 @@ export class StudyCourse {
 	getText(): string[] {
 		if (_.isEmpty(this.text)) {
 			const keys = this.keysToUse();
-			this.text = TextGenerator.generate(this.keyboard.vocabulary, this.weightedKeys(keys.keys), keys.shift, WORDS_FOR_LINE);
+			this.text = TextGenerator.generate(VOCABULARY,
+				this.weightedKeys(keys.keys),
+				keys.shift,
+				this.config.lessonGenerator.words,
+				this.config.lessonGenerator.minWordLen,
+				this.config.lessonGenerator.maxWordLen);
 		}
 		return this.text;
 	}
 
 	getMetronome(): number {
-		return this.metronome;
+		return this.config.metronome.tempo;
 	}
 
 	getLesson(): KeyboardLesson {
-		return this.keyboard.script[this.lessonIdx];
+		return this.keyboard.lessons[this.lessonIdx];
 	}
 
 	getLessonNumber(): number {
@@ -160,7 +166,7 @@ export class StudyCourse {
 	private isLessonComplete(keys: string[], errors: number): boolean {
 		let result = errors === 0;
 		_(keys).filter(key => key !== Key.shift).each(key => {
-			result = result && (this.keyboard.strokes.initial * 2 < this.statsKeyStrokesWithErrors(key));
+			result = result && (this.config.strokes.lesson < this.statsKeyStrokesWithErrors(key));
 		});
 		return result;
 	}
@@ -168,13 +174,13 @@ export class StudyCourse {
 	complete(res: ITypingLineResults) {
 		this.sumMergeStats(res);
 		const lesson = this.getLesson();
-		if (this.isLessonComplete(lesson.keys, _(res.errors).values().sum())) {
-			this.lessonIdx = Math.min(this.lessonIdx + 1, this.keyboard.script.length - 1);
+		if (this.isLessonComplete(lesson, _(res.errors).values().sum())) {
+			this.lessonIdx = Math.min(this.lessonIdx + 1, this.keyboard.lessons.length - 1);
 		}
 		this.text = [];
 		this.lastStats = res;
-		if (this.lessonIdx > this.keyboard.script.length) {
-			this.lessonIdx = this.keyboard.script.length - 1;
+		if (this.lessonIdx > this.keyboard.lessons.length) {
+			this.lessonIdx = this.keyboard.lessons.length - 1;
 		}
 	}
 
@@ -183,7 +189,7 @@ export class StudyCourse {
 	}
 
 	summary(): ISummaryData {
-		const keys = _(this.keyboard.script).slice(0, this.lessonIdx + 1).map('keys').flatten().value();
+		const keys = _(this.keyboard.lessons).slice(0, this.lessonIdx + 1).flatten().value();
 		const result: ISummaryData = {
 			keys,
 			total: {

@@ -25,7 +25,25 @@ msgstr "Доступные клавиатуры"
 msgid "Exit"
 msgstr "Выход"
 
+#: src/components/Trainer/LessonLabel.tsx:19
+msgid "Lesson %1."
+msgstr "Урок №%1."
+
+#: src/components/Trainer/TrainerInstruction.tsx:37
+msgid ""
+"Make sure you have proper keyboard layout selected. Find required keys on "
+"keyboard and place your hands in proper position. Prepare to start."
+msgstr ""
+"Убедитесь, что выбрана верная клавиатура. Найдите требуемые клавиши на "
+"клавиатуре и разместите руки в стартовую позицию. Приготовьтесь начать."
+
 #: src/routes/HomePage/HomePage.tsx:72
 msgid "My keyboards progress"
 msgstr "Мой прогресс"
 
+#: src/components/Trainer/TrainerInstruction.tsx:35
+msgid "Press space bar to start"
+msgstr "Нажмите пробел, чтобы начать занятие"
+
+#~ msgid "Hello there"
+#~ msgstr "Приветики"
