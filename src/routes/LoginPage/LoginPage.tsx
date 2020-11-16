@@ -6,11 +6,10 @@ import { route } from 'preact-router';
 import type { User } from '../../components/Db/User';
 import { useCallback, useContext, useEffect, useRef, useState } from 'preact/hooks';
 import _ from 'lodash';
-import { UserContext } from '../../App';
+import { i18nContext, UserContext } from '../../App';
 import { Db } from '../../components/Db/Db';
 import { url } from '../sitemap';
 import { Menu } from '../../components/Menu/Menu';
-
 
 export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 
@@ -18,6 +17,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 	const { setUser } = useContext(UserContext);
 	const idRef = useRef<HTMLInputElement>();
 	const nameRef = useRef<HTMLInputElement>();
+	const { _p, _np } = useContext(i18nContext);
 
 	useEffect(() => {
 		Db.user.toArray().then(setUsers);
@@ -25,7 +25,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 
 	const onSelectUser = useCallback((user: User) => {
 		setUser?.(user);
-		route(url.home);
+		route(url.user);
 	}, [setUser]);
 
 	const onRegisterClick = useCallback(() => {
@@ -50,7 +50,12 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 		<div className="LoginPage__body">
 			<div className="LoginPage__form">
 				<div className="LoginPage__form-list">
-					{!_.isEmpty(users) && <h3>* Select * <small>some already registered user</small></h3>}
+					{!_.isEmpty(users) &&
+					<h3 {...{
+						dangerouslySetInnerHTML: {
+							__html: _p('LoginPage', '* Select * some from <small>already registered users</small>'),
+						},
+					}} />}
 					<ul>
 						{_.map(users, (user, idx) => <li {...{ key: idx, onClick: _.partial(onSelectUser, user) }}>
 							{user.name}
@@ -58,9 +63,13 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 					</ul>
 				</div>
 				<div className="LoginPage__form-register">
-					<h3><small>or</small> + Register New + <small>user</small></h3>
+					<h3 {...{
+						dangerouslySetInnerHTML: {
+							__html: _p('LoginPage', '<small>or</small> + Register New + <small>user</small>'),
+						},
+					}} />
 					<div className="LoginPage__form-group">
-						<label>id:</label>
+						<label>{_p('LoginPage', 'login:')}</label>
 						<input {...{
 							ref: idRef,
 							type: 'text',
@@ -68,7 +77,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 						}} />
 					</div>
 					<div className="LoginPage__form-group">
-						<label>name:</label>
+						<label>{_p('LoginPage', 'name:')}</label>
 						<input {...{
 							ref: nameRef,
 							type: 'text',
@@ -79,8 +88,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 						<button {...{
 							className: 'LoginPage__form-register-button',
 							onClick: onRegisterClick,
-						}}>Register
-						</button>
+						}}>{_p('LoginPage', 'Register')}</button>
 					</div>
 				</div>
 			</div>

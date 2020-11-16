@@ -11,6 +11,19 @@ extractor
 		}),
 		JsExtractors.callExpression('_n', {
 			arguments: {
+				text: 0,
+				textPlural: 1,
+			},
+		}),
+		JsExtractors.callExpression('_p', {
+			arguments: {
+				context: 0,
+				text: 1,
+			},
+		}),
+		JsExtractors.callExpression('_np', {
+			arguments: {
+				context: 0,
 				text: 1,
 				textPlural: 2,
 			},

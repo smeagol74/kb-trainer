@@ -1,13 +1,13 @@
 @import "../../_theme";
 
-.HomePage {
+.UserPage {
 	@include page;
 
-	.HomePage__body {
+	.UserPage__body {
 		@include page__body;
 	}
 
-	.HomePage__frame {
+	.UserPage__frame {
 		@include light-box;
 
 		h3 {
@@ -15,25 +15,25 @@
 		}
 	}
 
-	.HomePage__my-keyboards {
+	.UserPage__my-keyboards {
 		@include dark-box;
 	}
 
-	.HomePage__other-keyboards {
+	.UserPage__other-keyboards {
 		@include dark-box;
 	}
 
-	.HomePage__my-keyboards + .HomePage__other-keyboards {
+	.UserPage__my-keyboards + .UserPage__other-keyboards {
 		margin-top: $margin-lg;
 	}
 
-	.HomePage__group-list {
+	.UserPage__group-list {
 		border: 1px solid $color-gray;
 		border-radius: $radius-sm;
 		background: $color-dark-gray;
 	}
 
-	.HomePage__group-list-item {
+	.UserPage__group-list-item {
 		padding: $margin-sm;
 		border-bottom: 1px solid $color-gray;
 		cursor: pointer;

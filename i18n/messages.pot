@@ -2,26 +2,143 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
-#: src/routes/HomePage/HomePage.tsx:82
-msgid "Available keyboards"
+#: src/routes/AboutPage/AboutPage.tsx:17
+msgctxt "AboutPage"
+msgid "Start"
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:44
-msgid "Exit"
+#: src/routes/KeyboardPage/KeyboardPage.tsx:66
+msgctxt "KeyboardPage"
+msgid "More Stats"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:73
+msgctxt "KeyboardPage"
+msgid "Start Training"
 msgstr ""
 
 #: src/components/Trainer/LessonLabel.tsx:19
+msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr ""
 
+#: src/routes/LoginPage/LoginPage.tsx:56
+msgctxt "LoginPage"
+msgid "* Select * some from <small>already registered users</small>"
+msgstr ""
+
+#: src/routes/LoginPage/LoginPage.tsx:68
+msgctxt "LoginPage"
+msgid "<small>or</small> + Register New + <small>user</small>"
+msgstr ""
+
+#: src/routes/LoginPage/LoginPage.tsx:72
+msgctxt "LoginPage"
+msgid "login:"
+msgstr ""
+
+#: src/routes/LoginPage/LoginPage.tsx:80
+msgctxt "LoginPage"
+msgid "name:"
+msgstr ""
+
+#: src/routes/LoginPage/LoginPage.tsx:91
+msgctxt "LoginPage"
+msgid "Register"
+msgstr ""
+
+#: src/components/Logo/Logo.tsx:12
+msgctxt "Logo"
+msgid "kb-trainer"
+msgstr ""
+
+#: src/components/Menu/Menu.tsx:44
+msgctxt "Menu"
+msgid "Exit"
+msgstr ""
+
+#: src/routes/UserPage/MyKeyboard.tsx:33
+msgctxt "MyKeyboard"
+msgid "keys:"
+msgstr ""
+
+#: src/routes/UserPage/OtherKeyboard.tsx:33
+msgctxt "OtherKeyboard"
+msgid "keys:"
+msgstr ""
+
+#: src/routes/PracticePage/PracticePage.tsx:54
+msgctxt "PracticePage"
+msgid "Cancel Training"
+msgstr ""
+
+#: src/routes/PracticePage/PracticePage.tsx:59
+msgctxt "PracticePage"
+msgid "Pause"
+msgstr ""
+
+#: src/routes/PracticePage/PracticePage.tsx:57
+msgctxt "PracticePage"
+msgid "Restart Lesson"
+msgstr ""
+
+#: src/routes/PracticePage/PracticePage.tsx:62
+msgctxt "PracticePage"
+msgid "Stop Training"
+msgstr ""
+
+#: src/components/Trainer/SummaryChart.tsx:109
+msgctxt "SummaryChart"
+msgid "Last session"
+msgstr ""
+
+#: src/components/Trainer/SummaryChart.tsx:24
+#: src/components/Trainer/SummaryChart.tsx:42
+msgctxt "SummaryChart"
+msgid "Strokes"
+msgstr ""
+
+#: src/components/Trainer/SummaryChart.tsx:71
+msgctxt "SummaryChart"
+msgid "Total"
+msgstr ""
+
 #: src/components/Trainer/TrainerInstruction.tsx:37
+msgctxt "TrainerInstruction"
 msgid "Make sure you have proper keyboard layout selected. Find required keys on keyboard and place your hands in proper position. Prepare to start."
 msgstr ""
 
-#: src/routes/HomePage/HomePage.tsx:72
-msgid "My keyboards progress"
+#: src/components/Trainer/TrainerInstruction.tsx:35
+msgctxt "TrainerInstruction"
+msgid "Press space bar to start"
 msgstr ""
 
-#: src/components/Trainer/TrainerInstruction.tsx:35
-msgid "Press space bar to start"
+#: src/components/Trainer/TrainerLine.tsx:98
+msgctxt "TrainerLine"
+msgid "Chars: %1 / %2"
+msgstr ""
+
+#: src/components/Trainer/TrainerLine.tsx:95
+msgctxt "TrainerLine"
+msgid "Cpm: %1"
+msgstr ""
+
+#: src/components/Trainer/TrainerLine.tsx:94
+msgctxt "TrainerLine"
+msgid "Errors: %1 (%2%%)"
+msgstr ""
+
+#: src/components/Trainer/TrainerLine.tsx:97
+msgctxt "TrainerLine"
+msgid "Time: %1"
+msgstr ""
+
+#: src/routes/UserPage/UserPage.tsx:82
+msgctxt "UserPage"
+msgid "Available keyboards"
+msgstr ""
+
+#: src/routes/UserPage/UserPage.tsx:72
+msgctxt "UserPage"
+msgid "My keyboards progress"
 msgstr ""

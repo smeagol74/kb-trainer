@@ -5,7 +5,7 @@ import './App.scss';
 import type { User } from './components/Db/User';
 import type { StateUpdater } from 'preact/hooks';
 import { useEffect, useState } from 'preact/hooks';
-import { i18n } from './utils/gettext';
+import { i18n, npgettextFunc, pgettextFunc } from './utils/gettext';
 import msg_ru from './i18n/messages.ru.json';
 
 export interface IUserContext {
@@ -17,19 +17,19 @@ export const UserContext = createContext<IUserContext>({});
 
 export interface I18NContext {
 	lang: string;
-	__: (msgid: string, ...args: any[]) => string;
-	_n: (msgid: string, msgid_plural: string, n: number, ...args: any[]) => string;
+	_p: pgettextFunc;
+	_np: npgettextFunc;
 	setLang: (locale: string) => void;
 }
 
 const gettext = i18n();
 gettext.loadJSON(msg_ru);
 
-const i18nEmpty = {
+const i18nEmpty: I18NContext = {
 	lang: gettext.getLocale(),
-	__: (msgid: string, ...args: any[]) => '',
-	_n: (msgid: string, msgid_plural: string, n: number, ...args: any[]) => '',
-	setLang: (locale: string) => {
+	_p: () => '',
+	_np: () => '',
+	setLang: () => {
 	},
 };
 
@@ -44,8 +44,8 @@ export const App: FunctionalComponent<{}> = () => {
 	useEffect(() => {
 		setGetText({
 			lang: lang,
-			__: (msgid: string, ...args: any[]) => gettext.gettext(msgid, args),
-			_n: (msgid: string, msgid_plural: string, n: number, ...args: any[]) => gettext.ngettext(msgid, msgid_plural, n, args),
+			_p: (msgctx, msgid, ...args) => gettext.pgettext(msgctx, msgid, args),
+			_np: (msgctx, msgid, msgid_plural, n, ...args) => gettext.npgettext(msgctx, msgid, msgid_plural, n, args),
 			setLang: (locale: string) => {
 				gettext.setLocale(locale);
 				setLang(gettext.getLocale());

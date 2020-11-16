@@ -5,6 +5,9 @@ import type { ChartData } from 'chart.js';
 import type { ISummaryData } from './StudyCourse';
 import './SummaryChart.scss';
 import jsLogger from 'js-logger';
+import type { pgettextFunc } from '../../utils/gettext';
+import { useContext } from 'preact/hooks';
+import { i18nContext } from '../../App';
 
 const log = jsLogger.get('SummaryChart');
 
@@ -13,12 +16,12 @@ export interface ISummaryChartProps {
 	data: ISummaryData;
 }
 
-function _mkTotalData(data: ISummaryData): ChartData {
+function _mkTotalData(data: ISummaryData, _p: pgettextFunc): ChartData {
 	return {
 		labels: data.keys,
 		datasets: [
 			{
-				label: 'Strokes',
+				label: _p('SummaryChart', 'Strokes'),
 				backgroundColor: 'rgba(179,181,198,0.2)',
 				borderColor: 'rgba(179,181,198,1)',
 				pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -31,12 +34,12 @@ function _mkTotalData(data: ISummaryData): ChartData {
 	};
 }
 
-function _mkLessonData(data: ISummaryData): ChartData {
+function _mkLessonData(data: ISummaryData, _p: pgettextFunc): ChartData {
 	return {
 		labels: data.keys,
 		datasets: [
 			{
-				label: 'Strokes',
+				label: _p('SummaryChart', 'Strokes'),
 				backgroundColor: 'rgba(179,181,198,0.2)',
 				borderColor: 'rgba(179,181,198,1)',
 				pointBackgroundColor: 'rgba(179,181,198,1)',
@@ -45,21 +48,13 @@ function _mkLessonData(data: ISummaryData): ChartData {
 				pointHoverBorderColor: 'rgba(179,181,198,1)',
 				data: data.lesson!.strokes,
 			},
-			{
-				label: 'Errors',
-				backgroundColor: 'rgba(255,99,132,0.2)',
-				borderColor: 'rgba(255,99,132,1)',
-				pointBackgroundColor: 'rgba(255,99,132,1)',
-				pointBorderColor: '#fff',
-				pointHoverBackgroundColor: '#fff',
-				pointHoverBorderColor: 'rgba(255,99,132,1)',
-				data: data.lesson!.errors,
-			},
 		],
 	};
 }
 
 export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) => {
+
+	const {_p} = useContext(i18nContext);
 
 	log.debug(data);
 
@@ -70,10 +65,10 @@ export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) 
 				height: 300,
 				config: {
 					type: 'radar',
-					data: _mkTotalData(data),
+					data: _mkTotalData(data, _p),
 					options: {
 						title: {
-							text: 'Total',
+							text: _p('SummaryChart', 'Total'),
 							display: true,
 						},
 						legend: {
@@ -108,10 +103,10 @@ export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) 
 				height: 300,
 				config: {
 					type: 'radar',
-					data: _mkLessonData(data),
+					data: _mkLessonData(data, _p),
 					options: {
 						title: {
-							text: 'Last session',
+							text: _p('SummaryChart', 'Last session'),
 							display: true,
 						},
 						legend: {

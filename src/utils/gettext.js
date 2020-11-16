@@ -140,6 +140,9 @@ export const i18n = function(options) {
 		_p: function() {
 			return this.pgettext.apply(this, arguments);
 		},
+		_np: function() {
+			return this.npgettext.apply(this, arguments);
+		},
 
 		setMessages: function(domain, locale, messages, plural_forms) {
 			if (!domain || !locale || !messages)
@@ -192,6 +195,9 @@ export const i18n = function(options) {
 		},
 		pgettext: function(msgctxt, msgid /* , extra */) {
 			return this.dcnpgettext.apply(this, [undefined, msgctxt, msgid, undefined, undefined].concat(Array.prototype.slice.call(arguments, 2)));
+		},
+		npgettext: function(msgctxt, msgid, msgid_plural, n /*, extra */) {
+			return this.dcnpgettext.apply(this, [undefined, msgctxt, msgid, msgid_plural, n].concat(Array.prototype.slice.call(arguments, 4)));
 		},
 		dcnpgettext: function(domain, msgctxt, msgid, msgid_plural, n /* , extra */) {
 			domain = domain || _domain;

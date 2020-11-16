@@ -14,7 +14,7 @@ export interface IMenuProps {
 
 export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 	const { user, setUser } = useContext(UserContext);
-	const { __, setLang, lang } = useContext(i18nContext);
+	const { _p, setLang, lang } = useContext(i18nContext);
 	const langRef = useRef<HTMLSelectElement>();
 
 	const onExit = useCallback(() => {
@@ -41,7 +41,7 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 			</select>
 		</div>
 		{!_.isNil(user) &&
-		<button className="Menu__logout" onClick={onExit}><Icon img="door-6" size="sm" /> {__('Exit')}
+		<button className="Menu__logout" onClick={onExit}><Icon img="door-6" size="sm" /> {_p('Menu', 'Exit')}
 		</button>}
 	</div>;
 };

@@ -6,16 +6,18 @@ import { route } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
 import { Trainer, TrainerState } from '../../components/Trainer/Trainer';
 import { url } from '../sitemap';
-import { useEffect, useState } from 'preact/hooks';
+import { useContext, useEffect, useState } from 'preact/hooks';
 import type { Keyboard } from '../../components/Db/Keyboard';
 import _ from 'lodash';
 import { Db } from '../../components/Db/Db';
+import { i18nContext } from '../../App';
 
 export interface IPracticePageProps extends RoutableProps {
 	id?: string;
 }
 
 export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) => {
+	const { _p } = useContext(i18nContext);
 	const [state, setState] = useState<TrainerState>(TrainerState.NEW);
 	const [keyboard, setKeyboard] = useState<Keyboard | undefined>(undefined);
 
@@ -48,13 +50,16 @@ export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) =>
 		</div>
 		<Menu>
 			{TrainerState.NEW === state &&
-			<button className="PracticePage__menu-button" onClick={_onCancelTraining}>Cancel Training</button>}
+			<button className="PracticePage__menu-button"
+							onClick={_onCancelTraining}>{_p('PracticePage', 'Cancel Training')}</button>}
 			{TrainerState.IN_LESSON === state &&
-			<button className="PracticePage__menu-button" onClick={_onRestartLesson}>Restart Lesson</button>}
+			<button className="PracticePage__menu-button"
+							onClick={_onRestartLesson}>{_p('PracticePage', 'Restart Lesson')}</button>}
 			{TrainerState.IN_LESSON === state &&
-			<button className="PracticePage__menu-button" onClick={_onPause}>Pause</button>}
+			<button className="PracticePage__menu-button" onClick={_onPause}>{_p('PracticePage', 'Pause')}</button>}
 			{TrainerState.BETWEEN_LESSONS === state &&
-			<button className="PracticePage__menu-button" onClick={_onCancelTraining}>Stop Training</button>}
+			<button className="PracticePage__menu-button"
+							onClick={_onCancelTraining}>{_p('PracticePage', 'Stop Training')}</button>}
 		</Menu>
 	</div>;
 };

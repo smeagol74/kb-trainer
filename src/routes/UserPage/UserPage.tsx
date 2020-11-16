@@ -1,6 +1,6 @@
 import type { FunctionalComponent, Key } from 'preact';
 import { h } from 'preact';
-import './HomePage.scss';
+import './UserPage.scss';
 import type { RoutableProps } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
 import type { Keyboard } from '../../components/Db/Keyboard';
@@ -11,13 +11,13 @@ import _ from 'lodash';
 import { MyKeyboard } from './MyKeyboard';
 import { OtherKeyboard } from './OtherKeyboard';
 
-export const HomePage: FunctionalComponent<RoutableProps> = () => {
+export const UserPage: FunctionalComponent<RoutableProps> = () => {
 
 	const [myKeyboards, setMyKeyboards] = useState<Keyboard[]>([]);
 	const [otherKeyboards, setOtherKeyboards] = useState<Keyboard[]>([]);
 
 	const { user } = useContext(UserContext);
-	const { __ } = useContext(i18nContext);
+	const { _p } = useContext(i18nContext);
 
 	useEffect(() => {
 
@@ -65,25 +65,25 @@ export const HomePage: FunctionalComponent<RoutableProps> = () => {
 	}, [user, setMyKeyboards, setOtherKeyboards]);
 
 
-	return <div className="HomePage">
-		<div className="HomePage__body">
-			<div className="HomePage__frame">
-				{!_.isEmpty(myKeyboards) && <div className="HomePage__my-keyboards">
-					<h3>{__('My keyboards progress')}</h3>
-					<div className="HomePage__group-list">
+	return <div className="UserPage">
+		<div className="UserPage__body">
+			<div className="UserPage__frame">
+				{!_.isEmpty(myKeyboards) && <div className="UserPage__my-keyboards">
+					<h3>{_p('UserPage', 'My keyboards progress')}</h3>
+					<div className="UserPage__group-list">
 						{_.map(myKeyboards, (keyboard, idx) => <MyKeyboard {...{
 							key: idx,
-							className: 'HomePage__group-list-item',
+							className: 'UserPage__group-list-item',
 							keyboard,
 						}} />)}
 					</div>
 				</div>}
-				{!_.isEmpty(otherKeyboards) && <div className="HomePage__other-keyboards">
-					<h3>{__('Available keyboards')}</h3>
-					<div className="HomePage__group-list">
+				{!_.isEmpty(otherKeyboards) && <div className="UserPage__other-keyboards">
+					<h3>{_p('UserPage', 'Available keyboards')}</h3>
+					<div className="UserPage__group-list">
 						{_.map(otherKeyboards, (keyboard, idx) => <OtherKeyboard {...{
 							key: idx,
-							className: 'HomePage__group-list-item',
+							className: 'UserPage__group-list-item',
 							keyboard,
 						}} />)}
 					</div>

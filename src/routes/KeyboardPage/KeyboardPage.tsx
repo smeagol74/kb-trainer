@@ -2,16 +2,16 @@ import './KeyboardPage.scss';
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import type { RoutableProps } from 'preact-router';
+import { route } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
 import { Icon } from '../../components/Icon/Icon';
 import type { Keyboard } from '../../components/Db/Keyboard';
 import { useContext, useEffect, useState } from 'preact/hooks';
-import { UserContext } from '../../App';
+import { i18nContext, UserContext } from '../../App';
 import { Db } from '../../components/Db/Db';
 import _ from 'lodash';
-import { OtherKeyboard } from '../HomePage/OtherKeyboard';
+import { OtherKeyboard } from '../UserPage/OtherKeyboard';
 import { url } from '../sitemap';
-import { route } from 'preact-router';
 
 export interface IKeyboardPageProps extends RoutableProps {
 	id?: string;
@@ -20,6 +20,7 @@ export interface IKeyboardPageProps extends RoutableProps {
 
 export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) => {
 
+	const { _p } = useContext(i18nContext);
 	const [keyboard, setKeyboard] = useState<Keyboard | undefined>(undefined);
 	const { user } = useContext(UserContext);
 	const [haveStats, setHaveStats] = useState<boolean>(false);
@@ -61,13 +62,15 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 						</div>)}
 					</div>
 					{haveStats && <div className="KeyboardPage__details-controls">
-						<button className="KeyboardPage__stats-button" onClick={_onStats}><Icon img="chart-5" /> More Stats</button>
+						<button className="KeyboardPage__stats-button" onClick={_onStats}><Icon
+							img="chart-5" /> {_p('KeyboardPage', 'More Stats')}</button>
 					</div>}
 				</div>
 				<div className="KeyboardPage__options">
 					<div className="KeyboardPage__options-form"></div>
 					<div className="KeyboardPage__options-controls">
-						<button className="KeyboardPage__start-button" onClick={_onStart}><Icon img="rocket-19" /> Start Training
+						<button className="KeyboardPage__start-button" onClick={_onStart}><Icon
+							img="rocket-19" /> {_p('KeyboardPage', 'Start Training')}
 						</button>
 					</div>
 				</div>

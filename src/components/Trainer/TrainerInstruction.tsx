@@ -13,7 +13,7 @@ export interface ITrainerInstructionProps {
 
 export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> = ({ onStart, children }) => {
 
-	const { __ } = useContext(i18nContext);
+	const { _p } = useContext(i18nContext);
 
 	useEffect(() => {
 		function _onKeydown(event: KeyboardEvent) {
@@ -32,9 +32,9 @@ export const TrainerInstruction: FunctionalComponent<ITrainerInstructionProps> =
 
 	return <div className="TrainerInstruction">
 		{children && <div className="TrainerInstruction__title">{children}</div>}
-		<div className="TrainerInstruction__button">{__('Press space bar to start')}</div>
+		<div className="TrainerInstruction__button">{_p('TrainerInstruction', 'Press space bar to start')}</div>
 		<div
-			className="TrainerInstruction__message">{__('Make sure you have proper keyboard layout selected. ' +
+			className="TrainerInstruction__message">{_p('TrainerInstruction', 'Make sure you have proper keyboard layout selected. ' +
 			'Find required keys on keyboard and place your hands in proper position. ' +
 			'Prepare to start.')}</div>
 	</div>;

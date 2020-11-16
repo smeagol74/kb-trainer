@@ -4,7 +4,8 @@ import { ITypingLineResults, TypingLine } from '../TypingLine/TypingLine';
 import './TrainerLine.scss';
 import { Metronome } from '../Metronome/Metronome';
 import { DateTime } from 'luxon';
-import { useCallback, useEffect, useState } from 'preact/hooks';
+import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
+import { i18nContext } from '../../App';
 
 function _cpm(chars: number, time: DateTime) {
 	const minutes = DateTime.local().diff(time).as('minutes');
@@ -26,6 +27,7 @@ export interface ITrainerLineProps {
 
 export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text, metronome }) => {
 
+	const { _p } = useContext(i18nContext);
 	const [errors, setErrors] = useState({
 		total: 0,
 		perc: 0,
@@ -89,11 +91,11 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 			}} />
 		</div>
 		<div className="TrainerLine__info">
-			<div className="TrainerLine__info-item">Errors: {errors.total} ({errors.perc}%)</div>
-			<div className="TrainerLine__info-item">Cpm: {_cpm(chars.complete, time.start)}</div>
+			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Errors: %1 (%2%%)', errors.total, errors.perc)}</div>
+			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Cpm: %1', _cpm(chars.complete, time.start))}</div>
 			<div className="TrainerLine__info-center">{state.message}</div>
-			<div className="TrainerLine__info-item">Time: {time.display}</div>
-			<div className="TrainerLine__info-item">Chars: {chars.complete} / {chars.total}</div>
+			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Time: %1', time.display)}</div>
+			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Chars: %1 / %2', chars.complete, chars.total)}</div>
 		</div>
 	</div>;
 };

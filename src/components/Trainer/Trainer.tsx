@@ -5,7 +5,6 @@ import { ITrainerLineResults, TrainerLine } from './TrainerLine';
 import { TrainerInstruction } from './TrainerInstruction';
 import './Trainer.scss';
 import type { Keyboard } from '../Db/Keyboard';
-import { Icon } from '../Icon/Icon';
 import { IStudyStats, StudyCourse } from './StudyCourse';
 import { UserContext } from '../../App';
 import _ from 'lodash';

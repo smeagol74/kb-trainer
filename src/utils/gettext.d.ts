@@ -17,7 +17,7 @@ export interface GettextOptions {
 
 export interface JsonDataHeader {
 	language: string;
-	"plural-forms": string;
+	'plural-forms': string;
 }
 
 export interface JsonDataMessages {
@@ -25,22 +25,42 @@ export interface JsonDataMessages {
 }
 
 export interface JsonData extends JsonDataMessages {
-	"": JsonDataHeader;
+	'': JsonDataHeader;
 }
+
+export type gettextFunc = (msgid: string, ...args: any[]) => string;
+export type ngettextFunc = (msgid: string, msgid_plural: string, n: number, ...args: any[]) => string;
+export type pgettextFunc = (msgctx: string, msgid: string, ...args: any[]) => string;
+export type npgettextFunc = (msgctx: string, msgid: string, msgid_plural: string, n: number, ...args: any[]) => string;
 
 export interface Gettext {
 	setMessages(domain: string, locale: string, messages: JsonDataMessages, plural_forms?: PluralForm): Gettext;
+
 	loadJSON(jsonData: JsonData, domain?: string): Gettext;
+
 	setLocale(locale: string): Gettext;
+
 	getLocale(): string;
+
 	textdomain(domain?: string): Gettext | string;
-	gettext(msgid: string, ...args: any[]): string;
-	ngettext(msgid: string, msgid_plural: string, n: number, ...args: any[]): string;
-	pgettext(msgctxt: string, msgid: string, ...args: any[]): string;
+
+	gettext: gettextFunc;
+
+	ngettext: ngettextFunc;
+
+	pgettext: pgettextFunc;
+
+	npgettext: npgettextFunc;
+
 	dcnpgettext(domain: string, msgctxt: string, msgid: string, msgid_plural: string, n: number, ...args: any[]): string;
-	__(msgid: string, ...args: any[]): string;
-	_n(msgid: string, msgid_plural: string, n: number, ...args: any[]): string;
-	_p(msgctxt: string, msgid: string, ...args: any[]): string;
+
+	__: gettextFunc;
+
+	_n: ngettextFunc;
+
+	_p: pgettextFunc;
+
+	_np: npgettextFunc;
 }
 
 export const i18n: GettextStatic;

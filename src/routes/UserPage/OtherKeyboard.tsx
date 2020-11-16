@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import { route } from 'preact-router';
 import { url } from '../sitemap';
 import { Icon } from '../../components/Icon/Icon';
+import { useContext } from 'preact/hooks';
+import { i18nContext } from '../../App';
 
 export interface IOtherKeyboardProps {
 	keyboard: Keyboard,
@@ -14,6 +16,8 @@ export interface IOtherKeyboardProps {
 }
 
 export const OtherKeyboard: FunctionalComponent<IOtherKeyboardProps> = ({ keyboard, className }) => {
+
+	const { _p } = useContext(i18nContext);
 
 	function _onClick() {
 		route(url.keyboard(keyboard.id));
@@ -26,7 +30,7 @@ export const OtherKeyboard: FunctionalComponent<IOtherKeyboardProps> = ({ keyboa
 			<div className="OtherKeyboard__desc-value">{keyboard.description}</div>
 		</div>
 		<div className="OtherKeyboard__block">
-			<div className="OtherKeyboard__block-label">keys:</div>
+			<div className="OtherKeyboard__block-label">{_p('OtherKeyboard', 'keys:')}</div>
 			<div className="OtherKeyboard__block-value">{_(keyboard.lessons).flatten().size()}</div>
 		</div>
 	</div>;

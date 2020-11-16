@@ -9,7 +9,7 @@ import { PracticePage } from './PracticePage/PracticePage';
 import { KeyboardPage } from './KeyboardPage/KeyboardPage';
 import { AboutPage } from './AboutPage/AboutPage';
 import { LoginPage } from './LoginPage/LoginPage';
-import { HomePage } from './HomePage/HomePage';
+import { UserPage } from './UserPage/UserPage';
 
 export interface IRoutesProps {
 }
@@ -25,7 +25,7 @@ export const Routes: FunctionalComponent<IRoutesProps> = () => {
 	}, [user]);
 
 	return (<Router onChange={onRouteChange}>
-		<HomePage path={rt.home} />
+		<UserPage path={rt.user} />
 		<LoginPage path={rt.login} />
 		<AboutPage path={rt.about} />
 		<KeyboardPage path={rt.keyboard}/>
