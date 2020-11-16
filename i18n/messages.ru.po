@@ -124,7 +124,7 @@ msgid ""
 "Make sure you have proper keyboard layout selected. Find required keys on "
 "keyboard and place your hands in proper position. Prepare to start."
 msgstr ""
-"Убедитесь, что выбрана верная клавиатура. Найдите требуемые клавиши на "
+"Убедитесь, что выбрана верная раскладка. Найдите требуемые клавиши на "
 "клавиатуре и разместите руки в стартовую позицию. Приготовьтесь начать."
 
 #: src/components/Trainer/TrainerInstruction.tsx:35

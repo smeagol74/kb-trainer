@@ -44,8 +44,8 @@ export const App: FunctionalComponent<{}> = () => {
 	useEffect(() => {
 		setGetText({
 			lang: lang,
-			_p: (msgctx, msgid, ...args) => gettext.pgettext(msgctx, msgid, args),
-			_np: (msgctx, msgid, msgid_plural, n, ...args) => gettext.npgettext(msgctx, msgid, msgid_plural, n, args),
+			_p: (msgctx, msgid, ...args) => gettext.pgettext(msgctx, msgid, ...args),
+			_np: (msgctx, msgid, msgid_plural, n, ...args) => gettext.npgettext(msgctx, msgid, msgid_plural, n, ...args),
 			setLang: (locale: string) => {
 				gettext.setLocale(locale);
 				setLang(gettext.getLocale());

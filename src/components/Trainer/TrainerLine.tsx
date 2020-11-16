@@ -91,7 +91,8 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 			}} />
 		</div>
 		<div className="TrainerLine__info">
-			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Errors: %1 (%2%%)', errors.total, errors.perc)}</div>
+			<div
+				className="TrainerLine__info-item">{_p('TrainerLine', 'Errors: %1 (%2%%)', errors.total, errors.perc)}</div>
 			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Cpm: %1', _cpm(chars.complete, time.start))}</div>
 			<div className="TrainerLine__info-center">{state.message}</div>
 			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Time: %1', time.display)}</div>

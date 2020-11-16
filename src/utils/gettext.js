@@ -237,13 +237,15 @@ export const i18n = function(options) {
 				translation = _dictionary[domain][locale][key];
 			}
 
+			let extra = Array.prototype.slice.call(arguments, 5);
+
 			// Singular form
 			if (!msgid_plural)
-				return t.apply(this, [[translation], n, options].concat(Array.prototype.slice.call(arguments, 5)));
+				return t.apply(this, [[translation], n, options].concat(extra));
 
 			// Plural one
 			options.plural_form = true;
-			return t.apply(this, [exist ? translation : [msgid, msgid_plural], n, options].concat(Array.prototype.slice.call(arguments, 5)));
+			return t.apply(this, [exist ? translation : [msgid, msgid_plural], n, options].concat(extra));
 		},
 	};
 };

@@ -36,3 +36,7 @@ extractor
 
 extractor
 	.printStats();
+
+const { exec } = require('child_process');
+
+exec('msgmerge --update ./i18n/messages.ru.po ./i18n/messages.pot');
