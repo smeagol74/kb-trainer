@@ -39,4 +39,24 @@ extractor
 
 const { exec } = require('child_process');
 
-exec('msgmerge --update ./i18n/messages.ru.po ./i18n/messages.pot');
+function merge(lang) {
+	return function() {
+		console.log(`Merging messages.${lang}.po with messages.pot`);
+		return new Promise((resolve, reject) => {
+			exec(`msgmerge --update ./i18n/messages.${lang}.po ./i18n/messages.pot`, (error, stdout, stderr) => {
+				console.log(stdout);
+				if (error) {
+					console.log('Error:', error);
+					reject();
+				} else {
+					console.log('Success');
+					resolve();
+				}
+			});
+		});
+	};
+}
+
+merge('ru')()
+	.then(() => console.log('Done'));
+

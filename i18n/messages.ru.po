@@ -132,22 +132,22 @@ msgctxt "TrainerInstruction"
 msgid "Press space bar to start"
 msgstr "Нажмите пробел, чтобы начать занятие"
 
-#: src/components/Trainer/TrainerLine.tsx:98
+#: src/components/Trainer/TrainerLine.tsx:99
 msgctxt "TrainerLine"
 msgid "Chars: %1 / %2"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:95
+#: src/components/Trainer/TrainerLine.tsx:96
 msgctxt "TrainerLine"
 msgid "Cpm: %1"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:94
+#: src/components/Trainer/TrainerLine.tsx:95
 msgctxt "TrainerLine"
 msgid "Errors: %1 (%2%%)"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:97
+#: src/components/Trainer/TrainerLine.tsx:98
 msgctxt "TrainerLine"
 msgid "Time: %1"
 msgstr ""
