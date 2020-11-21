@@ -1,4 +1,4 @@
-import { FunctionalComponent, h } from 'preact';
+import { Fragment, FunctionalComponent, h } from 'preact';
 import type { StateUpdater } from 'preact/hooks';
 import { useContext, useEffect, useState } from 'preact/hooks';
 import { ITrainerLineResults, TrainerLine } from './TrainerLine';
@@ -41,7 +41,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
 
 	useEffect(() => {
-		if (!_.isEmpty(user) && !_.isEmpty(keyboard) && !_.isNil(setUser)) {
+		if (!_.isEmpty(user) && !_.isEmpty(keyboard) && !_.isNil(setUser) && !_.isEmpty(stats)) {
 			setStudy(new StudyCourse({
 				user: user!,
 				keyboard: keyboard,
@@ -76,11 +76,15 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		setState(TrainerState.IN_LESSON);
 	}
 
-	const sessionLabel = study && <LessonLabel {...{
-		keyboard: keyboard.name,
-		lesson: study.getLesson(),
-		lessonNumber: study.getLessonNumber(),
-	}} />;
+	const sessionLabel = study && <Fragment>
+		{TrainerState.PAUSED === state && 'Paused. '}
+		<LessonLabel {...{
+			keyboard: keyboard.name,
+			lesson: study.getLesson(),
+			lessonNumber: study.getLessonNumber(),
+			lessonsIncomplete: study.areLessonsIncomplete(),
+		}} />
+	</Fragment>;
 
 	return <div className="Trainer">
 		{study?.hasSummary() && (TrainerState.IN_LESSON !== state) && <SummaryChart {...{
@@ -92,11 +96,11 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 			metronome: study.getMetronome(),
 			metronomeVolume: study.getMetronomeVolume(),
 		}} />}
-		{TrainerState.NEW === state && <TrainerInstruction {...{
+		{TrainerState.IN_LESSON !== state && <TrainerInstruction {...{
 			onStart: _onStart,
 		}} >
-			<div>{sessionLabel}</div>
-			{study && <LessonProgress {...{
+			<div className="Trainer__header">{sessionLabel}</div>
+			{study && study.areLessonsIncomplete() && <LessonProgress {...{
 				className: 'Trainer__progress',
 				stats: study.getStats(),
 				strokes: study.getConfig().strokes,
@@ -108,44 +112,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				stats: study.getStats(),
 				strokes: study.getConfig().strokes,
 				extraStrokes: study.getConfig().error.extraStrokes,
-			}} />}
-		</TrainerInstruction>}
-		{TrainerState.BETWEEN_LESSONS === state && <TrainerInstruction {...{
-			onStart: _onStart,
-		}} >
-			<div>{sessionLabel}</div>
-			{study && <LessonProgress {...{
-				className: 'Trainer__progress',
-				stats: study.getStats(),
-				strokes: study.getConfig().strokes,
-				extraStrokes: study.getConfig().error.extraStrokes,
-				keys: study.getLesson(),
-
-			}} />}
-			{study && <KeyboardProgress {...{
-				className: 'Trainer__progress',
-				stats: study.getStats(),
-				strokes: study.getConfig().strokes,
-				extraStrokes: study.getConfig().error.extraStrokes,
-			}} />}
-		</TrainerInstruction>}
-		{TrainerState.PAUSED === state && <TrainerInstruction {...{
-			onStart: _onStart,
-		}} >
-			<div>Paused. {sessionLabel}</div>
-			{study && <LessonProgress {...{
-				className: 'Trainer__progress',
-				stats: study.getStats(),
-				strokes: study.getConfig().strokes,
-				extraStrokes: study.getConfig().error.extraStrokes,
-				keys: study.getLesson(),
-
-			}} />}
-			{study && <KeyboardProgress {...{
-				className: 'Trainer__progress',
-				stats: study.getStats(),
-				strokes: study.getConfig().strokes,
-				extraStrokes: study.getConfig().error.extraStrokes,
+				label: study.areLessonsIncomplete() ? 'keyboard:' : '',
 			}} />}
 		</TrainerInstruction>}
 	</div>;

@@ -21,6 +21,7 @@ import { inputNumberValue } from '../../utils/dom';
 import { useUserKeyboardStats } from '../../components/Trainer/useUserKeyboardStats';
 import { LessonRow } from './LessonRow';
 import { KeyboardProgress } from './KeyboardProgress';
+import { userKeyboard } from '../../utils/user';
 
 const log = Logger.get('KeyboardPage');
 
@@ -35,7 +36,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 	const { user, setUser } = useContext(UserContext);
 	const [haveStats, setHaveStats] = useState<boolean>(false);
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
-	const uKey = user?.keyboards[keyboard?.id ?? 0] ?? DEFAULT_USER_KEYBOARD;
+	const uKey = userKeyboard(user, keyboard);
 	const ref = {
 		metronome: {
 			tempo: useRef<HTMLInputElement>(),

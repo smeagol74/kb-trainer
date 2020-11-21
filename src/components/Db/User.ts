@@ -63,6 +63,10 @@ export interface UserKeyboard {
 		 * Number of extra strokes required to be performed as penalty for error
 		 */
 		extraStrokes: number;
+		/**
+		 * Number of strokes without errors
+		 */
+		hotStreak: number;
 	}
 }
 
@@ -73,9 +77,9 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 	},
 	lesson: 0,
 	strokes: {
-		initial: 10,
-		lesson: 20,
-		complete: 200,
+		initial: 100,
+		lesson: 200,
+		complete: 2000,
 	},
 	textGenerator: {
 		minWordLen: 2,
@@ -83,7 +87,8 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 		words: 30,
 	},
 	error: {
-		extraStrokes: 10,
+		extraStrokes: 20,
+		hotStreak: 0,
 	},
 };
 

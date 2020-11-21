@@ -14,4 +14,21 @@
 		height: 16px;
 		margin-top: $margin-sm;
 	}
+
+	.Trainer__header {
+		kbd {
+			border: 1px solid $color-dark-gray;
+			padding: $margin-sm/3 $margin-sm;
+			border-radius: $radius-sm;
+			margin: 0 $margin-sm/2;
+
+			&:first-of-type {
+				margin-left: $margin-sm;
+			}
+		}
+
+		.Icon {
+			margin-right: $margin-sm;
+		}
+	}
 }

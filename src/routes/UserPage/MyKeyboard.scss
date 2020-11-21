@@ -1,7 +1,9 @@
 @import '../../_theme';
 
 .MyKeyboard {
-	@include flex-row;
+	.MyKeyboard__row {
+		@include flex-row;
+	}
 
 	.MyKeyboard__desc {
 		@include flex-col;
@@ -39,5 +41,9 @@
 		font-size: 2rem;
 		text-align: center;
 		vertical-align: middle;
+	}
+
+	.MyKeyboard__progress {
+		height: 15px;
 	}
 }

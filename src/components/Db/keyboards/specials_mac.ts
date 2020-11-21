@@ -2,7 +2,7 @@ import type { Keyboard } from '../Keyboard';
 
 export const specials_mac: Keyboard = {
 	id: 'specials_mac',
-	name: 'English Special Keys',
+	name: 'MacOS Special Keys',
 	description: 'Training special keys like cursor, F-keys, home, ctrl and other specials',
 	lessons: [
 		['Cmd', 'Ctrl'],

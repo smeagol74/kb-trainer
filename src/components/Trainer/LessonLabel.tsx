@@ -9,14 +9,18 @@ export interface ILessonLabelProps {
 	keyboard: string;
 	lesson: KeyboardLesson;
 	lessonNumber: number;
+	lessonsIncomplete: boolean;
 }
 
-export const LessonLabel: FunctionalComponent<ILessonLabelProps> = ({ keyboard, lesson, lessonNumber }) => {
+export const LessonLabel: FunctionalComponent<ILessonLabelProps> = ({ keyboard, lesson, lessonNumber, lessonsIncomplete }) => {
 	const { _p } = useContext(i18nContext);
 
 	return <Fragment>
-		<Icon img="keyboard-4" size="lg" /> {keyboard} – <Icon img="education-1" size="lg" />
-		{_p('LessonLabel', 'Lesson %1.', lessonNumber)}
-		{_.map(lesson, (k, idx) => <kbd key={idx}>{k}</kbd>)}
+		<Icon img="keyboard-4" size="lg" /> {keyboard}
+		{lessonsIncomplete && <Fragment> – <Icon img="education-1" size="lg" />
+			{_p('LessonLabel', 'Lesson %1.', lessonNumber)}
+			{_.map(lesson, (k, idx) => <kbd key={idx}>{k}</kbd>)}
+		</Fragment>}
 	</Fragment>;
 };
+

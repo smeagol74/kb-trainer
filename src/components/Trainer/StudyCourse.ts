@@ -98,6 +98,7 @@ export class StudyCourse {
 		}
 		result.shift = _.indexOf(result.keys, Key.shift) > -1;
 		result.keys = _.filter(result.keys, c => c !== Key.shift);
+		log.debug('keysToUse', result);
 		return result;
 	}
 
@@ -217,5 +218,9 @@ export class StudyCourse {
 
 	getStats(): IStudyStats {
 		return this.stats;
+	}
+
+	areLessonsIncomplete(): boolean {
+		return (this.lessonIdx !== this.keyboard.lessons.length - 1) || (!this.isLessonComplete(this.keyboard.lessons[this.lessonIdx], 0));
 	}
 }

@@ -14,9 +14,10 @@ export interface IKeyboardProgress {
 	stats: IStudyStats;
 	strokes: UserKeyboardStrokes;
 	extraStrokes: number;
+	label?: string;
 }
 
-export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({ stats, strokes, extraStrokes, className }) => {
+export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({ stats, strokes, extraStrokes, className, label }) => {
 	const keys = Object.keys(stats.strokes);
 	const progressStrokes = _(keys).map(k => Math.max(stats.strokes[k] ?? 0 - (stats.errors[k] ?? 0) * extraStrokes, 0)).sum() / (_.size(keys) || 1);
 	const progressComplete = Math.min(progressStrokes / strokes.complete, 1);
@@ -27,7 +28,7 @@ export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({ stats
 				<div className="KeyboardProgress__bar">
 					<div className="KeyboardProgress__bar-value"
 							 style={{ width: Math.max(0, progressComplete * 100).toFixed(2) + '%' }} />
-					<div className="KeyboardProgress__bar-label">{(progressComplete * 100).toFixed(2)}%</div>
+					<div className="KeyboardProgress__bar-label">{label} {(progressComplete * 100).toFixed(2)}%</div>
 				</div>
 			</div>
 		</div>;
