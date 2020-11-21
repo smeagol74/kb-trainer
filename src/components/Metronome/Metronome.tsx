@@ -13,17 +13,17 @@ const NOTE_FREQ = 340;
 const FADE_IN = 0.01;
 const FADE_OUT = 0.01;
 const OSC_TYPE = 'sine';
-const VOLUME = 0;
 
-function _playNote(context: AudioContext) {
+function _playNote(context: AudioContext, volume: number) {
 	const o = context.createOscillator();
 	const g = context.createGain();
 	o.type = OSC_TYPE;
 	o.connect(g);
-	// g.connect(context.destination);
+	g.connect(context.destination);
 	const t = context.currentTime;
 	o.frequency.setTargetAtTime(NOTE_FREQ, t, FADE_IN);
-	g.gain.setTargetAtTime(VOLUME, t, FADE_OUT);
+	g.gain.value = volume;
+	g.gain.setTargetAtTime(volume, t, FADE_OUT);
 	g.gain.setTargetAtTime(0, t + NOTE_LENGTH - 2 * FADE_OUT, FADE_OUT);
 	o.start(t);
 	o.stop(t + NOTE_LENGTH);
@@ -31,16 +31,17 @@ function _playNote(context: AudioContext) {
 
 export interface IMetronomeProps {
 	bpm: number;
+	volume: number;
 }
 
-export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm }) => {
+export const Metronome: FunctionalComponent<IMetronomeProps> = ({ bpm, volume }) => {
 	const [timeWorker, setTimeWorker] = useState<Worker | undefined>(undefined);
 	const play = useRef<() => void>();
 
 	useEffect(() => {
 		const context = new AudioContext();
 		play.current = () => {
-			_playNote(context);
+			_playNote(context, volume);
 		};
 		return () => {
 			context.close();

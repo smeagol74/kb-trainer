@@ -1,0 +1,45 @@
+@import '../../theme';
+
+.LessonRow {
+	display: table-row;
+
+	&.LessonRow--active {
+		.LessonRow__label {
+			color: lightgreen;
+			font-weight: bold;
+		}
+
+		.LessonRow__keys kbd {
+			color: lightgreen;
+		}
+	}
+
+	&.LessonRow--future {
+		.LessonRow__label {
+			color: $color-gray;
+		}
+
+		.LessonRow__keys kbd {
+			color: $color-gray;
+		}
+	}
+
+	.LessonRow__label {
+		display: table-cell;
+		white-space: nowrap;
+		padding: $margin-sm;
+	}
+
+	.LessonRow__keys {
+		display: table-cell;
+		white-space: nowrap;
+		padding: $margin-sm;
+	}
+
+	.LessonRow__progress {
+		display: table-cell;
+		width: 100%;
+		height: 100%;
+		padding: $margin-sm * 1.5 $margin-sm;
+	}
+}

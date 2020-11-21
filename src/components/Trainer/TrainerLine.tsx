@@ -22,10 +22,11 @@ export interface ITrainerLineResults {
 export interface ITrainerLineProps {
 	onComplete: (res: ITrainerLineResults) => void,
 	text: string[],
-	metronome: number
+	metronome: number,
+	metronomeVolume: number
 }
 
-export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text, metronome }) => {
+export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text, metronome, metronomeVolume }) => {
 
 	const { _p } = useContext(i18nContext);
 	const [errors, setErrors] = useState({
@@ -81,7 +82,7 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 	}
 
 	return <div className="TrainerLine">
-		<Metronome bpm={metronome} />
+		<Metronome bpm={metronome} volume={metronomeVolume} />
 		<div className="TrainerLine__typing">
 			<TypingLine {...{
 				onComplete: _onComplete,

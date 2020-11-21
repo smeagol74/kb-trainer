@@ -1,0 +1,31 @@
+@import '../../theme';
+
+.Intro {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	cursor: pointer;
+	margin: 0 0 0 $margin-sm;
+
+	svg {
+		fill: white;
+	}
+}
+
+.Intro__container {
+	.introjs-helperLayer {
+		background: #777777;
+	}
+
+	.introjs-tooltip {
+		background: #777777;
+	}
+
+	.introjs-arrow {
+		border-bottom-color: #777777;
+	}
+
+	.introjs-helperNumberLayer {
+		display: none;
+	}
+}

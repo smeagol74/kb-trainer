@@ -145,6 +145,10 @@ export class StudyCourse {
 		return this.config.metronome.tempo;
 	}
 
+	getMetronomeVolume(): number {
+		return this.config.metronome.volume;
+	}
+
 	getLesson(): KeyboardLesson {
 		return this.keyboard.lessons[this.lessonIdx];
 	}
@@ -207,4 +211,11 @@ export class StudyCourse {
 	}
 
 
+	getConfig(): UserKeyboard {
+		return this.config;
+	}
+
+	getStats(): IStudyStats {
+		return this.stats;
+	}
 }

@@ -1,3 +1,18 @@
+export interface UserKeyboardStrokes {
+	/**
+	 * Number of errorless strokes of each key required to append keys from previous lessons
+	 */
+	initial: number;
+	/**
+	 * Number of errorless strokes of each key required to move to next lesson
+	 */
+	lesson: number;
+	/**
+	 * Number of errorless strokes of each key to consider the keyboard trained
+	 */
+	complete: number;
+}
+
 /**
  * User specific keyboard configuration and progress
  */
@@ -22,20 +37,7 @@ export interface UserKeyboard {
 	/**
 	 * Keyboard training configuration
 	 */
-	strokes: {
-		/**
-		 * Number of errorless strokes of each key required to append keys from previous lessons
-		 */
-		initial: number;
-		/**
-		 * Number of errorless strokes of each key required to move to next lesson
-		 */
-		lesson: number;
-		/**
-		 * Number of errorless strokes of each key to consider the keyboard trained
-		 */
-		complete: number;
-	};
+	strokes: UserKeyboardStrokes;
 	/**
 	 * Lesson text generator configuration
 	 */
@@ -66,7 +68,7 @@ export interface UserKeyboard {
 
 export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 	metronome: {
-		tempo: 120,
+		tempo: 30,
 		volume: 1,
 	},
 	lesson: 0,

@@ -26,10 +26,13 @@ $margin-sm: 6px;
 	flex: 1;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
+
+	> div {
+		margin: auto 0;
+	}
 }
 
 @mixin light-box {

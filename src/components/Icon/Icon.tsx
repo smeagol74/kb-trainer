@@ -1,6 +1,7 @@
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import clsx from 'clsx';
+import { forwardRef } from 'preact/compat';
 
 export interface IIconProps {
 	className?: string;

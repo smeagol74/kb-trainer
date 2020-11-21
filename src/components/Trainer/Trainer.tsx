@@ -5,16 +5,17 @@ import { ITrainerLineResults, TrainerLine } from './TrainerLine';
 import { TrainerInstruction } from './TrainerInstruction';
 import './Trainer.scss';
 import type { Keyboard } from '../Db/Keyboard';
-import { IStudyStats, StudyCourse } from './StudyCourse';
+import { StudyCourse } from './StudyCourse';
 import { UserContext } from '../../App';
 import _ from 'lodash';
 import { LessonLabel } from './LessonLabel';
 import jsLogger from 'js-logger';
 import { SummaryChart } from './SummaryChart';
 import { Db } from '../Db/Db';
-import type { Progress } from '../Db/Progress';
-import { sumMerge } from '../../utils/stats';
 import { DateTime } from 'luxon';
+import { useUserKeyboardStats } from './useUserKeyboardStats';
+import { LessonProgress } from '../../routes/KeyboardPage/LessonProgress';
+import { KeyboardProgress } from '../../routes/KeyboardPage/KeyboardProgress';
 
 const log = jsLogger.get('Trainer');
 
@@ -31,48 +32,25 @@ export interface ITrainerProps {
 	setState: StateUpdater<TrainerState>;
 }
 
-function _summarizeStats(progress: Progress[]): [IStudyStats, number] {
-	const result: IStudyStats = {
-		strokes: {},
-		errors: {},
-	};
-	_(progress).each(p => {
-		sumMerge(result.strokes, p.strokes);
-		sumMerge(result.errors, p.errors);
-	});
-	return [result, _(progress).map('lesson').max() ?? 0];
-}
-
-function _getUserKeyboardStats(user: string, keyboard: string): PromiseLike<[IStudyStats, number]> {
-	return Db.progress.where({
-		user: user,
-		keyboard: keyboard,
-	})
-		.toArray()
-		.then(_summarizeStats);
-}
-
 export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, keyboard }) => {
 
 	const [study, setStudy] = useState<StudyCourse | undefined>(undefined);
 
 	const { user, setUser } = useContext(UserContext);
 
+	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
+
 	useEffect(() => {
 		if (!_.isEmpty(user) && !_.isEmpty(keyboard) && !_.isNil(setUser)) {
-
-			_getUserKeyboardStats(user!.id, keyboard.id)
-				.then(([stats, lesson]) => {
-					setStudy(new StudyCourse({
-						user: user!,
-						keyboard: keyboard,
-						stats: stats,
-						onSetUser: setUser!,
-						lesson: lesson,
-					}));
-				});
+			setStudy(new StudyCourse({
+				user: user!,
+				keyboard: keyboard,
+				stats: stats,
+				onSetUser: setUser!,
+				lesson: lesson,
+			}));
 		}
-	}, [user, keyboard, setStudy, setUser]);
+	}, [user, keyboard, setStudy, setUser, stats, lesson]);
 
 	function _onComplete(res: ITrainerLineResults) {
 		log.debug('_onComplete', res);
@@ -112,21 +90,63 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 			onComplete: _onComplete,
 			text: study.getText(),
 			metronome: study.getMetronome(),
+			metronomeVolume: study.getMetronomeVolume(),
 		}} />}
 		{TrainerState.NEW === state && <TrainerInstruction {...{
 			onStart: _onStart,
 		}} >
-			{sessionLabel}
+			<div>{sessionLabel}</div>
+			{study && <LessonProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+				keys: study.getLesson(),
+			}} />}
+			{study && <KeyboardProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+			}} />}
 		</TrainerInstruction>}
 		{TrainerState.BETWEEN_LESSONS === state && <TrainerInstruction {...{
 			onStart: _onStart,
 		}} >
-			{sessionLabel}
+			<div>{sessionLabel}</div>
+			{study && <LessonProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+				keys: study.getLesson(),
+
+			}} />}
+			{study && <KeyboardProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+			}} />}
 		</TrainerInstruction>}
 		{TrainerState.PAUSED === state && <TrainerInstruction {...{
 			onStart: _onStart,
 		}} >
-			Paused. {sessionLabel}
+			<div>Paused. {sessionLabel}</div>
+			{study && <LessonProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+				keys: study.getLesson(),
+
+			}} />}
+			{study && <KeyboardProgress {...{
+				className: 'Trainer__progress',
+				stats: study.getStats(),
+				strokes: study.getConfig().strokes,
+				extraStrokes: study.getConfig().error.extraStrokes,
+			}} />}
 		</TrainerInstruction>}
 	</div>;
 };
