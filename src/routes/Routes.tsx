@@ -10,6 +10,7 @@ import { KeyboardPage } from './KeyboardPage/KeyboardPage';
 import { AboutPage } from './AboutPage/AboutPage';
 import { LoginPage } from './LoginPage/LoginPage';
 import { UserPage } from './UserPage/UserPage';
+import { HomePage } from './HomePage/HomePage';
 
 export interface IRoutesProps {
 }
@@ -19,16 +20,17 @@ export const Routes: FunctionalComponent<IRoutesProps> = () => {
 	const { user } = useContext(UserContext);
 
 	const onRouteChange = useCallback((e: RouterOnChangeArgs) => {
-		if (_.isEmpty(user) && url.login !== e.url && url.about !== e.url) {
+		if (_.isEmpty(user) && url.login !== e.url && url.home !== e.url && url.about !== e.url) {
 			route(url.login, true);
 		}
 	}, [user]);
 
 	return (<Router onChange={onRouteChange}>
+		<HomePage path={rt.home} />
 		<UserPage path={rt.user} />
 		<LoginPage path={rt.login} />
 		<AboutPage path={rt.about} />
-		<KeyboardPage path={rt.keyboard}/>
-		<PracticePage path={rt.practice}/>
+		<KeyboardPage path={rt.keyboard} />
+		<PracticePage path={rt.practice} />
 	</Router>);
 };

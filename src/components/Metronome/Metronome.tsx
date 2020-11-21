@@ -20,7 +20,7 @@ function _playNote(context: AudioContext) {
 	const g = context.createGain();
 	o.type = OSC_TYPE;
 	o.connect(g);
-	g.connect(context.destination);
+	// g.connect(context.destination);
 	const t = context.currentTime;
 	o.frequency.setTargetAtTime(NOTE_FREQ, t, FADE_IN);
 	g.gain.setTargetAtTime(VOLUME, t, FADE_OUT);

@@ -134,9 +134,9 @@ export class StudyCourse {
 			this.text = TextGenerator.generate(VOCABULARY,
 				this.weightedKeys(keys.keys),
 				keys.shift,
-				this.config.lessonGenerator.words,
-				this.config.lessonGenerator.minWordLen,
-				this.config.lessonGenerator.maxWordLen);
+				this.config.textGenerator.words,
+				this.config.textGenerator.minWordLen,
+				this.config.textGenerator.maxWordLen);
 		}
 		return this.text;
 	}

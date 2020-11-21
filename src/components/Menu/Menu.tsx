@@ -29,8 +29,8 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 	};
 
 	return <div className="Menu">
-		<Link className="Menu__logo" href={url.about}><Logo /></Link>
-		{!_.isNil(user) && <Link className="Menu__user" href={url.home}>{user?.name}</Link>}
+		<Link className="Menu__logo" href={url.home}><Logo /></Link>
+		{!_.isNil(user) && <Link className="Menu__user" href={url.user}>{user?.name}</Link>}
 		<div className="Menu__spacer" />
 		{children}
 		<div className="Menu__spacer" />

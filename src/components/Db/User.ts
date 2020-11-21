@@ -39,7 +39,7 @@ export interface UserKeyboard {
 	/**
 	 * Lesson text generator configuration
 	 */
-	lessonGenerator: {
+	textGenerator: {
 		/**
 		 * Minimal word length in chars
 		 */
@@ -75,7 +75,7 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 		lesson: 20,
 		complete: 200,
 	},
-	lessonGenerator: {
+	textGenerator: {
 		minWordLen: 2,
 		maxWordLen: 4,
 		words: 30,

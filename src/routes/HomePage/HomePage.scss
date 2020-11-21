@@ -1,0 +1,15 @@
+@import '../../_theme';
+
+.HomePage {
+	@include page;
+
+	.HomePage__body {
+		@include page__body;
+		justify-content: unset;
+	}
+
+	.HomePage__body-content {
+		max-width: 900px;
+		width: 100%;
+	}
+}
