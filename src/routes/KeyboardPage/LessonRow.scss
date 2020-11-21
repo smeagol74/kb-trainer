@@ -22,6 +22,10 @@
 		.LessonRow__keys kbd {
 			color: $color-gray;
 		}
+
+		.LessonRow__progress {
+			visibility: hidden;
+		}
 	}
 
 	.LessonRow__label {
