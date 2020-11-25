@@ -1,8 +1,8 @@
 import type { FunctionalComponent } from 'preact';
+import { h } from 'preact';
 import type { IStudyStats } from '../../components/Trainer/StudyCourse';
 import type { UserKeyboardStrokes } from '../../components/Db/User';
 import _ from 'lodash';
-import { h } from 'preact';
 import clsx from 'clsx';
 import './LessonProgress.scss';
 import Logger from 'js-logger';
@@ -23,7 +23,6 @@ export const LessonProgress: FunctionalComponent<ILessonProgress> = ({ keys, sta
 	const progressLesson = Math.min((progressStrokes - strokes.initial) / (strokes.lesson - strokes.initial), 1);
 	const progressLessonTotal = Math.min(progressStrokes / strokes.lesson, 1);
 	// log.debug(keys, strokes, progressStrokes);
-	// if (progressStrokes > 0) {
 	return <div className={clsx('LessonProgress', className)}>
 		<div className="LessonProgress__cell">
 			<div className="LessonProgress__bar--initial LessonProgress__bar">
@@ -40,7 +39,4 @@ export const LessonProgress: FunctionalComponent<ILessonProgress> = ({ keys, sta
 			</div>
 		</div>
 	</div>;
-	// } else {
-	// 	return <div className={clsx('LessonProgress', className)} />;
-	// }
 };

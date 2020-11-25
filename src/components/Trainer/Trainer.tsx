@@ -6,7 +6,7 @@ import { TrainerInstruction } from './TrainerInstruction';
 import './Trainer.scss';
 import type { Keyboard } from '../Db/Keyboard';
 import { StudyCourse } from './StudyCourse';
-import { UserContext } from '../../App';
+import { i18nContext, UserContext } from '../../App';
 import _ from 'lodash';
 import { LessonLabel } from './LessonLabel';
 import jsLogger from 'js-logger';
@@ -39,6 +39,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 	const { user, setUser } = useContext(UserContext);
 
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
+
+	const {_p} = useContext(i18nContext);
 
 	useEffect(() => {
 		if (!_.isEmpty(user) && !_.isEmpty(keyboard) && !_.isNil(setUser) && !_.isEmpty(stats)) {
@@ -77,7 +79,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 	}
 
 	const sessionLabel = study && <Fragment>
-		{TrainerState.PAUSED === state && 'Paused. '}
+		{TrainerState.PAUSED === state && _p('Trainer', 'Paused. ')}
 		<LessonLabel {...{
 			keyboard: keyboard.name,
 			lesson: study.getLesson(),
@@ -112,7 +114,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				stats: study.getStats(),
 				strokes: study.getConfig().strokes,
 				extraStrokes: study.getConfig().error.extraStrokes,
-				label: study.areLessonsIncomplete() ? 'keyboard:' : '',
+				label: study.areLessonsIncomplete() ? _p('Trainer', 'keyboard:') : '',
 			}} />}
 		</TrainerInstruction>}
 	</div>;

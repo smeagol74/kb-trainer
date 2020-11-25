@@ -4,7 +4,6 @@ import { useContext, useEffect } from 'preact/hooks';
 import './TrainerInstruction.scss';
 import jsLogger from 'js-logger';
 import { i18nContext } from '../../App';
-import { LessonProgress } from '../../routes/KeyboardPage/LessonProgress';
 
 const log = jsLogger.get('TrainerInstruction');
 

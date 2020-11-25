@@ -15,8 +15,6 @@ body {
 	background: $color-page-background;
 	margin: 0;
 	padding: 0;
-	display: flex;
-	flex-direction: column;
 	overflow: hidden;
 
 	color: $color-white;
@@ -26,4 +24,8 @@ body {
 
 div {
 	box-sizing: border-box;
+}
+
+a {
+	color: $color-white;
 }

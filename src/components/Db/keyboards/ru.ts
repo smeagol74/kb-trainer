@@ -1,7 +1,7 @@
 import type { Keyboard } from '../Keyboard';
 
 export const ru: Keyboard = {
-	id: 'adv_ru',
+	id: 'ru',
 	name: 'Русская ЙЦУКЕН',
 	description: 'Обычная русская раскладка, тренировка для десятипальцевого набора',
 	lessons: [

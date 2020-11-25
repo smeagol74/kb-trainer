@@ -7,44 +7,170 @@ msgctxt "AboutPage"
 msgid "Start"
 msgstr ""
 
-#: src/routes/KeyboardPage/KeyboardPage.tsx:66
+#: src/routes/HomePage/HomePage.tsx:122
+#: src/routes/HomePage/HomePage.tsx:138
+msgctxt "HomePage"
+msgid "Start"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:196
+msgctxt "KeyboardPage"
+msgid "Complete:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:167
+msgctxt "KeyboardPage"
+msgid "Configuration of training completion and lessons switch criteria."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:195
+msgctxt "KeyboardPage"
+msgid "Count of errorless strokes of each key in the keyboard to consider keyboard training complete."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:183
+msgctxt "KeyboardPage"
+msgid "Count of errorless strokes of each key in the lesson to consider the lesson is done and user can move forward."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:171
+msgctxt "KeyboardPage"
+msgid "Count of errorless strokes of keys in the lesson before adding already trained keys of keyboard."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:211
+msgctxt "KeyboardPage"
+msgid "Count of generated words in one training session."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:249
+msgctxt "KeyboardPage"
+msgid "Count of strokes that will be deducted from the total key strokes for every error in this key during training."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:246
+msgctxt "KeyboardPage"
+msgid "Error Penalty"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:246
+msgctxt "KeyboardPage"
+msgid "Errors penalty configuration."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:250
+msgctxt "KeyboardPage"
+msgid "Extra Strokes:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:137
+msgctxt "KeyboardPage"
+msgid "In training metronome configuration."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:172
+msgctxt "KeyboardPage"
+msgid "Initial:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:184
+msgctxt "KeyboardPage"
+msgid "Lesson:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:137
+msgctxt "KeyboardPage"
+msgid "Metronome"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:152
+msgctxt "KeyboardPage"
+msgid "Metronome ticks volume percentage."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:130
 msgctxt "KeyboardPage"
 msgid "More Stats"
 msgstr ""
 
-#: src/routes/KeyboardPage/KeyboardPage.tsx:73
+#: src/routes/KeyboardPage/KeyboardPage.tsx:222
+msgctxt "KeyboardPage"
+msgid "One word length configuration. Minimal and maximal lengths."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:264
 msgctxt "KeyboardPage"
 msgid "Start Training"
 msgstr ""
 
-#: src/components/Trainer/LessonLabel.tsx:19
+#: src/routes/KeyboardPage/KeyboardPage.tsx:167
+msgctxt "KeyboardPage"
+msgid "Strokes"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:141
+msgctxt "KeyboardPage"
+msgid "Tempo:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:209
+msgctxt "KeyboardPage"
+msgid "Text Generator"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:140
+msgctxt "KeyboardPage"
+msgid "Ticks per minute metronome tempo."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:232
+msgctxt "KeyboardPage"
+msgid "to:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:209
+msgctxt "KeyboardPage"
+msgid "Training text generating algorithms configuration."
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:153
+msgctxt "KeyboardPage"
+msgid "Volume:"
+msgstr ""
+
+#: src/routes/UserPage/UserPage.tsx:71
+msgctxt "KeyboardPage"
+msgid "Welcome, %1"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:223
+msgctxt "KeyboardPage"
+msgid "Word Length from:"
+msgstr ""
+
+#: src/routes/KeyboardPage/KeyboardPage.tsx:212
+msgctxt "KeyboardPage"
+msgid "Words:"
+msgstr ""
+
+#: src/components/Trainer/LessonLabel.tsx:21
 msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr ""
 
-#: src/routes/LoginPage/LoginPage.tsx:56
+#: src/routes/LoginPage/LoginPage.tsx:71
 msgctxt "LoginPage"
-msgid "* Select * some from <small>already registered users</small>"
+msgid "Go"
 msgstr ""
 
-#: src/routes/LoginPage/LoginPage.tsx:68
+#: src/routes/LoginPage/LoginPage.tsx:59
 msgctxt "LoginPage"
-msgid "<small>or</small> + Register New + <small>user</small>"
+msgid "Please type your name, so I know how to address to you"
 msgstr ""
 
-#: src/routes/LoginPage/LoginPage.tsx:72
+#: src/routes/LoginPage/LoginPage.tsx:58
 msgctxt "LoginPage"
-msgid "login:"
-msgstr ""
-
-#: src/routes/LoginPage/LoginPage.tsx:80
-msgctxt "LoginPage"
-msgid "name:"
-msgstr ""
-
-#: src/routes/LoginPage/LoginPage.tsx:91
-msgctxt "LoginPage"
-msgid "Register"
+msgid "Welcome to kb-trainer"
 msgstr ""
 
 #: src/components/Logo/Logo.tsx:12
@@ -52,12 +178,12 @@ msgctxt "Logo"
 msgid "kb-trainer"
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:44
+#: src/components/Menu/Menu.tsx:33
 msgctxt "Menu"
-msgid "Exit"
+msgid "Keyboards"
 msgstr ""
 
-#: src/routes/UserPage/MyKeyboard.tsx:33
+#: src/routes/UserPage/MyKeyboard.tsx:39
 msgctxt "MyKeyboard"
 msgid "keys:"
 msgstr ""
@@ -103,6 +229,16 @@ msgctxt "SummaryChart"
 msgid "Total"
 msgstr ""
 
+#: src/components/Trainer/Trainer.tsx:117
+msgctxt "Trainer"
+msgid "keyboard:"
+msgstr ""
+
+#: src/components/Trainer/Trainer.tsx:82
+msgctxt "Trainer"
+msgid "Paused. "
+msgstr ""
+
 #: src/components/Trainer/TrainerInstruction.tsx:37
 msgctxt "TrainerInstruction"
 msgid "Make sure you have proper keyboard layout selected. Find required keys on keyboard and place your hands in proper position. Prepare to start."
@@ -113,32 +249,32 @@ msgctxt "TrainerInstruction"
 msgid "Press space bar to start"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:99
+#: src/components/Trainer/TrainerLine.tsx:103
 msgctxt "TrainerLine"
 msgid "Chars: %1 / %2"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:96
+#: src/components/Trainer/TrainerLine.tsx:100
 msgctxt "TrainerLine"
 msgid "Cpm: %1"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:95
+#: src/components/Trainer/TrainerLine.tsx:99
 msgctxt "TrainerLine"
 msgid "Errors: %1 (%2%%)"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:98
+#: src/components/Trainer/TrainerLine.tsx:102
 msgctxt "TrainerLine"
 msgid "Time: %1"
 msgstr ""
 
-#: src/routes/UserPage/UserPage.tsx:82
+#: src/routes/UserPage/UserPage.tsx:83
 msgctxt "UserPage"
 msgid "Available keyboards"
 msgstr ""
 
-#: src/routes/UserPage/UserPage.tsx:72
+#: src/routes/UserPage/UserPage.tsx:73
 msgctxt "UserPage"
 msgid "My keyboards progress"
 msgstr ""

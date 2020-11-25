@@ -53,6 +53,10 @@ export const App: FunctionalComponent<{}> = () => {
 		});
 	}, [lang, setGetText]);
 
+	useEffect(() => {
+		setLang(navigator.language.split('-')[0]);
+	}, []);
+
 	return <i18nContext.Provider value={getText}>
 		<UserContext.Provider value={{
 			user,

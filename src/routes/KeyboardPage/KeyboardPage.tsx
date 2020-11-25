@@ -1,5 +1,5 @@
 import './KeyboardPage.scss';
-import type { FunctionalComponent, Ref } from 'preact';
+import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import type { RoutableProps } from 'preact-router';
 import { route } from 'preact-router';
@@ -15,8 +15,6 @@ import { url } from '../sitemap';
 import Logger from 'js-logger';
 import { Intro, IntroContainerClass } from '../../components/Intro/Intro';
 import clsx from 'clsx';
-import type { User, UserKeyboard } from '../../components/Db/User';
-import { DEFAULT_USER_KEYBOARD } from '../../components/Db/User';
 import { inputNumberValue } from '../../utils/dom';
 import { useUserKeyboardStats } from '../../components/Trainer/useUserKeyboardStats';
 import { LessonRow } from './LessonRow';
@@ -135,9 +133,12 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 				<div className="KeyboardPage__options">
 					<div className="KeyboardPage__options-form">
 						<fieldset className={clsx(IntroContainerClass, 'KeyboardPage__options-form-group')}>
-							<legend data-intro="In training metronome configuration.">Metronome <Intro /></legend>
-							<div data-intro="Ticks per minute metronome tempo.">
-								<label>Tempo:</label>
+							<legend
+								data-intro={_p('KeyboardPage', 'In training metronome configuration.')}>{_p('KeyboardPage', 'Metronome')}
+								<Intro />
+							</legend>
+							<div data-intro={_p('KeyboardPage', 'Ticks per minute metronome tempo.')}>
+								<label>{_p('KeyboardPage', 'Tempo:')}</label>
 								<input {...{
 									ref: ref.metronome.tempo,
 									type: 'number',
@@ -148,8 +149,8 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 								}} />
 								bpm
 							</div>
-							<div data-intro="Metronome ticks volume percentage.">
-								<label>Volume:</label>
+							<div data-intro={_p('KeyboardPage', 'Metronome ticks volume percentage.')}>
+								<label>{_p('KeyboardPage', 'Volume:')}</label>
 								<input {...{
 									ref: ref.metronome.volume,
 									type: 'number',
@@ -162,11 +163,13 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 							</div>
 						</fieldset>
 						<fieldset className={clsx(IntroContainerClass, 'KeyboardPage__options-form-group')}>
-							<legend data-intro="Configuration of training completion and lessons switch criteria.">Strokes <Intro />
+							<legend
+								data-intro={_p('KeyboardPage', 'Configuration of training completion and lessons switch criteria.')}>{_p('KeyboardPage', 'Strokes')}
+								<Intro />
 							</legend>
 							<div
-								data-intro="Count of errorless strokes of keys in the lesson before adding already trained keys of keyboard.">
-								<label>Initial:</label>
+								data-intro={_p('KeyboardPage', 'Count of errorless strokes of keys in the lesson before adding already trained keys of keyboard.')}>
+								<label>{_p('KeyboardPage', 'Initial:')}</label>
 								<input {...{
 									ref: ref.strokes.initial,
 									type: 'number',
@@ -177,8 +180,8 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 								}} />
 							</div>
 							<div
-								data-intro="Count of errorless strokes of each key in the lesson to consider the lesson is done and user can move forward.">
-								<label>Lesson:</label>
+								data-intro={_p('KeyboardPage', 'Count of errorless strokes of each key in the lesson to consider the lesson is done and user can move forward.')}>
+								<label>{_p('KeyboardPage', 'Lesson:')}</label>
 								<input {...{
 									ref: ref.strokes.lesson,
 									type: 'number',
@@ -189,8 +192,8 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 								}} />
 							</div>
 							<div
-								data-intro="Count of errorless strokes of each key in the keyboard to consider keyboard training complete.">
-								<label>Complete:</label>
+								data-intro={_p('KeyboardPage', 'Count of errorless strokes of each key in the keyboard to consider keyboard training complete.')}>
+								<label>{_p('KeyboardPage', 'Complete:')}</label>
 								<input {...{
 									ref: ref.strokes.complete,
 									type: 'number',
@@ -202,9 +205,11 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 							</div>
 						</fieldset>
 						<fieldset className={clsx(IntroContainerClass, 'KeyboardPage__options-form-group')}>
-							<legend data-intro="Training text generating algorithms configuration.">Text Generator <Intro /></legend>
-							<div data-intro="Count of generated words in one training session.">
-								<label>Words:</label>
+							<legend
+								data-intro={_p('KeyboardPage', 'Training text generating algorithms configuration.')}>{_p('KeyboardPage', 'Text Generator')}
+								<Intro /></legend>
+							<div data-intro={_p('KeyboardPage', 'Count of generated words in one training session.')}>
+								<label>{_p('KeyboardPage', 'Words:')}</label>
 								<input {...{
 									ref: ref.textGen.words,
 									type: 'number',
@@ -214,8 +219,8 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									onChange: _saveConfig,
 								}} />
 							</div>
-							<div data-intro="One word length configuration. Minimal and maximal lengths.">
-								<label>Word Length from:</label>
+							<div data-intro={_p('KeyboardPage', 'One word length configuration. Minimal and maximal lengths.')}>
+								<label>{_p('KeyboardPage', 'Word Length from:')}</label>
 								<input {...{
 									ref: ref.textGen.minWordLen,
 									type: 'number',
@@ -224,7 +229,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									max: 100,
 									onChange: _saveConfig,
 								}} />
-								<label>to:</label>
+								<label>{_p('KeyboardPage', 'to:')}</label>
 								<input {...{
 									ref: ref.textGen.maxWordLen,
 									type: 'number',
@@ -237,10 +242,12 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 							</div>
 						</fieldset>
 						<fieldset className={clsx(IntroContainerClass, 'KeyboardPage__options-form-group')}>
-							<legend data-intro="Errors penalty configuration.">Error Penalty <Intro /></legend>
+							<legend
+								data-intro={_p('KeyboardPage', 'Errors penalty configuration.')}>{_p('KeyboardPage', 'Error Penalty')}
+								<Intro /></legend>
 							<div
-								data-intro="Count of strokes that will be deducted from the total key strokes for every error in this key during training.">
-								<label>Extra Strokes:</label>
+								data-intro={_p('KeyboardPage', 'Count of strokes that will be deducted from the total key strokes for every error in this key during training.')}>
+								<label>{_p('KeyboardPage', 'Extra Strokes:')}</label>
 								<input {...{
 									ref: ref.error.extraStrokes,
 									type: 'number',
