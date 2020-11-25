@@ -22,17 +22,13 @@ export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({ stats
 	const progressStrokes = _(keys).map(k => Math.max(stats.strokes[k] ?? 0 - (stats.errors[k] ?? 0) * extraStrokes, 0)).sum() / (_.size(keys) || 1);
 	const progressComplete = Math.min(progressStrokes / strokes.complete, 1);
 	// log.debug(keys, strokes, progressStrokes);
-	if (progressStrokes > 0) {
-		return <div className={clsx('KeyboardProgress', className)}>
-			<div className="KeyboardProgress__cell">
-				<div className="KeyboardProgress__bar">
-					<div className="KeyboardProgress__bar-value"
-							 style={{ width: Math.max(0, progressComplete * 100).toFixed(2) + '%' }} />
-					<div className="KeyboardProgress__bar-label">{label} {(progressComplete * 100).toFixed(2)}%</div>
-				</div>
+	return <div className={clsx('KeyboardProgress', className)}>
+		<div className="KeyboardProgress__cell">
+			<div className="KeyboardProgress__bar">
+				<div className="KeyboardProgress__bar-value"
+						 style={{ width: Math.max(0, progressComplete * 100).toFixed(2) + '%' }} />
+				<div className="KeyboardProgress__bar-label">{label} {(progressComplete * 100).toFixed(2)}%</div>
 			</div>
-		</div>;
-	} else {
-		return <div className={clsx('KeyboardProgress', className)} />;
-	}
+		</div>
+	</div>;
 };

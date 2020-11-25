@@ -24,14 +24,17 @@
 
 	.Menu__logout {
 		@include dark-button;
+		@include button-with-icon-sm;
 		margin-left: $margin-lg;
-	}
-
-	.Menu__logout-icon {
-		@include icon-white-sm;
 	}
 
 	.Menu__spacer {
 		flex: 1;
+	}
+
+	.Menu__language {
+		select {
+			@include dark-button;
+		}
 	}
 }

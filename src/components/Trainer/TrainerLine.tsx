@@ -82,7 +82,7 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 	}
 
 	return <div className="TrainerLine">
-		<Metronome bpm={metronome} volume={metronomeVolume} />
+		{metronomeVolume > 0 && <Metronome bpm={metronome} volume={metronomeVolume} />}
 		<div className="TrainerLine__typing">
 			<TypingLine {...{
 				onComplete: _onComplete,

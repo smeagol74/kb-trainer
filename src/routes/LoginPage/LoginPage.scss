@@ -42,21 +42,19 @@
 	}
 
 	.LoginPage__form-group {
-		@include form-group-horiz;
-
-		label {
-			width: 50px;
-			text-align: right;
-			margin-right: $margin-lg;
-		}
+		text-align: center;
 
 		input {
-			flex: 1;
+			@include input-dark;
+			margin: $margin-sm 0 $margin-lg 0;
+			width: 100%;
+			box-sizing: border-box;
 		}
 	}
 
 	.LoginPage__form-register-button {
 		@include dark-button;
+		@include button-with-icon-sm;
 		width: 100%;
 	}
 }

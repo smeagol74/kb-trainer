@@ -6,6 +6,7 @@ import { i18nContext } from '../../App';
 import { rt } from '../sitemap';
 import { route } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
+import { Icon } from '../../components/Icon/Icon';
 
 export const HomePage: FunctionalComponent = () => {
 
@@ -100,8 +101,11 @@ export const HomePage: FunctionalComponent = () => {
 				<p>Удачи. Все пожелания/замечания/предложения оставляйте на Гитхабе.</p>
 
 				<p>Пул-реквесты тоже приветствуются.</p>
+				<p className="HomePage__body-controls">
+					<button className="HomePage__start-button-body" onClick={_onStart}><Icon img={'rocket-19'} /> Start</button>
+				</p>
 
-				<h2>Планы</h2>
+				<h2>P.S. Планы</h2>
 
 				<p>В планах добавить тренировку скорости с автоматическим подбором частоты метронома. Алгоритм видится примерно
 					такой. Находится частота набора комфортная для тренирующегося (когда он не делает ошибок). Затем постепенно
@@ -113,7 +117,8 @@ export const HomePage: FunctionalComponent = () => {
 			</div>
 		</div>
 		<Menu>
-			<button onClick={_onStart}>Start</button>
+			<button className="HomePage__start-button" onClick={_onStart}><Icon img={'rocket-19'} size={'sm'} /> Start
+			</button>
 		</Menu>
 	</div>;
 };

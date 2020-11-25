@@ -29,6 +29,7 @@ $margin-sm: 6px;
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding: $margin-lg;
 
 	> div {
 		margin: auto 0;
@@ -72,6 +73,14 @@ $margin-sm: 6px;
 
 	.Icon {
 		fill: $color-light-gray;
+	}
+}
+
+@mixin button-with-icon-sm {
+	.Icon {
+		@include icon-white-sm;
+		fill: $color-light-gray;
+		margin-bottom: -2px;
 	}
 }
 
@@ -124,4 +133,21 @@ $margin-sm: 6px;
 @mixin flex-col {
 	display: flex;
 	flex-direction: column;
+}
+
+@mixin responsive-flex-col-sm {
+	@media (max-width: 720px) {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+@mixin input-dark {
+	background: $color-dark-gray;
+	color: $color-white;
+	border: 1px solid $color-gray;
+	margin: 0 $margin-sm;
+	border-radius: $radius-sm;
+	padding: $margin-sm;
+	text-align: center;
 }

@@ -30,7 +30,7 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 
 	return <div className="Menu">
 		<Link className="Menu__logo" href={url.home}><Logo /></Link>
-		{!_.isNil(user) && <Link className="Menu__user" href={url.user}>{user?.name}</Link>}
+		{!_.isNil(user) && <Link className="Menu__user" href={url.user}>{_p('Menu', 'Keyboards')}</Link>}
 		<div className="Menu__spacer" />
 		{children}
 		<div className="Menu__spacer" />
@@ -40,8 +40,5 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 				<option value="en" selected={lang === 'en'}>en</option>
 			</select>
 		</div>
-		{!_.isNil(user) &&
-		<button className="Menu__logout" onClick={onExit}><Icon img="door-6" size="sm" /> {_p('Menu', 'Exit')}
-		</button>}
 	</div>;
 };

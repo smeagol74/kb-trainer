@@ -10,27 +10,32 @@ import { i18nContext, UserContext } from '../../App';
 import { Db } from '../../components/Db/Db';
 import { url } from '../sitemap';
 import { Menu } from '../../components/Menu/Menu';
+import { Icon } from '../../components/Icon/Icon';
 
 export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 
-	const [users, setUsers] = useState<User[]>([]);
 	const { setUser } = useContext(UserContext);
-	const idRef = useRef<HTMLInputElement>();
 	const nameRef = useRef<HTMLInputElement>();
 	const { _p, _np } = useContext(i18nContext);
-
-	useEffect(() => {
-		Db.user.toArray().then(setUsers);
-	}, [setUsers]);
 
 	const onSelectUser = useCallback((user: User) => {
 		setUser?.(user);
 		route(url.user);
 	}, [setUser]);
 
+	useEffect(() => {
+		if (setUser) {
+			Db.user.toArray().then((users) => {
+				if (users.length > 0) {
+					onSelectUser(users[0]);
+				}
+			});
+		}
+	}, [setUser, onSelectUser]);
+
 	const onRegisterClick = useCallback(() => {
 		const user: User = {
-			id: idRef.current.value,
+			id: 'user',
 			name: nameRef.current.value,
 			keyboards: {},
 		};
@@ -49,35 +54,10 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 	return <div className="LoginPage">
 		<div className="LoginPage__body">
 			<div className="LoginPage__form">
-				<div className="LoginPage__form-list">
-					{!_.isEmpty(users) &&
-					<h3 {...{
-						dangerouslySetInnerHTML: {
-							__html: _p('LoginPage', '* Select * some from <small>already registered users</small>'),
-						},
-					}} />}
-					<ul>
-						{_.map(users, (user, idx) => <li {...{ key: idx, onClick: _.partial(onSelectUser, user) }}>
-							{user.name}
-						</li>)}
-					</ul>
-				</div>
 				<div className="LoginPage__form-register">
-					<h3 {...{
-						dangerouslySetInnerHTML: {
-							__html: _p('LoginPage', '<small>or</small> + Register New + <small>user</small>'),
-						},
-					}} />
+					<h3>{_p('LoginPage', 'Welcome to kb-trainer')}</h3>
+					<p>{_p('LoginPage', 'Please type your name, so I know how to address to you')}</p>
 					<div className="LoginPage__form-group">
-						<label>{_p('LoginPage', 'login:')}</label>
-						<input {...{
-							ref: idRef,
-							type: 'text',
-							name: 'id',
-						}} />
-					</div>
-					<div className="LoginPage__form-group">
-						<label>{_p('LoginPage', 'name:')}</label>
 						<input {...{
 							ref: nameRef,
 							type: 'text',
@@ -88,7 +68,7 @@ export const LoginPage: FunctionalComponent<RoutableProps> = ({}) => {
 						<button {...{
 							className: 'LoginPage__form-register-button',
 							onClick: onRegisterClick,
-						}}>{_p('LoginPage', 'Register')}</button>
+						}}><Icon img={'rocket-19'} /> {_p('LoginPage', 'Go')}</button>
 					</div>
 				</div>
 			</div>

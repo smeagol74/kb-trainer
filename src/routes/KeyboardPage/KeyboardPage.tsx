@@ -37,6 +37,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 	const [haveStats, setHaveStats] = useState<boolean>(false);
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
 	const uKey = userKeyboard(user, keyboard);
+	const [ver, setVer] = useState<number>(1);
 	const ref = {
 		metronome: {
 			tempo: useRef<HTMLInputElement>(),
@@ -89,6 +90,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 			user.keyboards[keyboard.id] = cfg;
 			setUser?.(user);
 			Db.user.put(user);
+			setVer(prev => prev + 1);
 		}
 	}
 
@@ -142,6 +144,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.metronome.tempo,
 									min: 10,
 									max: 400,
+									onChange: _saveConfig,
 								}} />
 								bpm
 							</div>
@@ -153,6 +156,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.metronome.volume * 100,
 									min: 0,
 									max: 100,
+									onChange: _saveConfig,
 								}} />
 								%
 							</div>
@@ -169,6 +173,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.strokes.initial,
 									min: 0,
 									max: 32768,
+									onChange: _saveConfig,
 								}} />
 							</div>
 							<div
@@ -180,6 +185,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.strokes.lesson,
 									min: 0,
 									max: 32768,
+									onChange: _saveConfig,
 								}} />
 							</div>
 							<div
@@ -191,6 +197,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.strokes.complete,
 									min: 0,
 									max: 32768,
+									onChange: _saveConfig,
 								}} />
 							</div>
 						</fieldset>
@@ -204,6 +211,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.textGenerator.words,
 									min: 10,
 									max: 32768,
+									onChange: _saveConfig,
 								}} />
 							</div>
 							<div data-intro="One word length configuration. Minimal and maximal lengths.">
@@ -214,6 +222,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.textGenerator.minWordLen,
 									min: 1,
 									max: 100,
+									onChange: _saveConfig,
 								}} />
 								<label>to:</label>
 								<input {...{
@@ -222,6 +231,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.textGenerator.maxWordLen,
 									min: 1,
 									max: 100,
+									onChange: _saveConfig,
 								}} />
 								chars
 							</div>
@@ -237,6 +247,7 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 									defaultValue: uKey.error.extraStrokes,
 									min: 1,
 									max: 32768,
+									onChange: _saveConfig,
 								}} />
 							</div>
 						</fieldset>

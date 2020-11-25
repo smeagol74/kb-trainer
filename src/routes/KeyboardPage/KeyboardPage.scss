@@ -26,6 +26,7 @@
 	.KeyboardPage__details {
 		@include dark-box;
 		@include flex-row;
+		@include responsive-flex-col-sm;
 	}
 
 	.KeyboardPage__desc {
@@ -54,6 +55,7 @@
 	.KeyboardPage__options {
 		@include dark-box;
 		@include flex-row;
+		@include responsive-flex-col-sm;
 	}
 
 	.KeyboardPage__options-form {
@@ -91,9 +93,9 @@
 	}
 
 	.KeyboardPage__options-form-group {
-		display: flex;
-		flex-direction: row;
+		@include flex-row;
 		justify-content: space-around;
+		@include responsive-flex-col-sm;
 		border-color: #777777;
 		margin: $margin-sm 0;
 
@@ -102,13 +104,7 @@
 		}
 
 		input {
-			background: #555;
-			color: white;
-			border: 1px solid #ccc;
-			margin: 0 $margin-sm;
-			border-radius: $radius-sm;
-			padding: $margin-sm;
-			text-align: center;
+			@include input-dark;
 		}
 	}
 }

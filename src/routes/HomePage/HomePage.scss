@@ -12,4 +12,26 @@
 		max-width: 900px;
 		width: 100%;
 	}
+
+	.HomePage__start-button {
+		@include dark-button;
+		@include button-with-icon-sm;
+	}
+
+	.HomePage__body-controls {
+		text-align: center;
+		margin: $margin-lg 0;
+	}
+
+	.HomePage__start-button-body {
+		padding: $margin-lg;
+		font-size: xx-large;
+		border-radius: $radius-lg;
+		cursor: pointer;
+		margin-top: $margin-lg;
+
+		&:hover {
+			background: $color-light-gray;
+		}
+	}
 }

@@ -49,7 +49,7 @@ export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) =>
 			}} />}
 		</div>
 		<Menu>
-			{TrainerState.NEW === state &&
+			{TrainerState.BETWEEN_LESSONS !== state &&
 			<button className="PracticePage__menu-button"
 							onClick={_onCancelTraining}>{_p('PracticePage', 'Cancel Training')}</button>}
 			{TrainerState.IN_LESSON === state &&

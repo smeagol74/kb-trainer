@@ -68,6 +68,7 @@ export const UserPage: FunctionalComponent<RoutableProps> = () => {
 	return <div className="UserPage">
 		<div className="UserPage__body">
 			<div className="UserPage__frame">
+				<h1>{_p('KeyboardPage', 'Welcome, %1', user?.name)}</h1>
 				{!_.isEmpty(myKeyboards) && <div className="UserPage__my-keyboards">
 					<h3>{_p('UserPage', 'My keyboards progress')}</h3>
 					<div className="UserPage__group-list">
