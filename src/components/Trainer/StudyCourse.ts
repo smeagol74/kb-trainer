@@ -12,7 +12,7 @@ const log = jsLogger.get('StudyCourse');
 
 interface IKeys {
 	keys: string[];
-	shift: boolean;
+	shift: number;
 }
 
 const Key = {
@@ -88,7 +88,7 @@ export class StudyCourse {
 	private keysToUse(): IKeys {
 		const result: IKeys = {
 			keys: [],
-			shift: false,
+			shift: 0,
 		};
 		const lesson = this.getLesson();
 		if (this.isInitialLessonComplete(lesson)) {
@@ -96,7 +96,15 @@ export class StudyCourse {
 		} else {
 			result.keys = lesson;
 		}
-		result.shift = _.indexOf(result.keys, Key.shift) > -1;
+		if (_.indexOf(result.keys, Key.shift) > -1) {
+			const strokes = _.map(result.keys, k => this.statsKeyStrokesWithErrors(k));
+			const shift = this.statsKeyStrokesWithErrors(Key.shift);
+			const total = _.sum(strokes);
+			const max = _.max(strokes) ?? 0;
+			if (max > 0) {
+				result.shift = (max - shift) / (max * 2);
+			}
+		}
 		result.keys = _.filter(result.keys, c => c !== Key.shift);
 		log.debug('keysToUse', result);
 		return result;

@@ -292,7 +292,7 @@ msgstr "Знаков: %1 / %2"
 #: src/components/Trainer/TrainerLine.tsx:100
 msgctxt "TrainerLine"
 msgid "Cpm: %1"
-msgstr "З/М: %1"
+msgstr "Зн/мин: %1"
 
 #: src/components/Trainer/TrainerLine.tsx:99
 msgctxt "TrainerLine"

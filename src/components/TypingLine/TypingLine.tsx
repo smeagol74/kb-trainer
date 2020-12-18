@@ -75,13 +75,31 @@ const Special: Dict<string> = {
 	..._key('End'),
 };
 
+const charCodeFix: Dict<number> = {
+	1025: 203, // Ë
+	203: 203,  // Ë
+};
+
+function _sameCharCode(char: string, other: string): boolean {
+	if (char.length === 1 && other.length === 1) {
+		const c1 = char.charCodeAt(0);
+		const c2 = other.charCodeAt(0);
+		return (charCodeFix[c1] ?? c1) === (charCodeFix[c2] ?? c2);
+	} else {
+		return false;
+	}
+}
+
+function _sameChar(char: string, other: string): boolean {
+	return char === other || _sameCharCode(char, other);
+}
 
 export function _charMatches(char: string, event: KeyboardEvent): boolean {
 	if (char.length === 1) {
 		if (char === PARA) {
 			return event.key === 'Enter';
 		} else {
-			return char === event.key;
+			return _sameChar(char, event.key);
 		}
 	} else if (Special[char.toLowerCase()]) {
 		return event.key === Special[char.toLowerCase()];
