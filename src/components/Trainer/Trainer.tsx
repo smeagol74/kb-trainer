@@ -40,7 +40,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
 
-	const {_p} = useContext(i18nContext);
+	const { _p } = useContext(i18nContext);
 
 	useEffect(() => {
 		if (!_.isEmpty(user) && !_.isEmpty(keyboard) && !_.isNil(setUser) && !_.isEmpty(stats)) {
@@ -68,10 +68,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 			lesson: study!.getLessonIdx(),
 		});
 		setState(TrainerState.BETWEEN_LESSONS);
-		study?.complete({
-			strokes: res.strokes,
-			errors: res.errors,
-		});
+		study?.complete(res);
 	}
 
 	function _onStart() {
@@ -116,6 +113,10 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				extraStrokes: study.getConfig().error.extraStrokes,
 				label: study.areLessonsIncomplete() ? _p('Trainer', 'keyboard:') : '',
 			}} />}
+			{study && <div>
+				HotStreak: {study.getHotStreak()} / {study.getBestHotStreak()} Metronome {!study.areLessonsIncomplete() &&
+			<span> HotStreak: {study.getMetronomeHotStreak()} </span>} Tempo: {study.getMetronome()}
+			</div>}
 		</TrainerInstruction>}
 	</div>;
 };

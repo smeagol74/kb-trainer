@@ -11,6 +11,7 @@ const log = jsLogger.get('TypingLine');
 export interface ITypingLineResults {
 	strokes: Dict<number>;
 	errors: Dict<number>;
+	hotStreak: number;
 }
 
 export interface ITypingLineProps {
@@ -128,7 +129,7 @@ export function _isShifted(char: string): boolean {
 	return char === char.toUpperCase() && char !== char.toLowerCase();
 }
 
-function _mkResults(errors: number[], text: string[]): ITypingLineResults {
+function _mkResults(errors: number[], text: string[], hotStreak: number): ITypingLineResults {
 
 	const result: ITypingLineResults = {
 		strokes: {
@@ -137,6 +138,7 @@ function _mkResults(errors: number[], text: string[]): ITypingLineResults {
 		errors: {
 			Enter: errors[text.length],
 		},
+		hotStreak: hotStreak,
 	};
 	_.each(text, (char, idx) => {
 		if (char.length === 1) {
@@ -174,6 +176,7 @@ declare global {
 export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComplete, onType, onError }) => {
 
 	const [pos, setPos] = useState<number>(0);
+	const [hotStreak, setHotStreak] = useState<number>(0);
 	const [errors, setErrors] = useState<number[]>(new Array(text.length + 1).fill(0));
 	const keypress = useRef<(event: KeyboardEvent) => void>();
 	const complete = useRef<() => void>();
@@ -202,9 +205,9 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComp
 
 	useEffect(() => {
 		complete.current = () => {
-			onComplete(_mkResults(errors, text));
+			onComplete(_mkResults(errors, text, hotStreak));
 		};
-	}, [onComplete, errors, text]);
+	}, [onComplete, errors, text, hotStreak]);
 
 	useEffect(() => {
 		keypress.current = (event) => {
@@ -223,6 +226,7 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComp
 						return res;
 					});
 				}
+				setHotStreak(prev => prev + 1);
 			} else {
 				if (!Modifier[event.key] || Modifier[Mod[char]]) {
 					setErrors((prev) => {
@@ -231,10 +235,11 @@ export const TypingLine: FunctionalComponent<ITypingLineProps> = ({ text, onComp
 						onError(_(res).filter(v => v > 0).size());
 						return res;
 					});
+					setHotStreak(0);
 				}
 			}
 		};
-	}, [onComplete, setErrors, setPos, onType, onError]);
+	}, [onComplete, setErrors, setPos, onType, onError, setHotStreak]);
 
 	useEffect(() => {
 		const _onKeypress = (event: KeyboardEvent) => {

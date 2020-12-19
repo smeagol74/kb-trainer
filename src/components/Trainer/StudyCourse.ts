@@ -6,7 +6,9 @@ import { TextGenerator } from './TextGenerator';
 import type { ITypingLineResults } from '../TypingLine/TypingLine';
 import jsLogger from 'js-logger';
 import { sumMerge } from '../../utils/stats';
-import { DEFAULT_USER_KEYBOARD } from '../Db/User';
+import type { ITrainerLineResults } from './TrainerLine';
+import { userKeyboard } from '../../utils/user';
+import { Db } from '../Db/Db';
 
 const log = jsLogger.get('StudyCourse');
 
@@ -58,16 +60,18 @@ export class StudyCourse {
 	private readonly stats: IStudyStats;
 	private lastStats?: IStudyStats;
 	private config: UserKeyboard;
+	private configModified: boolean;
 
 	constructor(props: IStudyCourseOptions) {
 		log.debug('constructor', props);
 		this.keyboard = props.keyboard;
 		this.user = props.user;
 		this.onSetUser = props.onSetUser;
-		this.config = this.user.keyboards?.[this.keyboard.id] ?? DEFAULT_USER_KEYBOARD;
+		this.config = userKeyboard(props.user, props.keyboard);
 		this.lessonIdx = props.lesson ?? this.config.lesson ?? 0;
 		this.text = [];
 		this.stats = props.stats;
+		this.configModified = false;
 	}
 
 	private statsKeyStrokesWithErrors(key: string): number {
@@ -184,17 +188,93 @@ export class StudyCourse {
 		return result;
 	}
 
-	complete(res: ITypingLineResults) {
+	private _resetMetronomeHotStreak() {
+		if (this.config.metronome.hotStreak > 0) {
+			this.configModified = true;
+		}
+		this.config.metronome.hotStreak = 0;
+	}
+
+	private _incMetronomeHotStreak(value: number, errors: number, cpm: number) {
+		const tempo = cpm > 0 ? cpm : this.config.metronome.tempo;
+		if (errors > 0) {
+			this.config.metronome.hotStreak = value;
+			this.config.metronome.tempo = Math.max(tempo - this.config.metronome.dec, 30);
+		} else {
+			this.config.metronome.hotStreak += value;
+			if (this.config.metronome.hotStreak > this.config.metronome.speedUp) {
+				this.config.metronome.hotStreak = 0;
+				this.config.metronome.tempo = tempo + this.config.metronome.inc;
+			}
+		}
+		this.configModified = true;
+	}
+
+	private _isLessonsComplete(): boolean {
+		const isLastLesson = (this.lessonIdx === this.keyboard.lessons.length - 1);
+		const allCharsComplete = () => {
+			const keys = _(this.keyboard.lessons).flatten().value();
+			let res = true;
+			_(keys).each(key => {
+				res = res && (this.config.strokes.lesson < this.statsKeyStrokesWithErrors(key));
+			});
+			return res;
+		};
+		return isLastLesson && allCharsComplete();
+	}
+
+	private _incHotStreak(value: number, errors: number) {
+		if (errors > 0) {
+			this.config.error.hotStreak = value;
+		} else {
+			this.config.error.hotStreak += value;
+		}
+		this.config.error.bestHotStreak = Math.max(this.config.error.bestHotStreak, this.config.error.hotStreak);
+		this.configModified = true;
+	}
+
+	private _saveConfig() {
+		if (this.configModified) {
+			const user = this.user;
+			const _onSetUser = this.onSetUser;
+			user.keyboards[this.keyboard.id] = {
+				...this.config,
+			};
+			log.debug('_saveConfig', this.keyboard.id, user.keyboards);
+			const onSetUser = () => {
+				_onSetUser(user);
+			};
+			Db.user.put(this.user).then(onSetUser);
+			this.configModified = false;
+		}
+	}
+
+	complete(res: ITrainerLineResults) {
 		this.sumMergeStats(res);
 		const lesson = this.getLesson();
-		if (this.isLessonComplete(lesson, _(res.errors).values().sum())) {
-			this.lessonIdx = Math.min(this.lessonIdx + 1, this.keyboard.lessons.length - 1);
+		const totalErrors = _(res.errors).values().sum();
+		this._incHotStreak(res.hotStreak, totalErrors);
+		if (this._isLessonsComplete()) {
+			this._incMetronomeHotStreak(res.hotStreak, totalErrors, res.cpm);
+		} else {
+			if (this.isLessonComplete(lesson, totalErrors)) {
+				if (this.lessonIdx < this.keyboard.lessons.length - 1) {
+					this.lessonIdx += 1;
+					if (this.lessonIdx === this.keyboard.lessons.length - 1) {
+						this._resetMetronomeHotStreak();
+					}
+				} else {
+					this.lessonIdx = this.keyboard.lessons.length - 1;
+				}
+			}
 		}
+
 		this.text = [];
 		this.lastStats = res;
 		if (this.lessonIdx > this.keyboard.lessons.length) {
 			this.lessonIdx = this.keyboard.lessons.length - 1;
 		}
+		this._saveConfig();
 	}
 
 	hasSummary(): boolean {
@@ -229,6 +309,18 @@ export class StudyCourse {
 	}
 
 	areLessonsIncomplete(): boolean {
-		return (this.lessonIdx !== this.keyboard.lessons.length - 1) || (!this.isLessonComplete(this.keyboard.lessons[this.lessonIdx], 0));
+		return !this._isLessonsComplete();
+	}
+
+	getHotStreak(): number {
+		return this.config.error.hotStreak;
+	}
+
+	getBestHotStreak(): number {
+		return this.config.error.bestHotStreak;
+	}
+
+	getMetronomeHotStreak(): number {
+		return this.config.metronome.hotStreak;
 	}
 }

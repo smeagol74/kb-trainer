@@ -6,6 +6,7 @@ import { Metronome } from '../Metronome/Metronome';
 import { DateTime } from 'luxon';
 import { useCallback, useContext, useEffect, useState } from 'preact/hooks';
 import { i18nContext } from '../../App';
+import _ from 'lodash';
 
 function _cpm(chars: number, time: DateTime) {
 	const minutes = DateTime.local().diff(time).as('minutes');
@@ -13,20 +14,26 @@ function _cpm(chars: number, time: DateTime) {
 }
 
 export interface ITrainerLineResults {
-	strokes: Dict<number>,
-	errors: Dict<number>,
-	cpm: number,
+	strokes: Dict<number>;
+	errors: Dict<number>;
+	cpm: number;
 	time: number;
+	hotStreak: number;
 }
 
 export interface ITrainerLineProps {
-	onComplete: (res: ITrainerLineResults) => void,
-	text: string[],
-	metronome: number,
-	metronomeVolume: number
+	onComplete: (res: ITrainerLineResults) => void;
+	text: string[];
+	metronome: number;
+	metronomeVolume: number;
 }
 
-export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete, text, metronome, metronomeVolume }) => {
+export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({
+																																			onComplete,
+																																			text,
+																																			metronome,
+																																			metronomeVolume,
+																																		}) => {
 
 	const { _p } = useContext(i18nContext);
 	const [errors, setErrors] = useState({
@@ -34,9 +41,9 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 		perc: 0,
 	});
 	const [time, setTime] = useState({
-		start: DateTime.local(),
+		start: undefined,
 		display: '',
-	});
+	} as {start?: DateTime, display: string});
 	const [chars, setChars] = useState({
 		total: text.length + 1,
 		complete: 0,
@@ -47,7 +54,16 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 			...prev,
 			complete: complete,
 		}));
-	}, [setChars]);
+		setTime(prev => {
+			const res = {
+				...prev
+			};
+			if (_.isNil(res.start)) {
+				res.start = DateTime.local()
+			}
+			return res;
+		})
+	}, [setChars, setTime]);
 
 	const _onError = useCallback((errors: number) => {
 		setErrors(prev => ({
@@ -67,7 +83,7 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 		const timer = setInterval(() => {
 			setTime(prev => ({
 				...prev,
-				display: DateTime.local().diff(prev.start).toFormat('m:ss'),
+				display: DateTime.local().diff(prev.start ?? DateTime.local()).toFormat('m:ss'),
 			}));
 		}, 1000);
 		return () => {
@@ -79,8 +95,9 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 		onComplete({
 			strokes: res.strokes,
 			errors: res.errors,
-			cpm: _cpm(chars.complete, time.start),
-			time: DateTime.local().diff(time.start).as('seconds'),
+			cpm: _cpm(chars.complete, time.start ?? DateTime.local()),
+			time: DateTime.local().diff(time.start ?? DateTime.local()).as('seconds'),
+			hotStreak: res.hotStreak,
 		});
 	}
 
@@ -91,14 +108,14 @@ export const TrainerLine: FunctionalComponent<ITrainerLineProps> = ({ onComplete
 				onComplete: _onComplete,
 				onType: _onType,
 				onError: _onError,
-				text,
+				text
 			}} />
 		</div>
 		<div className="TrainerLine__info">
 			<div
 				className="TrainerLine__info-item">{_p('TrainerLine', 'Errors: %1 (%2%%)', errors.total, errors.perc)}</div>
-			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Cpm: %1', _cpm(chars.complete, time.start))}</div>
-			<div className="TrainerLine__info-center"/>
+			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Cpm: %1', _cpm(chars.complete, time.start ?? DateTime.local()))}</div>
+			<div className="TrainerLine__info-center" />
 			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Time: %1', time.display)}</div>
 			<div className="TrainerLine__info-item">{_p('TrainerLine', 'Chars: %1 / %2', chars.complete, chars.total)}</div>
 		</div>

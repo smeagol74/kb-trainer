@@ -29,6 +29,22 @@ export interface UserKeyboard {
 		 * Just sound volume
 		 */
 		volume: number;
+		/**
+		 * Number of strokes without errors after metronome automatically changed
+		 */
+		hotStreak: number;
+		/**
+		 * Number of strokes without errors to increase tempo
+		 */
+		speedUp: number;
+		/**
+		 * Tempo amount to increase
+		 */
+		inc: number;
+		/**
+		 * Tempo amount to decrease
+		 */
+		dec: number;
 	}
 	/**
 	 * Last trained lesson
@@ -67,6 +83,10 @@ export interface UserKeyboard {
 		 * Number of strokes without errors
 		 */
 		hotStreak: number;
+		/**
+		 * Best hotStreak ever
+		 */
+		bestHotStreak: number;
 	}
 }
 
@@ -74,6 +94,10 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 	metronome: {
 		tempo: 30,
 		volume: 1,
+		hotStreak: 0,
+		speedUp: 200,
+		inc: 3,
+		dec: 5,
 	},
 	lesson: 0,
 	strokes: {
@@ -89,6 +113,7 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 	error: {
 		extraStrokes: 20,
 		hotStreak: 0,
+		bestHotStreak: 0,
 	},
 };
 
