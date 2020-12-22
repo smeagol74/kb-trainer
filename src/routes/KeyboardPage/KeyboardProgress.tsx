@@ -1,25 +1,34 @@
 import type { FunctionalComponent } from 'preact';
-import type { IStudyStats } from '../../components/Trainer/StudyCourse';
 import type { UserKeyboardStrokes } from '../../components/Db/User';
 import _ from 'lodash';
 import { h } from 'preact';
 import clsx from 'clsx';
 import './KeyboardProgress.scss';
 import Logger from 'js-logger';
+import type { StudyStats } from '../../components/Trainer/StudyStats';
+import { keyStrokesWithErrors } from '../../components/Trainer/StudyStats';
 
 const log = Logger.get('KeyboardProgress');
 
 export interface IKeyboardProgress {
 	className?: string;
-	stats: IStudyStats;
+	stats: StudyStats;
 	strokes: UserKeyboardStrokes;
 	extraStrokes: number;
 	label?: string;
 }
 
-export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({ stats, strokes, extraStrokes, className, label }) => {
+export const KeyboardProgress: FunctionalComponent<IKeyboardProgress> = ({
+																																					 stats,
+																																					 strokes,
+																																					 extraStrokes,
+																																					 className,
+																																					 label,
+																																				 }) => {
 	const keys = Object.keys(stats.strokes);
-	const progressStrokes = _(keys).map(k => Math.max(stats.strokes[k] ?? 0 - (stats.errors[k] ?? 0) * extraStrokes, 0)).sum() / (_.size(keys) || 1);
+	const progressStrokes = _(keys)
+		.map(k => Math.min(strokes.complete, keyStrokesWithErrors(stats, extraStrokes, k)))
+		.sum() / (_.size(keys) || 1);
 	const progressComplete = Math.min(progressStrokes / strokes.complete, 1);
 	// log.debug(keys, strokes, progressStrokes);
 	return <div className={clsx('KeyboardProgress', className)}>

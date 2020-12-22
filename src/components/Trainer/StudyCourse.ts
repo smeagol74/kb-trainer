@@ -9,6 +9,8 @@ import { sumMerge } from '../../utils/stats';
 import type { ITrainerLineResults } from './TrainerLine';
 import { userKeyboard } from '../../utils/user';
 import { Db } from '../Db/Db';
+import type { StudyStats } from './StudyStats';
+import { firstIncompleteLesson, isInitialLessonComplete, isLessonComplete, keyStrokesWithErrors } from './StudyStats';
 
 const log = jsLogger.get('StudyCourse');
 
@@ -21,7 +23,6 @@ const Key = {
 	shift: 'Shift',
 };
 
-const ERROR_EXTRA_STROKES = 10;
 const STROKES_FOR_GENERATOR = 10000;
 const VOCABULARY = 'random';
 
@@ -37,17 +38,11 @@ export interface ISummaryData {
 	}
 }
 
-export interface IStudyStats {
-	strokes: Dict<number>;
-	errors: Dict<number>;
-}
-
 export interface IStudyCourseOptions {
 	user: User;
 	keyboard: Keyboard;
-	stats: IStudyStats;
+	stats: StudyStats;
 	onSetUser: StateUpdater<User | undefined>;
-	lesson?: number;
 }
 
 export class StudyCourse {
@@ -57,8 +52,8 @@ export class StudyCourse {
 	private onSetUser: StateUpdater<User | undefined>;
 	private lessonIdx: number;
 	private text: string[];
-	private readonly stats: IStudyStats;
-	private lastStats?: IStudyStats;
+	private readonly stats: StudyStats;
+	private lastStats?: StudyStats;
 	private config: UserKeyboard;
 	private configModified: boolean;
 
@@ -68,25 +63,19 @@ export class StudyCourse {
 		this.user = props.user;
 		this.onSetUser = props.onSetUser;
 		this.config = userKeyboard(props.user, props.keyboard);
-		this.lessonIdx = props.lesson ?? this.config.lesson ?? 0;
 		this.text = [];
 		this.stats = props.stats;
 		this.configModified = false;
+		this.lessonIdx = 0;
+		this._selectBestLesson(0);
 	}
 
-	private statsKeyStrokesWithErrors(key: string): number {
-		const strokes = this.stats.strokes[key] ?? 0;
-		const errors = this.stats.errors[key] ?? 0;
-		const res = strokes - (errors * ERROR_EXTRA_STROKES);
-		return Math.max(res, 0);
+	private _statsKeyStrokesWithErrors(key: string): number {
+		return keyStrokesWithErrors(this.stats, this.config.error.extraStrokes, key);
 	}
 
-	private isInitialLessonComplete(keys: string[]): boolean {
-		let result = true;
-		_(keys).filter(key => key !== Key.shift).each(key => {
-			result = result && (this.config.strokes.initial < this.statsKeyStrokesWithErrors(key));
-		});
-		return result;
+	private _isInitialLessonComplete(keys: string[]): boolean {
+		return isInitialLessonComplete(this.config, this.stats, keys);
 	}
 
 	private keysToUse(): IKeys {
@@ -95,14 +84,14 @@ export class StudyCourse {
 			shift: 0,
 		};
 		const lesson = this.getLesson();
-		if (this.isInitialLessonComplete(lesson)) {
+		if (this._isInitialLessonComplete(lesson)) {
 			result.keys = _(this.keyboard.lessons).slice(0, this.lessonIdx + 1).flatten().value();
 		} else {
 			result.keys = lesson;
 		}
 		if (_.indexOf(result.keys, Key.shift) > -1) {
-			const strokes = _.map(result.keys, k => this.statsKeyStrokesWithErrors(k));
-			const shift = this.statsKeyStrokesWithErrors(Key.shift);
+			const strokes = _.map(result.keys, k => this._statsKeyStrokesWithErrors(k));
+			const shift = this._statsKeyStrokesWithErrors(Key.shift);
 			const total = _.sum(strokes);
 			const max = _.max(strokes) ?? 0;
 			if (max > 0) {
@@ -117,7 +106,7 @@ export class StudyCourse {
 	private weightedKeys(keys: string[]): string[] {
 		log.debug(keys);
 		let result: string[] = [];
-		const strokes = _.map(keys, k => this.statsKeyStrokesWithErrors(k));
+		const strokes = _.map(keys, k => this._statsKeyStrokesWithErrors(k));
 		log.debug('strokes:', strokes);
 		const total = _.sum(strokes);
 		const max = _.max(strokes) ?? 0;
@@ -174,18 +163,14 @@ export class StudyCourse {
 		return this.lessonIdx;
 	}
 
-	private sumMergeStats(stats: ITypingLineResults) {
+	private _sumMergeStats(stats: ITypingLineResults) {
 		sumMerge(this.stats.strokes, stats.strokes);
 		sumMerge(this.stats.errors, stats.errors);
-		log.debug('sumMergeStats', this.stats);
+		log.debug('_sumMergeStats', this.stats);
 	}
 
-	private isLessonComplete(keys: string[], errors: number): boolean {
-		let result = errors === 0;
-		_(keys).filter(key => key !== Key.shift).each(key => {
-			result = result && (this.config.strokes.lesson < this.statsKeyStrokesWithErrors(key));
-		});
-		return result;
+	private _isLessonComplete(keys: string[]): boolean {
+		return isLessonComplete(this.config, this.stats, keys);
 	}
 
 	private _resetMetronomeHotStreak() {
@@ -211,16 +196,8 @@ export class StudyCourse {
 	}
 
 	private _isLessonsComplete(): boolean {
-		const isLastLesson = (this.lessonIdx === this.keyboard.lessons.length - 1);
-		const allCharsComplete = () => {
-			const keys = _(this.keyboard.lessons).flatten().value();
-			let res = true;
-			_(keys).each(key => {
-				res = res && (this.config.strokes.lesson < this.statsKeyStrokesWithErrors(key));
-			});
-			return res;
-		};
-		return isLastLesson && allCharsComplete();
+		const keys = _(this.keyboard.lessons).flatten().value();
+		return isLessonComplete(this.config, this.stats, keys);
 	}
 
 	private _incHotStreak(value: number, errors: number) {
@@ -249,23 +226,26 @@ export class StudyCourse {
 		}
 	}
 
+	private _selectBestLesson(errors: number) {
+		let idx = firstIncompleteLesson(this.config, this.stats, this.keyboard.lessons);
+		if ((idx === this.lessonIdx + 1) && errors > 0) {
+			idx = this.lessonIdx;
+		}
+		idx = Math.min(idx, this.keyboard.lessons.length - 1);
+		this.lessonIdx = idx;
+	}
+
 	complete(res: ITrainerLineResults) {
-		this.sumMergeStats(res);
-		const lesson = this.getLesson();
+		this._sumMergeStats(res);
 		const totalErrors = _(res.errors).values().sum();
 		this._incHotStreak(res.hotStreak, totalErrors);
+
 		if (this._isLessonsComplete()) {
 			this._incMetronomeHotStreak(res.hotStreak, totalErrors, res.cpm);
 		} else {
-			if (this.isLessonComplete(lesson, totalErrors)) {
-				if (this.lessonIdx < this.keyboard.lessons.length - 1) {
-					this.lessonIdx += 1;
-					if (this.lessonIdx === this.keyboard.lessons.length - 1) {
-						this._resetMetronomeHotStreak();
-					}
-				} else {
-					this.lessonIdx = this.keyboard.lessons.length - 1;
-				}
+			this._selectBestLesson(totalErrors);
+			if (this._isLessonsComplete()) {
+				this._resetMetronomeHotStreak();
 			}
 		}
 
@@ -286,7 +266,7 @@ export class StudyCourse {
 		const result: ISummaryData = {
 			keys,
 			total: {
-				strokes: _.map(keys, k => this.statsKeyStrokesWithErrors(k)),
+				strokes: _.map(keys, k => this._statsKeyStrokesWithErrors(k)),
 				errors: _.map(keys, k => this.stats.errors[k] ?? 0),
 			},
 		};
@@ -304,7 +284,7 @@ export class StudyCourse {
 		return this.config;
 	}
 
-	getStats(): IStudyStats {
+	getStats(): StudyStats {
 		return this.stats;
 	}
 

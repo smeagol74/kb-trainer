@@ -49,7 +49,6 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				keyboard: keyboard,
 				stats: stats,
 				onSetUser: setUser!,
-				lesson: lesson,
 			}));
 		}
 	}, [user, keyboard, setStudy, setUser, stats, lesson]);
