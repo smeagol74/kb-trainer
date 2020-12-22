@@ -143,14 +143,6 @@ export class StudyCourse {
 		return this.text;
 	}
 
-	getMetronome(): number {
-		return this.config.metronome.tempo;
-	}
-
-	getMetronomeVolume(): number {
-		return this.config.metronome.volume;
-	}
-
 	getLesson(): KeyboardLesson {
 		return this.keyboard.lessons[this.lessonIdx];
 	}
@@ -167,10 +159,6 @@ export class StudyCourse {
 		sumMerge(this.stats.strokes, stats.strokes);
 		sumMerge(this.stats.errors, stats.errors);
 		log.debug('_sumMergeStats', this.stats);
-	}
-
-	private _isLessonComplete(keys: string[]): boolean {
-		return isLessonComplete(this.config, this.stats, keys);
 	}
 
 	private _resetMetronomeHotStreak() {
@@ -292,15 +280,4 @@ export class StudyCourse {
 		return !this._isLessonsComplete();
 	}
 
-	getHotStreak(): number {
-		return this.config.error.hotStreak;
-	}
-
-	getBestHotStreak(): number {
-		return this.config.error.bestHotStreak;
-	}
-
-	getMetronomeHotStreak(): number {
-		return this.config.metronome.hotStreak;
-	}
 }

@@ -61,7 +61,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 			date: DateTime.local().toISO(),
 			strokes: res.strokes,
 			errors: res.errors,
-			metronome: study!.getMetronome(),
+			metronome: study!.getConfig().metronome.tempo,
 			cpm: res.cpm,
 			time: res.time,
 			lesson: study!.getLessonIdx(),
@@ -91,8 +91,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		{study && (TrainerState.IN_LESSON === state) && <TrainerLine {...{
 			onComplete: _onComplete,
 			text: study.getText(),
-			metronome: study.getMetronome(),
-			metronomeVolume: study.getMetronomeVolume(),
+			metronome: study.getConfig().metronome.tempo,
+			metronomeVolume: study.getConfig().metronome.volume,
 		}} />}
 		{TrainerState.IN_LESSON !== state && <TrainerInstruction {...{
 			onStart: _onStart,
@@ -113,8 +113,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				label: study.areLessonsIncomplete() ? _p('Trainer', 'keyboard:') : '',
 			}} />}
 			{study && <div>
-				HotStreak: {study.getHotStreak()} / {study.getBestHotStreak()} Metronome {!study.areLessonsIncomplete() &&
-			<span> HotStreak: {study.getMetronomeHotStreak()} </span>} Tempo: {study.getMetronome()}
+				HotStreak: {study.getConfig().error.hotStreak} / {study.getConfig().error.bestHotStreak} Metronome {!study.areLessonsIncomplete() &&
+			<span> HotStreak: {study.getConfig().metronome.hotStreak} </span>} Tempo: {study.getConfig().metronome.tempo}
 			</div>}
 		</TrainerInstruction>}
 	</div>;

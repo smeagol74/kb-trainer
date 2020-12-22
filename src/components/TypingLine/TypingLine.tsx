@@ -74,6 +74,10 @@ const Special: Dict<string> = {
 	..._key('PageDown', 'pgdn'),
 	..._key('Home'),
 	..._key('End'),
+	..._key('ArrowUp', 'Up'),
+	..._key('ArrowDown', 'Down'),
+	..._key('ArrowRight', 'Right'),
+	..._key('ArrowLeft', 'Left'),
 };
 
 const charCodeFix: Dict<number> = {
