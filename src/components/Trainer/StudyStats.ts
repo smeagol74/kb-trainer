@@ -25,7 +25,7 @@ function isComplete(stats: StudyStats, extraStrokes: number, value: number, keys
 }
 
 export function isInitialLessonComplete(cfg: UserKeyboard, stats: StudyStats, keys: string[]): boolean {
-	return isComplete(stats, cfg.error.extraStrokes, cfg.strokes.initial, keys);
+	return _.isEmpty(keys) || isComplete(stats, cfg.error.extraStrokes, cfg.strokes.initial, keys);
 }
 
 export function isLessonComplete(cfg: UserKeyboard, stats: StudyStats, keys: string[]): boolean {

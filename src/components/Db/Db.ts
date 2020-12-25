@@ -9,6 +9,7 @@ import { ru } from './keyboards/ru';
 import { punct_ru } from './keyboards/punct_ru';
 import { specials_mac } from './keyboards/specials_mac';
 import { numbers } from './keyboards/numbers';
+import { func } from './keyboards/func';
 
 class DexieDb extends Dexie {
 
@@ -37,6 +38,7 @@ class DexieDb extends Dexie {
 			punct_ru,
 			specials_mac,
 			numbers,
+			func,
 		]);
 	}
 

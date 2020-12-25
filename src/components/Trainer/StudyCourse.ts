@@ -21,6 +21,7 @@ interface IKeys {
 
 const Key = {
 	shift: 'Shift',
+	nonShift: (key: string) => key !== Key.shift,
 };
 
 const STROKES_FOR_GENERATOR = 10000;
@@ -75,7 +76,7 @@ export class StudyCourse {
 	}
 
 	private _isInitialLessonComplete(keys: string[]): boolean {
-		return isInitialLessonComplete(this.config, this.stats, keys);
+		return isInitialLessonComplete(this.config, this.stats, _.filter(keys, Key.nonShift));
 	}
 
 	private keysToUse(): IKeys {
@@ -98,7 +99,7 @@ export class StudyCourse {
 				result.shift = (max - shift) / (max * 2);
 			}
 		}
-		result.keys = _.filter(result.keys, c => c !== Key.shift);
+		result.keys = _.filter(result.keys, Key.nonShift);
 		log.debug('keysToUse', result);
 		return result;
 	}
