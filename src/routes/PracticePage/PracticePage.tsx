@@ -23,7 +23,7 @@ export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) =>
 
 	useEffect(() => {
 		if (!_.isEmpty(id)) {
-			Db.keyboard.get(id!)
+			Db.utils.keyboard.get(id!)
 				.then(setKeyboard);
 		}
 	}, [id, setKeyboard]);

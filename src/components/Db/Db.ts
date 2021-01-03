@@ -10,6 +10,9 @@ import { punct_ru } from './keyboards/punct_ru';
 import { specials_mac } from './keyboards/specials_mac';
 import { numbers } from './keyboards/numbers';
 import { func } from './keyboards/func';
+import { pack_ru } from './keyboards/pack_ru';
+import { pack_en } from './keyboards/pack_en';
+import _ from 'lodash';
 
 class DexieDb extends Dexie {
 
@@ -39,9 +42,40 @@ class DexieDb extends Dexie {
 			specials_mac,
 			numbers,
 			func,
+			pack_en,
+			pack_ru,
 		]);
 	}
 
+	utils = {
+		keyboard: {
+			withDetails(keyboard: Keyboard): PromiseLike<Keyboard> {
+				if (_.isEmpty(keyboard.keyboards)) {
+					return Promise.resolve(keyboard);
+				} else {
+					return Promise.all(_.map(keyboard.keyboards, id => Db.keyboard.get(id)))
+						.then(keyboards => {
+							return {
+								...keyboard,
+								lessons: [
+									..._(keyboards).map('lessons').flatten().value(),
+									...keyboard.lessons,
+								],
+							};
+						});
+				}
+			},
+			get(id: string): PromiseLike<Keyboard | undefined> {
+				return Db.keyboard.get(id).then(keyboard => {
+					if (_.isNil(keyboard)) {
+						return keyboard;
+					} else {
+						return Db.utils.keyboard.withDetails(keyboard);
+					}
+				});
+			},
+		},
+	};
 }
 
 export const Db = new DexieDb();

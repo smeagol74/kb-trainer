@@ -12,7 +12,7 @@ const vocabulary: Dict<GeneratorFunc> = {
 		const len = rand(minLen, maxLen);
 		for (let i = 0; i < len; i++) {
 			let char = chars[rand(0, chars.length - 1)];
-			if (rand(0, 100) < (shift * 100)) {
+			if (char.length == 1 && rand(0, 100) < (shift * 100)) {
 				char = char.toUpperCase();
 			}
 			result.push(char);

@@ -96,7 +96,7 @@ export const DEFAULT_USER_KEYBOARD: UserKeyboard = {
 		volume: 1,
 		hotStreak: 0,
 		speedUp: 200,
-		inc: 3,
+		inc: 5,
 		dec: 5,
 	},
 	lesson: 0,

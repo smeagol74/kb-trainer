@@ -10,6 +10,7 @@ import { i18nContext, UserContext } from '../../App';
 import _ from 'lodash';
 import { MyKeyboard } from './MyKeyboard';
 import { OtherKeyboard } from './OtherKeyboard';
+import { KeyboardCalc } from '../../components/Db/Keyboard';
 
 export const UserPage: FunctionalComponent<RoutableProps> = () => {
 
@@ -21,11 +22,22 @@ export const UserPage: FunctionalComponent<RoutableProps> = () => {
 
 	useEffect(() => {
 
-		function _queryCounts(keyboards: Keyboard[]) {
-			const promises: PromiseLike<number | Keyboard[]>[] = _(keyboards).map(kb => Db.progress.where({
+		function _fetchPrerequisites(keyboards: Keyboard[]): PromiseLike<Keyboard[]> {
+			const promises = _.map(keyboards, k => Db.utils.keyboard.withDetails(k));
+			return Promise.all(promises);
+		}
+
+		function _queryKeyboardCounts(keyboard: Keyboard) {
+			const keyboards = KeyboardCalc.keyboards(keyboard);
+			return Promise.all(_.map(keyboards, kb => Db.progress.where({
 				user: user?.id,
-				keyboard: kb.id,
-			}).count())
+				keyboard: kb,
+			}).count()))
+				.then(_.sum);
+		}
+
+		function _queryCounts(keyboards: Keyboard[]) {
+			const promises: PromiseLike<number | Keyboard[]>[] = _(keyboards).map(_queryKeyboardCounts)
 				.value();
 			return Promise.all([
 				Promise.resolve(keyboards),
@@ -59,6 +71,7 @@ export const UserPage: FunctionalComponent<RoutableProps> = () => {
 		}
 
 		Db.keyboard.toArray()
+			.then(_fetchPrerequisites)
 			.then(_queryCounts)
 			.then(_splitKeyboards)
 			.then(_saveToState);

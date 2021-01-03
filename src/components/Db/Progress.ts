@@ -8,5 +8,4 @@ export interface Progress {
 	metronome: number;
 	cpm: number;
 	time: number;
-	lesson: number;
 }

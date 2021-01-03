@@ -16,6 +16,8 @@ import { DateTime } from 'luxon';
 import { useUserKeyboardStats } from './useUserKeyboardStats';
 import { LessonProgress } from '../../routes/KeyboardPage/LessonProgress';
 import { KeyboardProgress } from '../../routes/KeyboardPage/KeyboardProgress';
+import type { Progress } from '../Db/Progress';
+import { useCharKeyboardMapFor } from './useCharKeyboardMapFor';
 
 const log = jsLogger.get('Trainer');
 
@@ -40,6 +42,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
 
+	const charKeyboardMap = useCharKeyboardMapFor(keyboard);
+
 	const { _p } = useContext(i18nContext);
 
 	useEffect(() => {
@@ -53,9 +57,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		}
 	}, [user, keyboard, setStudy, setUser, stats, lesson]);
 
-	function _onComplete(res: ITrainerLineResults) {
-		log.debug('_onComplete', res);
-		Db.progress.put({
+	function _splitResults(res: ITrainerLineResults): Progress[] {
+		const template: Progress = {
 			user: user!.id,
 			keyboard: keyboard.id,
 			date: DateTime.local().toISO(),
@@ -64,8 +67,38 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 			metronome: study!.getConfig().metronome.tempo,
 			cpm: res.cpm,
 			time: res.time,
-			lesson: study!.getLessonIdx(),
+		};
+		const strokes: Dict<Dict<number>> = {};
+		const errors: Dict<Dict<number>> = {};
+
+		_.each(res.strokes, (value, key) => {
+			const keyb = charKeyboardMap[key] ?? keyboard.id;
+			const _strokes = strokes[keyb] ?? {};
+			_strokes[key] = value;
+			strokes[keyb] = _strokes;
 		});
+		_.each(res.errors, (value, key) => {
+			const keyb = charKeyboardMap[key] ?? keyboard.id;
+			const _errors = errors[keyb] ?? {};
+			_errors[key] = value;
+			errors[keyb] = _errors;
+		});
+
+		const keyboards = _.uniq(_.concat(_.keys(strokes), _.keys(errors)));
+
+		return _.map(keyboards, key => ({
+			...template,
+			keyboard: key,
+			strokes: strokes[key],
+			errors: errors[key],
+		}));
+	}
+
+	function _onComplete(res: ITrainerLineResults) {
+		log.debug('_onComplete', res);
+		const progress = _splitResults(res);
+
+		Db.progress.bulkPut(progress);
 		setState(TrainerState.BETWEEN_LESSONS);
 		study?.complete(res);
 	}

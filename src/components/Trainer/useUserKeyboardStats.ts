@@ -1,13 +1,14 @@
 import type { Keyboard } from '../Db/Keyboard';
-import type { User, UserKeyboard, UserKeyboardStrokes } from '../Db/User';
+import { KeyboardCalc } from '../Db/Keyboard';
+import type { User } from '../Db/User';
 import type { Progress } from '../Db/Progress';
 import _ from 'lodash';
-import { ensureNumber, sumMerge } from '../../utils/stats';
+import { sumMerge } from '../../utils/stats';
 import { Db } from '../Db/Db';
 import { useEffect, useState } from 'preact/hooks';
 import { userKeyboard } from '../../utils/user';
 import type { StudyStats } from './StudyStats';
-import { firstIncompleteLesson, isLessonComplete } from './StudyStats';
+import { firstIncompleteLesson } from './StudyStats';
 
 function _summarizeStats(progress: Progress[]): [StudyStats, number] {
 	const result: StudyStats = {
@@ -21,12 +22,14 @@ function _summarizeStats(progress: Progress[]): [StudyStats, number] {
 	return [result, _(progress).map('lesson').max() ?? 0];
 }
 
-function _getUserKeyboardStats(user: string, keyboard: string): PromiseLike<[StudyStats, number]> {
-	return Db.progress.where({
+function _getUserKeyboardStats(user: string, keyboards: string[]): PromiseLike<[StudyStats, number]> {
+	const promises = _.map(keyboards, keyboard => Db.progress.where({
 		user: user,
 		keyboard: keyboard,
 	})
-		.toArray()
+		.toArray());
+	return Promise.all(promises)
+		.then(progresses => _.flatten(progresses))
 		.then(_summarizeStats);
 }
 
@@ -39,7 +42,7 @@ export function useUserKeyboardStats(user?: User, keyboard?: Keyboard): [StudySt
 
 	useEffect(() => {
 		if (user && keyboard) {
-			_getUserKeyboardStats(user!.id, keyboard!.id)
+			_getUserKeyboardStats(user!.id, KeyboardCalc.keyboards(keyboard!))
 				.then(([stats, lesson]) => {
 					setStats(stats);
 					const cfg = userKeyboard(user, keyboard);
