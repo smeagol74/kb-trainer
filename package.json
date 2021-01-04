@@ -10,7 +10,8 @@
 		"lint": "prettier --check \"src/**/*.{json,js,jsx,ts,tsx,css,scss,md}\"",
 		"serve": "sirv build --port 3000 --cors --single",
 		"pot": "node ./i18n/extract.js",
-		"po2json": "node ./i18n/convert.js"
+		"po2json": "node ./i18n/convert.js",
+		"serve-docs": "sirv docs --port 3000 --cors --single"
 	},
 	"dependencies": {
 		"chart.js": "^2.9.4",

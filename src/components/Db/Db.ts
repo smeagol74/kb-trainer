@@ -20,6 +20,13 @@ class DexieDb extends Dexie {
 	user: Dexie.Table<User, string>;
 	progress: Dexie.Table<Progress, number>;
 
+	utils: {
+		keyboard: {
+			withDetails: (keyboard: Keyboard) => PromiseLike<Keyboard>;
+			get: (id: string) => PromiseLike<Keyboard | undefined>;
+		}
+	};
+
 
 	constructor() {
 		super('kb-trainer');
@@ -31,6 +38,38 @@ class DexieDb extends Dexie {
 		this.keyboard = this.table('keyboard');
 		this.user = this.table('user');
 		this.progress = this.table('progress');
+
+		const self = this;
+
+		this.utils = {
+			keyboard: {
+				withDetails(keyboard: Keyboard): PromiseLike<Keyboard> {
+					if (_.isEmpty(keyboard.keyboards)) {
+						return Promise.resolve(keyboard);
+					} else {
+						return Promise.all(_.map(keyboard.keyboards, id => self.keyboard.get(id)))
+							.then(keyboards => {
+								return {
+									...keyboard,
+									lessons: [
+										..._(keyboards).map('lessons').flatten().value(),
+										...keyboard.lessons,
+									],
+								};
+							});
+					}
+				},
+				get(id: string): PromiseLike<Keyboard | undefined> {
+					return Db.keyboard.get(id).then(keyboard => {
+						if (_.isNil(keyboard)) {
+							return keyboard;
+						} else {
+							return self.utils.keyboard.withDetails(keyboard);
+						}
+					});
+				},
+			},
+		};
 	}
 
 	loadDefaults() {
@@ -47,35 +86,6 @@ class DexieDb extends Dexie {
 		]);
 	}
 
-	utils = {
-		keyboard: {
-			withDetails(keyboard: Keyboard): PromiseLike<Keyboard> {
-				if (_.isEmpty(keyboard.keyboards)) {
-					return Promise.resolve(keyboard);
-				} else {
-					return Promise.all(_.map(keyboard.keyboards, id => Db.keyboard.get(id)))
-						.then(keyboards => {
-							return {
-								...keyboard,
-								lessons: [
-									..._(keyboards).map('lessons').flatten().value(),
-									...keyboard.lessons,
-								],
-							};
-						});
-				}
-			},
-			get(id: string): PromiseLike<Keyboard | undefined> {
-				return Db.keyboard.get(id).then(keyboard => {
-					if (_.isNil(keyboard)) {
-						return keyboard;
-					} else {
-						return Db.utils.keyboard.withDetails(keyboard);
-					}
-				});
-			},
-		},
-	};
 }
 
 export const Db = new DexieDb();
