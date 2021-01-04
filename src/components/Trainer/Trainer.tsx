@@ -146,8 +146,10 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				label: study.areLessonsIncomplete() ? _p('Trainer', 'keyboard:') : '',
 			}} />}
 			{study && <div>
-				HotStreak: {study.getConfig().error.hotStreak} / {study.getConfig().error.bestHotStreak} Metronome {!study.areLessonsIncomplete() &&
-			<span> HotStreak: {study.getConfig().metronome.hotStreak} </span>} Tempo: {study.getConfig().metronome.tempo}
+				{_p('Trainer', 'Hot streak: %1 / %2', study.getConfig().error.hotStreak, study.getConfig().error.bestHotStreak)}{' '}
+				{_p('Trainer', 'Metronome Tempo: %1', study.getConfig().metronome.tempo)}
+				{!study.areLessonsIncomplete() &&
+				<span>{' '}{_p('Trainer', 'Hot streak: %1', study.getConfig().metronome.hotStreak)}</span>}
 			</div>}
 		</TrainerInstruction>}
 	</div>;

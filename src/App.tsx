@@ -7,6 +7,7 @@ import type { StateUpdater } from 'preact/hooks';
 import { useEffect, useState } from 'preact/hooks';
 import { i18n, npgettextFunc, pgettextFunc } from './utils/gettext';
 import msg_ru from './i18n/messages.ru.json';
+import msg_en from './i18n/messages.en.json';
 
 export interface IUserContext {
 	user?: User,
@@ -24,6 +25,7 @@ export interface I18NContext {
 
 const gettext = i18n();
 gettext.loadJSON(msg_ru);
+gettext.loadJSON(msg_en);
 
 const i18nEmpty: I18NContext = {
 	lang: gettext.getLocale(),

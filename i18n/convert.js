@@ -48,6 +48,7 @@ function _complete() {
 }
 
 convertFile('ru')
+	.then(_convertFile('en'))
 	.then(_complete);
 
 

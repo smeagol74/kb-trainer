@@ -7,8 +7,53 @@ msgctxt "AboutPage"
 msgid "Start"
 msgstr ""
 
-#: src/routes/HomePage/HomePage.tsx:122
-#: src/routes/HomePage/HomePage.tsx:138
+#: src/routes/HomePage/HomePage.tsx:22
+msgctxt "HomePage"
+msgid "kb-trainer"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:25
+msgctxt "HomePage"
+msgid "section_concept"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:30
+msgctxt "HomePage"
+msgid "section_congratulations"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:26
+msgctxt "HomePage"
+msgid "section_createdFor"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:24
+msgctxt "HomePage"
+msgid "section_history"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:29
+msgctxt "HomePage"
+msgid "section_howItWorks"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:35
+msgctxt "HomePage"
+msgid "section_plans"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:28
+msgctxt "HomePage"
+msgid "section_principles"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:27
+msgctxt "HomePage"
+msgid "section_specifics"
+msgstr ""
+
+#: src/routes/HomePage/HomePage.tsx:33
+#: src/routes/HomePage/HomePage.tsx:40
 msgctxt "HomePage"
 msgid "Start"
 msgstr ""
@@ -138,7 +183,7 @@ msgctxt "KeyboardPage"
 msgid "Volume:"
 msgstr ""
 
-#: src/routes/UserPage/UserPage.tsx:71
+#: src/routes/UserPage/UserPage.tsx:84
 msgctxt "KeyboardPage"
 msgid "Welcome, %1"
 msgstr ""
@@ -229,12 +274,27 @@ msgctxt "SummaryChart"
 msgid "Total"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:117
+#: src/components/Trainer/Trainer.tsx:152
+msgctxt "Trainer"
+msgid "Hot streak: %1"
+msgstr ""
+
+#: src/components/Trainer/Trainer.tsx:149
+msgctxt "Trainer"
+msgid "Hot streak: %1 / %2"
+msgstr ""
+
+#: src/components/Trainer/Trainer.tsx:146
 msgctxt "Trainer"
 msgid "keyboard:"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:82
+#: src/components/Trainer/Trainer.tsx:150
+msgctxt "Trainer"
+msgid "Metronome Tempo: %1"
+msgstr ""
+
+#: src/components/Trainer/Trainer.tsx:111
 msgctxt "Trainer"
 msgid "Paused. "
 msgstr ""
@@ -249,32 +309,32 @@ msgctxt "TrainerInstruction"
 msgid "Press space bar to start"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:103
+#: src/components/Trainer/TrainerLine.tsx:120
 msgctxt "TrainerLine"
 msgid "Chars: %1 / %2"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:100
+#: src/components/Trainer/TrainerLine.tsx:117
 msgctxt "TrainerLine"
 msgid "Cpm: %1"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:99
+#: src/components/Trainer/TrainerLine.tsx:116
 msgctxt "TrainerLine"
 msgid "Errors: %1 (%2%%)"
 msgstr ""
 
-#: src/components/Trainer/TrainerLine.tsx:102
+#: src/components/Trainer/TrainerLine.tsx:119
 msgctxt "TrainerLine"
 msgid "Time: %1"
 msgstr ""
 
-#: src/routes/UserPage/UserPage.tsx:83
+#: src/routes/UserPage/UserPage.tsx:96
 msgctxt "UserPage"
 msgid "Available keyboards"
 msgstr ""
 
-#: src/routes/UserPage/UserPage.tsx:73
+#: src/routes/UserPage/UserPage.tsx:86
 msgctxt "UserPage"
 msgid "My keyboards progress"
 msgstr ""
