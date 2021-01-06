@@ -51,9 +51,14 @@ msgstr ""
 msgctxt "HomePage"
 msgid "section_congratulations"
 msgstr ""
-"<p>Удачи! Все <a href=\"https://github.com/smeagol74/kb-trainer/discussions\" target=\"_blank\">пожелания</a>/<a href=\"https://github.com/smeagol74/kb-trainer/issues\" target=\"_blank\">замечания</a>/<a href=\"https://github.com/smeagol74/kb-trainer/discussions\" target=\"_blank\">предложения</a> оставляйте на Гитхабе.</p>\n"
+"<p>Удачи! Все <a href=\"https://github.com/smeagol74/kb-trainer/discussions"
+"\" target=\"_blank\">пожелания</a>/<a href=\"https://github.com/smeagol74/kb-"
+"trainer/issues\" target=\"_blank\">замечания</a>/<a href=\"https://github."
+"com/smeagol74/kb-trainer/discussions\" target=\"_blank\">предложения</a> "
+"оставляйте на Гитхабе.</p>\n"
 "\n"
-"<p><a href=\"https://github.com/smeagol74/kb-trainer/pulls\" target=\"_blank\">Пул-реквесты</a> тоже приветствуются.</p>"
+"<p><a href=\"https://github.com/smeagol74/kb-trainer/pulls\" target=\"_blank"
+"\">Пул-реквесты</a> тоже приветствуются.</p>"
 
 #: src/routes/HomePage/HomePage.tsx:26
 msgctxt "HomePage"
@@ -78,10 +83,10 @@ msgstr ""
 "\n"
 "<p>Осенью 2020 года любимая жена подарила мне новую замечательную "
 "клавиатуру, вот такую:&nbsp;<a href=\"https://kinesis-ergo.com/shop/"
-"advantage2/\" target=\"_blank\">Kinesis Advantage 2</a> и тут незамедлительно "
-"выяснилось, что я не умею на ней работать. Буковки-то я ещё вспомнил как "
-"набирать, благо, метод слепой печати я освоил в своё время, но вот всё "
-"остальное оказалось очень сильно не на своих местах, Что уронило мою "
+"advantage2/\" target=\"_blank\">Kinesis Advantage 2</a> и тут "
+"незамедлительно выяснилось, что я не умею на ней работать. Буковки-то я ещё "
+"вспомнил как набирать, благо, метод слепой печати я освоил в своё время, но "
+"вот всё остальное оказалось очень сильно не на своих местах, Что уронило мою "
 "продуктивность практически в ноль. Я вновь ощутил себя человеком севшим за "
 "клавиатуру впервые в жизни. Так как я уже тренировался слепой печати, то "
 "решил просто обновить свои навыки на новой клавиатуре пройдя какой-нибудь "
@@ -398,25 +403,42 @@ msgctxt "OtherKeyboard"
 msgid "keys:"
 msgstr "клавиш:"
 
-#: src/routes/PracticePage/PracticePage.tsx:54
+#: src/routes/PracticePage/PracticePage.tsx:45
 msgctxt "PracticePage"
 msgid "Cancel Training"
 msgstr "Отменить занятие"
 
-#: src/routes/PracticePage/PracticePage.tsx:59
+#: src/routes/PracticePage/PracticePage.tsx:50
 msgctxt "PracticePage"
 msgid "Pause"
 msgstr "Пауза"
 
-#: src/routes/PracticePage/PracticePage.tsx:57
+#: src/routes/PracticePage/PracticePage.tsx:48
 msgctxt "PracticePage"
 msgid "Restart Lesson"
 msgstr "Перезапустить урок"
 
-#: src/routes/PracticePage/PracticePage.tsx:62
+#: src/routes/PracticePage/PracticePage.tsx:53
 msgctxt "PracticePage"
 msgid "Stop Training"
 msgstr "Остановить занятие"
+
+#: src/routes/StatsPage/StatsChart.tsx:121
+#: src/routes/StatsPage/StatsChart.tsx:55
+msgctxt "StatsChart"
+msgid "Errors"
+msgstr "Ошибки"
+
+#: src/routes/StatsPage/StatsChart.tsx:31
+#: src/routes/StatsPage/StatsChart.tsx:84
+msgctxt "StatsChart"
+msgid "Strokes"
+msgstr "Нажатия"
+
+#: src/routes/StatsPage/StatsPage.tsx:68
+msgctxt "StatsPage"
+msgid "Back to Keyboard"
+msgstr "Вернуться к Клавиатуре"
 
 #: src/components/Trainer/SummaryChart.tsx:109
 msgctxt "SummaryChart"

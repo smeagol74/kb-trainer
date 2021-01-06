@@ -243,24 +243,41 @@ msgctxt "OtherKeyboard"
 msgid "keys:"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:54
+#: src/routes/PracticePage/PracticePage.tsx:45
 msgctxt "PracticePage"
 msgid "Cancel Training"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:59
+#: src/routes/PracticePage/PracticePage.tsx:50
 msgctxt "PracticePage"
 msgid "Pause"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:57
+#: src/routes/PracticePage/PracticePage.tsx:48
 msgctxt "PracticePage"
 msgid "Restart Lesson"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:62
+#: src/routes/PracticePage/PracticePage.tsx:53
 msgctxt "PracticePage"
 msgid "Stop Training"
+msgstr ""
+
+#: src/routes/StatsPage/StatsChart.tsx:121
+#: src/routes/StatsPage/StatsChart.tsx:55
+msgctxt "StatsChart"
+msgid "Errors"
+msgstr ""
+
+#: src/routes/StatsPage/StatsChart.tsx:31
+#: src/routes/StatsPage/StatsChart.tsx:84
+msgctxt "StatsChart"
+msgid "Strokes"
+msgstr ""
+
+#: src/routes/StatsPage/StatsPage.tsx:68
+msgctxt "StatsPage"
+msgid "Back to Keyboard"
 msgstr ""
 
 #: src/components/Trainer/SummaryChart.tsx:109
