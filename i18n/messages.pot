@@ -223,6 +223,11 @@ msgctxt "Logo"
 msgid "kb-trainer"
 msgstr ""
 
+#: src/components/Menu/Menu.tsx:43
+msgctxt "Menu"
+msgid "Buy me some tea..."
+msgstr ""
+
 #: src/components/Menu/Menu.tsx:33
 msgctxt "Menu"
 msgid "Keyboards"

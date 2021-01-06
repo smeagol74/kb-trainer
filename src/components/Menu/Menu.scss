@@ -37,4 +37,13 @@
 			@include dark-button;
 		}
 	}
+
+	.Menu__donate {
+		margin-right: 8px;
+	}
+
+	.Menu__donate-button {
+		@include dark-button;
+		font-size: smaller;
+	}
 }

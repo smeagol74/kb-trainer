@@ -34,6 +34,15 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 		<div className="Menu__spacer" />
 		{children}
 		<div className="Menu__spacer" />
+		<div className={'Menu__donate'}>
+			<a href={'https://paypal.me/irbis74'}
+				 className={'Menu__donate-button'}
+				 target={'_blank'}
+			>
+				<Icon img={'coffee-1'} size={'sm'} />{' '}
+				{_p('Menu', 'Buy me some tea...')}
+			</a>
+		</div>
 		<div className="Menu__language">
 			<select ref={langRef} onChange={onLanguageChange}>
 				<option value="ru" selected={lang === 'ru'}>ru</option>
