@@ -1,0 +1,13 @@
+@import '../../_theme';
+
+.StatsPage {
+	@include page;
+
+	.StatsPage__body {
+		@include page__body;
+	}
+
+	.StatsPage__menu-button {
+		@include dark-button;
+	}
+}

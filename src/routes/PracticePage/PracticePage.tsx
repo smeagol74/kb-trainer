@@ -6,11 +6,9 @@ import { route } from 'preact-router';
 import { Menu } from '../../components/Menu/Menu';
 import { Trainer, TrainerState } from '../../components/Trainer/Trainer';
 import { url } from '../sitemap';
-import { useContext, useEffect, useState } from 'preact/hooks';
-import type { Keyboard } from '../../components/Db/Keyboard';
-import _ from 'lodash';
-import { Db } from '../../components/Db/Db';
+import { useContext, useState } from 'preact/hooks';
 import { i18nContext } from '../../App';
+import { useKeyboard } from '../../components/Db/effects/useKeyboard';
 
 export interface IPracticePageProps extends RoutableProps {
 	id?: string;
@@ -19,14 +17,7 @@ export interface IPracticePageProps extends RoutableProps {
 export const PracticePage: FunctionalComponent<IPracticePageProps> = ({ id }) => {
 	const { _p } = useContext(i18nContext);
 	const [state, setState] = useState<TrainerState>(TrainerState.NEW);
-	const [keyboard, setKeyboard] = useState<Keyboard | undefined>(undefined);
-
-	useEffect(() => {
-		if (!_.isEmpty(id)) {
-			Db.utils.keyboard.get(id!)
-				.then(setKeyboard);
-		}
-	}, [id, setKeyboard]);
+	const keyboard = useKeyboard(id);
 
 	function _onCancelTraining() {
 		route(url.keyboard(id!));
