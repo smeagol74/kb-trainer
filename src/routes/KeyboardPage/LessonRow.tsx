@@ -6,6 +6,7 @@ import type { UserKeyboardStrokes } from '../../components/Db/User';
 import './LessonRow.scss';
 import clsx from 'clsx';
 import type { StudyStats } from '../../components/Trainer/StudyStats';
+import { keyName } from '../../utils/keyboard';
 
 export interface ILessonRowProps {
 	lesson: number;
@@ -30,7 +31,7 @@ export const LessonRow: FunctionalComponent<ILessonRowProps> = ({
 			Lesson {lesson + 1}:
 		</div>
 		<div className="LessonRow__keys">
-			{_.map(keys, (k, kidx) => <kbd key={`${lesson}-${kidx}`}>{k}</kbd>)}
+			{_.map(keys, (k, kidx) => <kbd key={`${lesson}-${kidx}`}>{keyName(k)}</kbd>)}
 		</div>
 		<LessonProgress {...{
 			className: 'LessonRow__progress',

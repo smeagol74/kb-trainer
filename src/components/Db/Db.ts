@@ -7,7 +7,7 @@ import { en } from './keyboards/en';
 import { punct_en } from './keyboards/punct_en';
 import { ru } from './keyboards/ru';
 import { punct_ru } from './keyboards/punct_ru';
-import { specials_mac } from './keyboards/specials_mac';
+import { specials } from './keyboards/specials';
 import { numbers } from './keyboards/numbers';
 import { func } from './keyboards/func';
 import { pack_ru } from './keyboards/pack_ru';
@@ -78,7 +78,7 @@ class DexieDb extends Dexie {
 			punct_en,
 			ru,
 			punct_ru,
-			specials_mac,
+			specials,
 			numbers,
 			func,
 			pack_en,

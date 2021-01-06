@@ -1,11 +1,11 @@
 import type { Keyboard } from '../Keyboard';
 
-export const specials_mac: Keyboard = {
-	id: 'specials_mac',
-	name: 'MacOS Special Keys',
+export const specials: Keyboard = {
+	id: 'specials',
+	name: 'Special Keys',
 	description: 'Training special keys like cursor, home, ctrl and other specials',
 	lessons: [
-		['Cmd', 'Ctrl'],
+		['Meta', 'Ctrl'],
 		['Alt'],
 		['BackSpace'],
 		['Delete', 'Enter'],

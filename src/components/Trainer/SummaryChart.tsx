@@ -8,6 +8,8 @@ import jsLogger from 'js-logger';
 import type { pgettextFunc } from '../../utils/gettext';
 import { useContext } from 'preact/hooks';
 import { i18nContext } from '../../App';
+import { keyName } from '../../utils/keyboard';
+import _ from 'lodash';
 
 const log = jsLogger.get('SummaryChart');
 
@@ -18,7 +20,7 @@ export interface ISummaryChartProps {
 
 function _mkTotalData(data: ISummaryData, _p: pgettextFunc): ChartData {
 	return {
-		labels: data.keys,
+		labels: _.map(data.keys, keyName),
 		datasets: [
 			{
 				label: _p('SummaryChart', 'Strokes'),
@@ -36,7 +38,7 @@ function _mkTotalData(data: ISummaryData, _p: pgettextFunc): ChartData {
 
 function _mkLessonData(data: ISummaryData, _p: pgettextFunc): ChartData {
 	return {
-		labels: data.keys,
+		labels: _.map(data.keys, keyName),
 		datasets: [
 			{
 				label: _p('SummaryChart', 'Strokes'),
@@ -54,7 +56,7 @@ function _mkLessonData(data: ISummaryData, _p: pgettextFunc): ChartData {
 
 export const SummaryChart: FunctionalComponent<ISummaryChartProps> = ({ data }) => {
 
-	const {_p} = useContext(i18nContext);
+	const { _p } = useContext(i18nContext);
 
 	log.debug(data);
 

@@ -8,6 +8,7 @@ import { useContext } from 'preact/hooks';
 import { i18nContext } from '../../App';
 import { Chart } from '../../components/Chart/Chart';
 import _ from 'lodash';
+import { keyName } from '../../utils/keyboard';
 
 const log = jsLogger.get('StatsChart');
 
@@ -21,7 +22,7 @@ function _mkTotalData(strokes: Dict<number>, _p: pgettextFunc): ChartData {
 	const keys: string[] = [];
 	const values: number[] = [];
 	_.each(strokes, (v, k) => {
-		keys.push(k);
+		keys.push(keyName(k));
 		values.push(v);
 	});
 	return {
@@ -45,7 +46,7 @@ function _mkErrorsData(errors: Dict<number>, _p: pgettextFunc): ChartData {
 	const keys: string[] = [];
 	const values: number[] = [];
 	_.each(errors, (v, k) => {
-		keys.push(k);
+		keys.push(keyName(k));
 		values.push(v);
 	});
 	return {
