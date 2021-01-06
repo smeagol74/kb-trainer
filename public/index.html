@@ -3,8 +3,113 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link type="text/plain" rel="author" href="humans.txt" />
+	<meta lang="en">
+	<title>KB Trainer</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="keyboard, trainer, touch typing, клавиатурный тренажёр">
 </head>
 <body>
+<noscript>
+	<h1>kb-trainer</h1>
+	<section>
+		<h2>History of creation Idea</h2>
+		<p>In the fall of 2020, my beloved wife gave me the new wonderful keyboard <a
+			href="“https://kinesis-ergo.com/shop/advantage2/“" target="“_blank”">Kinesis Advantage 2</a> . And it immediately
+			became quite clear that I can’t type on it. I remembered how to type letters because I’ve mastered touch typing.
+			All other keys were out of their usual place. And my productivity was dropped to almost zero. I felt like I use
+			the keyboard for the first time in my life. Since I have already known touch typing, I decided to update my skills
+			on a new keyboard by taking a suitable course. I found a trainer and even started to press the letters, but then I
+			realized that the trainer has no exercise for service buttons. Then I looked for other trainers and tried many…
+			the same result. The Spacebar and Enter and the upper/lower case switch are somehow taken into account by all
+			these numerous courses, but many other switches and extended characters are completely ignored. All the trainers I
+			found allow me to learn how to type letters, numbers, and a little punctuation. This isn’t enough! And I decided
+			to create the trainer that trains my hands to use the entire keyboard. In fact, Enter, Control and Alt buttons
+			have no differences from the letter buttons. This is new concept…</p>
+	</section>
+	<section>
+		<h2>Concept</h2>
+		<p>This trainer aims for you to get used to your keyboard. There is no specific typing method, just you and your
+			keyboard. So, it suits if you wish to type with two fingers, and if you wish use ten fingers on each of three
+			hands, I suppose some users could be from Alpha Centauri, yeah :) It suits for touch typing too.</p>
+		<p>To get used to any keyboard, it is necessary to press each key many times. In the beginning, you consciously pay
+			attention to this, then the hands “remember” the key’s location on the keyboard and after that, they act
+			automatically.</p>
+		<p>The trainer is flexible. It allows you to practice with any physical keyboard, any language, any keyboard layout,
+			and any typing principles.</p>
+	</section>
+	<section>
+		<h2>Target audience Who is this product for?</h2>
+		<p>It is made for anyone who wants to use the keyboard more effectively. For anyone who wants, needs or has to type
+			a lot of texts. For anyone who uses keyboard shortcuts with all its keys, including the toggle keys (Shift,
+			Control, Alt), navigation keys and function keys.</p>
+		<p>The trainer doesn’t know anything about the configuration of your keyboard or keys layout, it could be the
+			classic QWERTY or some specific like Dvorak or Coleman. The trainer is suitable for any option.</p>
+	</section>
+	<section>
+		<h2>Specifics</h2>
+		<p>The key feature of KB-trainer is that this keyboard trainer allows you to train and to get used to all keys on
+			your keyboard, not letters and numbers only, but everything.</p>
+	</section>
+	<section>
+		<h2>Basic principles</h2>
+		<ul>
+			<li>To get used to the location of the key, you need to press it many times.</li>
+			<li>It is better to type slowly but without mistakes.</li>
+			<li>You can increase the speed of the movement when your fingers are used to button locations.</li>
+			<li>When typing button combination it’s best to use both hands whenever possible. For example, if you type a
+				capital letter you press the <kbd>Shift</kbd> with one hand and letter key with another.
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h2>How it works</h2>
+		<p>The implementation of the simulator is based on the basic principles.</p>
+		<ul>
+			<li>All symbols / keys are grouped into Keyboard packs. Each “Keyboard” containts a set of symbol or combinations.
+				You can train every Keyboard separately.
+			</li>
+			<li>There are also complex “Kayboard”, for example “English” pack contains all English letters, numbers and
+				special keys, and punctuation.
+			</li>
+			<li>The “Keyboard” workout consists of lessons. Each lesson adds a subset of symbols / keys. To study the lesson
+				you make exercises. In the beginning they contain only the symbols / keys of this lesson (up to a certain
+				level). Then all symbols from the lessons already passed are mixed in.
+			</li>
+			<li>The algorithm generates a random training text based on training history. Symbols you made a mistake on are
+				offered more frequently than others. The algorithm tries to add characters/keys to the text so that you type
+				them all equally well.
+			</li>
+			<li>When all symbols and keys are learned, you start the last lesson of the Keyboard pack. These exercises there
+				contain all symbols and combinations.
+			</li>
+			<li>When all the lessons are completed, you will be “stuck” in the last lesson with texts consisting of all the
+				keyboard characters until you type each character a specified number of times. For each error, the number set in
+				the settings will be subtracted from the already dialed amount. The more mistakes you make, the more the
+				erroneous character / key will come across in the generated texts. At the same time the trainer will switch to
+				the typing speed training mode. Algorithm will increase the metronome tempo during exercises when you pass them
+				without errors, and decrease the tempo otherwise.
+			</li>
+		</ul>
+	</section>
+	<section>
+		<p>Good luck!</p>
+		<p>If you’d like to discuss a feature request, open an issue on GitHub and follow the guide. If you found a bug,
+			open an issue on GitHub and follow the guide. The more detail the better! If you want to contribute, submit a pull
+			request!</p>
+	</section>
+	<section>
+		<h2>P.S. Plans</h2>
+		<p>There are a lot of ideas here. I want to make some possibility to train shortcuts. Not only usual when some
+			modifiers pressed with some letter key, but some like in Vim or Emacs, with some shortcuts sequence. Add
+			possibility to users to create their own custom keyboards. I afraid that there will be some issues with European
+			languages diacritics. And I have no idea if this trailer could be useful for eastern languages like China or
+			Japanese.</p>
+		<p>Also I noticed that it’s more fun to train not just with metronome tics, but with some background music. For
+			example disco gives rather smooth rhythm of 100-130 bits per minute. And I have and idea to make some disco-mix
+			with smooth rhythm change instead of simple metronome. Probably some synth music will work also.</p>
+	</section>
+</noscript>
 <script type="module" src="/_dist_/index.js"></script>
 </body>
 </html>

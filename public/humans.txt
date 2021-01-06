@@ -1,0 +1,15 @@
+/* TEAM */
+
+	Developer: Konstantin Borisov
+	Contact: smeagol74@gmail.com
+	From: Novosibirsk, Russia
+
+/* THANKS */
+
+	EN Translator: Ulechka Hmeleva
+	From: Novosibirsk, Russia
+
+/* SITE */
+	Language: English / Russian
+	Doctype: HTML5
+	IDE: JetBrains WebStorm, POEdit
