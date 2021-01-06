@@ -14,6 +14,8 @@ const FADE_IN = 0.01;
 const FADE_OUT = 0.01;
 const OSC_TYPE = 'sine';
 
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
 function _playNote(context: AudioContext, volume: number) {
 	const o = context.createOscillator();
 	const g = context.createGain();

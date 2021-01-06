@@ -11,6 +11,7 @@ import { AboutPage } from './AboutPage/AboutPage';
 import { LoginPage } from './LoginPage/LoginPage';
 import { UserPage } from './UserPage/UserPage';
 import { HomePage } from './HomePage/HomePage';
+import { StatsPage } from './StatsPage/StatsPage';
 
 export interface IRoutesProps {
 }
@@ -32,5 +33,6 @@ export const Routes: FunctionalComponent<IRoutesProps> = () => {
 		<AboutPage path={rt.about} />
 		<KeyboardPage path={rt.keyboard} />
 		<PracticePage path={rt.practice} />
+		<StatsPage path={rt.stats} />
 	</Router>);
 };

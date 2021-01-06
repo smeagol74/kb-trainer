@@ -50,6 +50,12 @@
 
 	.KeyboardPage__start-button {
 		@include dark-button;
+
+		.Icon {
+			width: 100px;
+			display: block;
+			margin: 0 auto;
+		}
 	}
 
 	.KeyboardPage__options {
@@ -64,7 +70,6 @@
 
 	.KeyboardPage__details-view {
 		flex: 1;
-		display: table;
 
 		kbd {
 			border: 1px solid $color-dark-gray;
@@ -83,6 +88,12 @@
 
 	.KeyboardPage__stats-button {
 		@include dark-button;
+
+		.Icon {
+			width: 100px;
+			display: block;
+			margin: 0 auto;
+		}
 	}
 
 	.KeyboardPage__options-controls {
