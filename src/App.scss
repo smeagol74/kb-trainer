@@ -20,6 +20,12 @@ body {
 	color: $color-white;
 	font-family: 'Pangolin', cursive;
 	box-sizing: border-box;
+
+	> p {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
 }
 
 div {
