@@ -1,13 +1,14 @@
 import './Menu.scss';
 import type { FunctionalComponent } from 'preact';
-import { useCallback, useContext, useEffect, useRef, useState } from 'preact/hooks';
+import { h } from 'preact';
+import { useCallback, useContext, useRef } from 'preact/hooks';
 import { i18nContext, UserContext } from '../../App';
 import { Link, route } from 'preact-router';
 import { url } from '../../routes/sitemap';
-import { h } from 'preact';
 import { Logo } from '../Logo/Logo';
 import _ from 'lodash';
 import { Icon } from '../Icon/Icon';
+import { Action, analytics, Category } from '../../utils/analytics';
 
 export interface IMenuProps {
 }
@@ -25,7 +26,13 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 	const onLanguageChange = (event: Event) => {
 		if (langRef.current) {
 			setLang(langRef.current.value);
+			analytics.trackEvent(Category.LanguageSwitch, Action.ChangeTo, langRef.current.value);
 		}
+	};
+
+	const onPayPalClick = (event: Event) => {
+		analytics.trackEvent(Category.ExternalLink, Action.NavigateTo, 'PayPal');
+		window.open('https://paypal.me/irbis74');
 	};
 
 	return <div className="Menu">
@@ -35,13 +42,13 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 		{children}
 		<div className="Menu__spacer" />
 		<div className={'Menu__donate'}>
-			<a href={'https://paypal.me/irbis74'}
-				 className={'Menu__donate-button'}
-				 target={'_blank'}
+			<button
+				className={'Menu__donate-button'}
+				onClick={onPayPalClick}
 			>
 				<Icon img={'coffee-1'} size={'sm'} />{' '}
 				{_p('Menu', 'Buy me some tea...')}
-			</a>
+			</button>
 		</div>
 		<div className="Menu__language">
 			<select ref={langRef} onChange={onLanguageChange}>

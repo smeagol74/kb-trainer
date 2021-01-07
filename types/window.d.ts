@@ -1,4 +1,5 @@
 declare interface Window {
-	webkitAudioContext?: AudioContext
+	webkitAudioContext?: AudioContext;
+	_paq?: any[];
 }
 
