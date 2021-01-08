@@ -1,9 +1,9 @@
 import './Menu.scss';
 import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
-import { useCallback, useContext, useRef } from 'preact/hooks';
+import { useContext, useRef } from 'preact/hooks';
 import { i18nContext, UserContext } from '../../App';
-import { Link, route } from 'preact-router';
+import { Link } from 'preact-router';
 import { url } from '../../routes/sitemap';
 import { Logo } from '../Logo/Logo';
 import _ from 'lodash';
@@ -14,25 +14,15 @@ export interface IMenuProps {
 }
 
 export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	const { _p, setLang, lang } = useContext(i18nContext);
 	const langRef = useRef<HTMLSelectElement>();
-
-	const onExit = useCallback(() => {
-		setUser?.(undefined);
-		route(url.login);
-	}, [setUser]);
 
 	const onLanguageChange = (event: Event) => {
 		if (langRef.current) {
 			setLang(langRef.current.value);
-			analytics.trackEvent(Category.LanguageSwitch, Action.ChangeTo, langRef.current.value);
+			analytics.trackEvent(Category.LanguageSwitch, Action.changeTo(langRef.current.value));
 		}
-	};
-
-	const onPayPalClick = (event: Event) => {
-		analytics.trackEvent(Category.ExternalLink, Action.NavigateTo, 'PayPal');
-		window.open('https://paypal.me/irbis74');
 	};
 
 	return <div className="Menu">
@@ -42,18 +32,19 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 		{children}
 		<div className="Menu__spacer" />
 		<div className={'Menu__donate'}>
-			<button
+			<a
+				href={'https://paypal.me/irbis74'}
 				className={'Menu__donate-button'}
-				onClick={onPayPalClick}
+				rel={'noreferrer nofollow'}
 			>
 				<Icon img={'coffee-1'} size={'sm'} />{' '}
 				{_p('Menu', 'Buy me some tea...')}
-			</button>
+			</a>
 		</div>
 		<div className="Menu__language">
-			<select ref={langRef} onChange={onLanguageChange}>
-				<option value="ru" selected={lang === 'ru'}>ru</option>
-				<option value="en" selected={lang === 'en'}>en</option>
+			<select ref={langRef} onChange={onLanguageChange} value={lang}>
+				<option value="ru">ru</option>
+				<option value="en">en</option>
 			</select>
 		</div>
 	</div>;

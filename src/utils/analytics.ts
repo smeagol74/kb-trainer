@@ -2,16 +2,14 @@ import _ from 'lodash';
 
 export enum Category {
 	LanguageSwitch = 'Language Switch',
-	ExternalLink = 'External Link'
 }
 
-export enum Action {
-	ChangeTo = 'Change To',
-	NavigateTo = 'Navigate To'
-}
+export const Action = {
+	changeTo: (lang: string) => `Change to ${lang}`,
+};
 
 export interface Analytics {
-	trackEvent: (category: Category, action: Action, name?: string, value?: number) => void;
+	trackEvent: (category: Category, action: string, name?: string, value?: number) => void;
 }
 
 export const analytics: Analytics = {

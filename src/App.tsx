@@ -5,9 +5,8 @@ import './App.scss';
 import type { User } from './components/Db/User';
 import type { StateUpdater } from 'preact/hooks';
 import { useEffect, useState } from 'preact/hooks';
-import { i18n, npgettextFunc, pgettextFunc } from './utils/gettext';
-import msg_ru from './i18n/messages.ru.json';
-import msg_en from './i18n/messages.en.json';
+import { gettext, setHtmlLang } from './utils/gettext';
+import type { npgettextFunc, pgettextFunc } from './utils/i18n';
 
 export interface IUserContext {
 	user?: User,
@@ -23,24 +22,19 @@ export interface I18NContext {
 	setLang: (locale: string) => void;
 }
 
-const gettext = i18n();
-gettext.loadJSON(msg_ru);
-gettext.loadJSON(msg_en);
-
-const i18nEmpty: I18NContext = {
+const i18nEmpty = (): I18NContext => ({
 	lang: gettext.getLocale(),
 	_p: () => '',
 	_np: () => '',
 	setLang: () => {
 	},
-};
+});
 
-
-export const i18nContext = createContext<I18NContext>(i18nEmpty);
+export const i18nContext = createContext<I18NContext>(i18nEmpty());
 
 export const App: FunctionalComponent<{}> = () => {
 	const [user, setUser] = useState<User | undefined>(undefined);
-	const [getText, setGetText] = useState<I18NContext>(i18nEmpty);
+	const [getText, setGetText] = useState<I18NContext>(i18nEmpty());
 	const [lang, setLang] = useState<string>(gettext.getLocale());
 
 	useEffect(() => {
@@ -51,13 +45,10 @@ export const App: FunctionalComponent<{}> = () => {
 			setLang: (locale: string) => {
 				gettext.setLocale(locale);
 				setLang(gettext.getLocale());
+				setHtmlLang(gettext.getLocale());
 			},
 		});
-	}, [lang, setGetText]);
-
-	useEffect(() => {
-		setLang(navigator.language.split('-')[0]);
-	}, []);
+	}, [lang, setGetText, setLang]);
 
 	return <i18nContext.Provider value={getText}>
 		<UserContext.Provider value={{

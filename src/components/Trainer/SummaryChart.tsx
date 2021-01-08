@@ -5,11 +5,11 @@ import type { ChartData } from 'chart.js';
 import type { ISummaryData } from './StudyCourse';
 import './SummaryChart.scss';
 import jsLogger from 'js-logger';
-import type { pgettextFunc } from '../../utils/gettext';
 import { useContext } from 'preact/hooks';
 import { i18nContext } from '../../App';
 import { keyName } from '../../utils/keyboard';
 import _ from 'lodash';
+import type { pgettextFunc } from '../../utils/i18n';
 
 const log = jsLogger.get('SummaryChart');
 

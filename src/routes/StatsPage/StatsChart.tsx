@@ -3,12 +3,12 @@ import { h } from 'preact';
 import type { ChartData } from 'chart.js';
 import './StatsChart.scss';
 import jsLogger from 'js-logger';
-import type { pgettextFunc } from '../../utils/gettext';
 import { useContext } from 'preact/hooks';
 import { i18nContext } from '../../App';
 import { Chart } from '../../components/Chart/Chart';
 import _ from 'lodash';
 import { keyName } from '../../utils/keyboard';
+import type { pgettextFunc } from '../../utils/i18n';
 
 const log = jsLogger.get('StatsChart');
 
