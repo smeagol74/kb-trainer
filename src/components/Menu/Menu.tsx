@@ -36,6 +36,7 @@ export const Menu: FunctionalComponent<IMenuProps> = ({ children }) => {
 				href={'https://paypal.me/irbis74'}
 				className={'Menu__donate-button'}
 				rel={'noreferrer nofollow'}
+				target={'_blank'}
 			>
 				<Icon img={'coffee-1'} size={'sm'} />{' '}
 				{_p('Menu', 'Buy me some tea...')}
