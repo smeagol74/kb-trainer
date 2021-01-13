@@ -35,3 +35,9 @@ div {
 a {
 	color: $color-white;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+
+kbd {
+	font-family: 'PT Mono', monospace;
+}

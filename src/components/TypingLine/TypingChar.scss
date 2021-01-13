@@ -8,10 +8,9 @@ $fw-typed: 300;
 $fw-future: 400;
 $fw-current: 600;
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap');
 
 .TypingChar {
-	font-family: 'Fira Code', monospace;
+	font-family: 'PT Mono', monospace;
 	font-weight: $fw-future;
 	font-size: 1.5rem;
 	border-bottom: 2px transparent;
