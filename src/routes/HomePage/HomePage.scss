@@ -6,6 +6,7 @@
 	.HomePage__body {
 		@include page__body;
 		justify-content: unset;
+		line-height: 1.5rem;
 	}
 
 	.HomePage__body-content {

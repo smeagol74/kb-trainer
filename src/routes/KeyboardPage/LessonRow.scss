@@ -2,15 +2,18 @@
 
 .LessonRow {
 	display: table-row;
+	color: $color-green;
+
 
 	&.LessonRow--active {
 		.LessonRow__label {
-			color: lightgreen;
+			color: white;
 			font-weight: bold;
 		}
 
 		.LessonRow__keys kbd {
-			color: lightgreen;
+			color: white;
+			font-weight: bold;
 		}
 	}
 

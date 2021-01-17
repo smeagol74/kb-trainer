@@ -107,7 +107,7 @@
 		@include flex-row;
 		justify-content: space-around;
 		@include responsive-flex-col-sm;
-		border-color: #777777;
+		border: 1px solid #777777;
 		margin: $margin-sm 0;
 
 		legend {
