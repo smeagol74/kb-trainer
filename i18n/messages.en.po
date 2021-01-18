@@ -10,12 +10,12 @@ msgstr ""
 "Project-Id-Version: kb-trainer\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2021-01-18 05:46\n"
+"PO-Revision-Date: 2021-01-18 14:59\n"
 
 #: src/routes/AboutPage/AboutPage.tsx:17
 msgctxt "AboutPage"
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: src/routes/HomePage/HomePage.tsx:22
 msgctxt "HomePage"
