@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kb-trainer\n"
 "Language-Team: English\n"
 "Language: en_US\n"
-"PO-Revision-Date: 2021-01-13 15:04\n"
+"PO-Revision-Date: 2021-01-18 02:52\n"
 
 #: src/routes/AboutPage/AboutPage.tsx:17
 msgctxt "AboutPage"
@@ -26,8 +26,8 @@ msgstr ""
 msgctxt "HomePage"
 msgid "section_concept"
 msgstr "<h2>Concept</h2>\n\n"
-"<p>This trainer aims for you to get used to your keyboard. There is no specific typing method, just you and your keyboard. So, it suits if you wish to type with two fingers, and if you wish use ten fingers on each of three hands, I suppose some users could be from Alpha Centauri, yeah :) It suits for touch typing too.</p>\n\n"
-"<p>To get used to any keyboard, it is necessary to press each key many times. In the beginning, you consciously pay attention to this, then the hands \"remember\" the key’s location on the keyboard and after that, they act automatically.</p>\n\n"
+"<p>This trainer aims for you to get used to your keyboard. There is no specific typing method, just you and your keyboard. So, it suits if you wish to type with two fingers, and if you wish use ten fingers on each of three hands, I suppose some users could be from Alpha Centauri, yeah :) It suits for touch typing too.</p>\n"
+"<p>To get used to any keyboard, it is necessary to press each key many times. In the beginning, you consciously pay attention to this, then the hands \"remember\" the key’s location on the keyboard and after that, they act automatically.</p>\n"
 "<p>The trainer is flexible. It allows you to practice with any physical keyboard, any language, any keyboard layout, and any typing principles.</p>"
 
 #: src/routes/HomePage/HomePage.tsx:30
