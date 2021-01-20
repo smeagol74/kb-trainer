@@ -32,7 +32,12 @@ extractor
 	.parseFilesGlob('./src/**/*.@(ts|js|tsx|jsx)');
 
 extractor
-	.savePotFile('./i18n/messages.pot');
+	.savePotFile('./i18n/messages.pot', {
+		Language: 'en',
+		'Project-Id-Version': 'kb-trainer',
+		'Language-Team': 'https://crowdin.com/project/kb-trainer',
+		'POT-Creation-Date': new Date().toISOString(),
+	});
 
 extractor
 	.printStats();
@@ -58,5 +63,6 @@ function merge(lang) {
 }
 
 merge('ru')()
+	.then(merge('en'))
 	.then(() => console.log('Done'));
 

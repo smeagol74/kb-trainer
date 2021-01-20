@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kb-trainer\n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2021-01-20T14:24:49.876Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -52,10 +52,11 @@ msgctxt "HomePage"
 msgid "section_congratulations"
 msgstr ""
 "<p>Удачи! Все <a href=\"https://github.com/smeagol74/kb-trainer/discussions"
-"\" target=\"_blank\" rel=\"noreferrer nofollow\">пожелания</a>/<a href=\"https://github.com/smeagol74/kb-"
-"trainer/issues\" target=\"_blank\" rel=\"noreferrer nofollow\">замечания</a>/<a href=\"https://github."
-"com/smeagol74/kb-trainer/discussions\" target=\"_blank\" rel=\"noreferrer nofollow\">предложения</a> "
-"оставляйте на Гитхабе.</p>\n"
+"\" target=\"_blank\" rel=\"noreferrer nofollow\">пожелания</a>/<a href="
+"\"https://github.com/smeagol74/kb-trainer/issues\" target=\"_blank\" rel="
+"\"noreferrer nofollow\">замечания</a>/<a href=\"https://github.com/smeagol74/"
+"kb-trainer/discussions\" target=\"_blank\" rel=\"noreferrer nofollow"
+"\">предложения</a> оставляйте на Гитхабе.</p>\n"
 "\n"
 "<p><a href=\"https://github.com/smeagol74/kb-trainer/pulls\" target=\"_blank"
 "\" rel=\"noreferrer nofollow\">Пул-реквесты</a> тоже приветствуются.</p>"
@@ -83,24 +84,24 @@ msgstr ""
 "\n"
 "<p>Осенью 2020 года любимая жена подарила мне новую замечательную "
 "клавиатуру, вот такую:&nbsp;<a href=\"https://kinesis-ergo.com/shop/"
-"advantage2/\" target=\"_blank\" rel=\"noreferrer nofollow\">Kinesis Advantage 2</a> и тут "
-"незамедлительно выяснилось, что я не умею на ней работать. Буковки-то я ещё "
-"вспомнил как набирать, благо, метод слепой печати я освоил в своё время, но "
-"вот всё остальное оказалось очень сильно не на своих местах, Что уронило мою "
-"продуктивность практически в ноль. Я вновь ощутил себя человеком севшим за "
-"клавиатуру впервые в жизни. Так как я уже тренировался слепой печати, то "
-"решил просто обновить свои навыки на новой клавиатуре пройдя какой-нибудь "
-"известный курс. Нашёл какой-то тренажёр и даже начал нажимать буковки, но "
-"тут я понял, что тренажёр совершенно не занимается всякими служебными "
-"кнопочками. Тогда стал искать другие тренажёры и перепробовал многие, но "
-"результат был тот же. Пробел с вводом и переключатель строчных/прописных "
-"букв ещё как-то учитываются всеми этими многочисленными курсами, но "
-"множество прочих переключателей и расширенных знаков полностью игнорированы. "
-"Все обнаруженные мной тренажёры позволяют научиться набирать буковки, "
-"циферки и немного пунктуации. Но этого мало. И я задумал создать тренажёр, "
-"который позволит натренировать руки пользоваться всей клавиатурой целиком. "
-"Ведь кнопки Ввода, Контрола или Альта ничем не отличаются от кнопок с "
-"буковками. Из этого родилась концепция…</p>"
+"advantage2/\" target=\"_blank\" rel=\"noreferrer nofollow\">Kinesis "
+"Advantage 2</a> и тут незамедлительно выяснилось, что я не умею на ней "
+"работать. Буковки-то я ещё вспомнил как набирать, благо, метод слепой печати "
+"я освоил в своё время, но вот всё остальное оказалось очень сильно не на "
+"своих местах, Что уронило мою продуктивность практически в ноль. Я вновь "
+"ощутил себя человеком севшим за клавиатуру впервые в жизни. Так как я уже "
+"тренировался слепой печати, то решил просто обновить свои навыки на новой "
+"клавиатуре пройдя какой-нибудь известный курс. Нашёл какой-то тренажёр и "
+"даже начал нажимать буковки, но тут я понял, что тренажёр совершенно не "
+"занимается всякими служебными кнопочками. Тогда стал искать другие тренажёры "
+"и перепробовал многие, но результат был тот же. Пробел с вводом и "
+"переключатель строчных/прописных букв ещё как-то учитываются всеми этими "
+"многочисленными курсами, но множество прочих переключателей и расширенных "
+"знаков полностью игнорированы. Все обнаруженные мной тренажёры позволяют "
+"научиться набирать буковки, циферки и немного пунктуации. Но этого мало. И я "
+"задумал создать тренажёр, который позволит натренировать руки пользоваться "
+"всей клавиатурой целиком. Ведь кнопки Ввода, Контрола или Альта ничем не "
+"отличаются от кнопок с буковками. Из этого родилась концепция…</p>"
 
 #: src/routes/HomePage/HomePage.tsx:29
 msgctxt "HomePage"
@@ -358,7 +359,7 @@ msgctxt "KeyboardPage"
 msgid "Words:"
 msgstr "Всего слов:"
 
-#: src/components/Trainer/LessonLabel.tsx:21
+#: src/components/Trainer/LessonLabel.tsx:22
 msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr "Урок №%1."
@@ -383,12 +384,12 @@ msgctxt "Logo"
 msgid "kb-trainer"
 msgstr "kb-trainer"
 
-#: src/components/Menu/Menu.tsx:43
+#: src/components/Menu/Menu.tsx:42
 msgctxt "Menu"
 msgid "Buy me some tea..."
 msgstr "На чай…"
 
-#: src/components/Menu/Menu.tsx:33
+#: src/components/Menu/Menu.tsx:30
 msgctxt "Menu"
 msgid "Keyboards"
 msgstr "Клавиатуры"
@@ -423,14 +424,14 @@ msgctxt "PracticePage"
 msgid "Stop Training"
 msgstr "Остановить занятие"
 
-#: src/routes/StatsPage/StatsChart.tsx:121
-#: src/routes/StatsPage/StatsChart.tsx:55
+#: src/routes/StatsPage/StatsChart.tsx:122
+#: src/routes/StatsPage/StatsChart.tsx:56
 msgctxt "StatsChart"
 msgid "Errors"
 msgstr "Ошибки"
 
-#: src/routes/StatsPage/StatsChart.tsx:31
-#: src/routes/StatsPage/StatsChart.tsx:84
+#: src/routes/StatsPage/StatsChart.tsx:32
+#: src/routes/StatsPage/StatsChart.tsx:85
 msgctxt "StatsChart"
 msgid "Strokes"
 msgstr "Нажатия"
@@ -440,18 +441,18 @@ msgctxt "StatsPage"
 msgid "Back to Keyboard"
 msgstr "Вернуться к Клавиатуре"
 
-#: src/components/Trainer/SummaryChart.tsx:109
+#: src/components/Trainer/SummaryChart.tsx:111
 msgctxt "SummaryChart"
 msgid "Last session"
 msgstr "Последнее занятие"
 
-#: src/components/Trainer/SummaryChart.tsx:24
-#: src/components/Trainer/SummaryChart.tsx:42
+#: src/components/Trainer/SummaryChart.tsx:26
+#: src/components/Trainer/SummaryChart.tsx:44
 msgctxt "SummaryChart"
 msgid "Strokes"
 msgstr "Нажатия"
 
-#: src/components/Trainer/SummaryChart.tsx:71
+#: src/components/Trainer/SummaryChart.tsx:73
 msgctxt "SummaryChart"
 msgid "Total"
 msgstr "Всего"

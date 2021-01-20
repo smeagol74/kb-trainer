@@ -1,6 +1,10 @@
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+"Project-Id-Version: kb-trainer\n"
+"Language-Team: https://crowdin.com/project/kb-trainer\n"
+"POT-Creation-Date: 2021-01-20T14:25:34.296Z\n"
 
 #: src/routes/AboutPage/AboutPage.tsx:17
 msgctxt "AboutPage"
@@ -198,7 +202,7 @@ msgctxt "KeyboardPage"
 msgid "Words:"
 msgstr ""
 
-#: src/components/Trainer/LessonLabel.tsx:21
+#: src/components/Trainer/LessonLabel.tsx:22
 msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr ""
@@ -223,12 +227,12 @@ msgctxt "Logo"
 msgid "kb-trainer"
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:43
+#: src/components/Menu/Menu.tsx:42
 msgctxt "Menu"
 msgid "Buy me some tea..."
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:33
+#: src/components/Menu/Menu.tsx:30
 msgctxt "Menu"
 msgid "Keyboards"
 msgstr ""
@@ -263,14 +267,14 @@ msgctxt "PracticePage"
 msgid "Stop Training"
 msgstr ""
 
-#: src/routes/StatsPage/StatsChart.tsx:121
-#: src/routes/StatsPage/StatsChart.tsx:55
+#: src/routes/StatsPage/StatsChart.tsx:122
+#: src/routes/StatsPage/StatsChart.tsx:56
 msgctxt "StatsChart"
 msgid "Errors"
 msgstr ""
 
-#: src/routes/StatsPage/StatsChart.tsx:31
-#: src/routes/StatsPage/StatsChart.tsx:84
+#: src/routes/StatsPage/StatsChart.tsx:32
+#: src/routes/StatsPage/StatsChart.tsx:85
 msgctxt "StatsChart"
 msgid "Strokes"
 msgstr ""
@@ -280,18 +284,18 @@ msgctxt "StatsPage"
 msgid "Back to Keyboard"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:109
+#: src/components/Trainer/SummaryChart.tsx:111
 msgctxt "SummaryChart"
 msgid "Last session"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:24
-#: src/components/Trainer/SummaryChart.tsx:42
+#: src/components/Trainer/SummaryChart.tsx:26
+#: src/components/Trainer/SummaryChart.tsx:44
 msgctxt "SummaryChart"
 msgid "Strokes"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:71
+#: src/components/Trainer/SummaryChart.tsx:73
 msgctxt "SummaryChart"
 msgid "Total"
 msgstr ""

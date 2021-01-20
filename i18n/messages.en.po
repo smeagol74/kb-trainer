@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2021-01-20T14:24:49.876Z\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -36,8 +36,8 @@ msgstr ""
 "\n"
 "<p>To get used to any keyboard, it is necessary to press each key many "
 "times. In the beginning, you consciously pay attention to this, then the "
-"hands \"remember\" the key’s location on the keyboard and after that, they act "
-"automatically.</p>\n"
+"hands \"remember\" the key’s location on the keyboard and after that, they "
+"act automatically.</p>\n"
 "\n"
 "<p>The trainer is flexible. It allows you to practice with any physical "
 "keyboard, any language, any keyboard layout, and any typing principles.</p>"
@@ -49,14 +49,16 @@ msgstr ""
 "<p>Good luck!</p>\n"
 "\n"
 "<p>If you’d like to discuss a feature request, open <a href=\"https://github."
-"com/smeagol74/kb-trainer/discussions\" target=\"_blank\" rel=\"noreferrer nofollow\">a discussion on "
-"GitHub</a> and follow <a href=\"https://github.com/smeagol74/kb-trainer/blob/"
-"master/CONTRIBUTING.md\" target=\"_blank\" rel=\"noreferrer nofollow\">the guide</a>. If you found a bug, "
-"open <a href=\"https://github.com/smeagol74/kb-trainer/issues\" "
-"target=\"_blank\" rel=\"noreferrer nofollow\">an issue on GitHub</a> and follow <a href=\"https://github."
-"com/smeagol74/kb-trainer/blob/master/CONTRIBUTING.md\" target=\"_blank\" rel=\"noreferrer nofollow\">the "
-"guide</a>. The more detail the better! If you want to contribute, submit <a "
-"href=\"https://github.com/smeagol74/kb-trainer/pulls\" target=\"_blank\" rel=\"noreferrer nofollow\">a pull "
+"com/smeagol74/kb-trainer/discussions\" target=\"_blank\" rel=\"noreferrer "
+"nofollow\">a discussion on GitHub</a> and follow <a href=\"https://github."
+"com/smeagol74/kb-trainer/blob/master/CONTRIBUTING.md\" target=\"_blank\" rel="
+"\"noreferrer nofollow\">the guide</a>. If you found a bug, open <a href="
+"\"https://github.com/smeagol74/kb-trainer/issues\" target=\"_blank\" rel="
+"\"noreferrer nofollow\">an issue on GitHub</a> and follow <a href=\"https://"
+"github.com/smeagol74/kb-trainer/blob/master/CONTRIBUTING.md\" target=\"_blank"
+"\" rel=\"noreferrer nofollow\">the guide</a>. The more detail the better! If "
+"you want to contribute, submit <a href=\"https://github.com/smeagol74/kb-"
+"trainer/pulls\" target=\"_blank\" rel=\"noreferrer nofollow\">a pull "
 "request</a>!</p>"
 
 #: src/routes/HomePage/HomePage.tsx:26
@@ -81,22 +83,23 @@ msgstr ""
 "<h2>History of creation Idea</h2>\n"
 "\n"
 "<p>In the fall of 2020, my beloved wife gave me the new wonderful keyboard "
-"<a href=\"https://kinesis-ergo.com/shop/advantage2/\" target=\"_blank\" rel=\"noreferrer nofollow\">Kinesis "
-"Advantage 2</a> . And it immediately became quite clear that I can’t type on "
-"it. I remembered how to type letters because I’ve mastered touch typing. All "
-"other keys were out of their usual place. And my productivity was dropped to "
-"almost zero. I felt like I use the keyboard for the first time in my life. "
-"Since I have already known touch typing, I decided to update my skills on a "
-"new keyboard by taking a suitable course. I found a trainer and even started "
-"to press the letters, but then I realized that the trainer has no exercise "
-"for service buttons. Then I looked for other trainers and tried many… the "
-"same result. The Spacebar and Enter and the upper/lower case switch are "
-"somehow taken into account by all these numerous courses, but many other "
-"switches and extended characters are completely ignored. All the trainers I "
-"found allow me to learn how to type letters, numbers, and a little "
-"punctuation. This isn’t enough! And I decided to create the trainer that "
-"trains my hands to use the entire keyboard. In fact, Enter, Control and Alt "
-"buttons have no differences from the letter buttons. This is new concept…</p>"
+"<a href=\"https://kinesis-ergo.com/shop/advantage2/\" target=\"_blank\" rel="
+"\"noreferrer nofollow\">Kinesis Advantage 2</a> . And it immediately became "
+"quite clear that I can’t type on it. I remembered how to type letters "
+"because I’ve mastered touch typing. All other keys were out of their usual "
+"place. And my productivity was dropped to almost zero. I felt like I use the "
+"keyboard for the first time in my life. Since I have already known touch "
+"typing, I decided to update my skills on a new keyboard by taking a suitable "
+"course. I found a trainer and even started to press the letters, but then I "
+"realized that the trainer has no exercise for service buttons. Then I looked "
+"for other trainers and tried many… the same result. The Spacebar and Enter "
+"and the upper/lower case switch are somehow taken into account by all these "
+"numerous courses, but many other switches and extended characters are "
+"completely ignored. All the trainers I found allow me to learn how to type "
+"letters, numbers, and a little punctuation. This isn’t enough! And I decided "
+"to create the trainer that trains my hands to use the entire keyboard. In "
+"fact, Enter, Control and Alt buttons have no differences from the letter "
+"buttons. This is new concept…</p>"
 
 #: src/routes/HomePage/HomePage.tsx:29
 msgctxt "HomePage"
@@ -113,11 +116,12 @@ msgstr ""
 "containts a set of symbol or combinations. You can train every Keyboard "
 "separately.</li>\n"
 "\n"
-"<li>There are also complex \"Kayboard\", for example \"English\" pack contains "
-"all English letters, numbers and special keys, and punctuation.</li>\n"
+"<li>There are also complex \"Kayboard\", for example \"English\" pack "
+"contains all English letters, numbers and special keys, and punctuation.</"
+"li>\n"
 "\n"
-"<li>The \"Keyboard\" workout consists of lessons. Each lesson adds a subset of "
-"symbols / keys. To study the lesson you make exercises. In the beginning "
+"<li>The \"Keyboard\" workout consists of lessons. Each lesson adds a subset "
+"of symbols / keys. To study the lesson you make exercises. In the beginning "
 "they contain only the symbols / keys of this lesson (up to a certain level). "
 "Then all symbols from the lessons already passed are mixed in.</li>\n"
 "\n"
@@ -343,7 +347,7 @@ msgctxt "KeyboardPage"
 msgid "Words:"
 msgstr ""
 
-#: src/components/Trainer/LessonLabel.tsx:21
+#: src/components/Trainer/LessonLabel.tsx:22
 msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr ""
@@ -368,12 +372,12 @@ msgctxt "Logo"
 msgid "kb-trainer"
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:43
+#: src/components/Menu/Menu.tsx:42
 msgctxt "Menu"
 msgid "Buy me some tea..."
 msgstr ""
 
-#: src/components/Menu/Menu.tsx:33
+#: src/components/Menu/Menu.tsx:30
 msgctxt "Menu"
 msgid "Keyboards"
 msgstr ""
@@ -388,38 +392,55 @@ msgctxt "OtherKeyboard"
 msgid "keys:"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:54
+#: src/routes/PracticePage/PracticePage.tsx:45
 msgctxt "PracticePage"
 msgid "Cancel Training"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:59
+#: src/routes/PracticePage/PracticePage.tsx:50
 msgctxt "PracticePage"
 msgid "Pause"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:57
+#: src/routes/PracticePage/PracticePage.tsx:48
 msgctxt "PracticePage"
 msgid "Restart Lesson"
 msgstr ""
 
-#: src/routes/PracticePage/PracticePage.tsx:62
+#: src/routes/PracticePage/PracticePage.tsx:53
 msgctxt "PracticePage"
 msgid "Stop Training"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:109
+#: src/routes/StatsPage/StatsChart.tsx:122
+#: src/routes/StatsPage/StatsChart.tsx:56
+msgctxt "StatsChart"
+msgid "Errors"
+msgstr ""
+
+#: src/routes/StatsPage/StatsChart.tsx:32
+#: src/routes/StatsPage/StatsChart.tsx:85
+msgctxt "StatsChart"
+msgid "Strokes"
+msgstr ""
+
+#: src/routes/StatsPage/StatsPage.tsx:68
+msgctxt "StatsPage"
+msgid "Back to Keyboard"
+msgstr ""
+
+#: src/components/Trainer/SummaryChart.tsx:111
 msgctxt "SummaryChart"
 msgid "Last session"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:24
-#: src/components/Trainer/SummaryChart.tsx:42
+#: src/components/Trainer/SummaryChart.tsx:26
+#: src/components/Trainer/SummaryChart.tsx:44
 msgctxt "SummaryChart"
 msgid "Strokes"
 msgstr ""
 
-#: src/components/Trainer/SummaryChart.tsx:71
+#: src/components/Trainer/SummaryChart.tsx:73
 msgctxt "SummaryChart"
 msgid "Total"
 msgstr ""
