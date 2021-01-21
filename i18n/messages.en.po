@@ -4,14 +4,14 @@ msgstr ""
 "Language: en\n"
 "Project-Id-Version: kb-trainer\n"
 "Language-Team: English\n"
-"POT-Creation-Date: 2021-01-20T14:25:34.296Z\n"
+"POT-Creation-Date: 2021-01-21T17:31:17.211Z\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: kb-trainer\n"
 "X-Crowdin-Project-ID: 436856\n"
 "X-Crowdin-Language: en\n"
 "X-Crowdin-File: /master/i18n/messages.pot\n"
 "X-Crowdin-File-ID: 6\n"
-"PO-Revision-Date: 2021-01-20 14:41\n"
+"PO-Revision-Date: 2021-01-21 18:03\n"
 
 #: src/routes/AboutPage/AboutPage.tsx:17
 msgctxt "AboutPage"
@@ -234,7 +234,7 @@ msgctxt "KeyboardPage"
 msgid "Words:"
 msgstr ""
 
-#: src/components/Trainer/LessonLabel.tsx:22
+#: src/components/Trainer/LessonLabel.tsx:26
 msgctxt "LessonLabel"
 msgid "Lesson %1."
 msgstr ""
@@ -269,7 +269,7 @@ msgctxt "Menu"
 msgid "Keyboards"
 msgstr ""
 
-#: src/routes/UserPage/MyKeyboard.tsx:39
+#: src/routes/UserPage/MyKeyboard.tsx:38
 msgctxt "MyKeyboard"
 msgid "keys:"
 msgstr ""
@@ -311,7 +311,7 @@ msgctxt "StatsChart"
 msgid "Strokes"
 msgstr ""
 
-#: src/routes/StatsPage/StatsPage.tsx:68
+#: src/routes/StatsPage/StatsPage.tsx:67
 msgctxt "StatsPage"
 msgid "Back to Keyboard"
 msgstr ""
@@ -332,22 +332,22 @@ msgctxt "SummaryChart"
 msgid "Total"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:152
+#: src/components/Trainer/Trainer.tsx:153
 msgctxt "Trainer"
 msgid "Hot streak: %1"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:149
+#: src/components/Trainer/Trainer.tsx:150
 msgctxt "Trainer"
 msgid "Hot streak: %1 / %2"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:146
+#: src/components/Trainer/Trainer.tsx:147
 msgctxt "Trainer"
 msgid "keyboard:"
 msgstr ""
 
-#: src/components/Trainer/Trainer.tsx:150
+#: src/components/Trainer/Trainer.tsx:151
 msgctxt "Trainer"
 msgid "Metronome Tempo: %1"
 msgstr ""
@@ -357,14 +357,24 @@ msgctxt "Trainer"
 msgid "Paused. "
 msgstr ""
 
-#: src/components/Trainer/TrainerInstruction.tsx:37
+#: src/components/Trainer/TrainerInstruction.tsx:57
 msgctxt "TrainerInstruction"
-msgid "Make sure you have proper keyboard layout selected. Find required keys on keyboard and place your hands in proper position. Prepare to start."
+msgid "Now make sure you have proper keyboard layout selected. Find required keys on keyboard and place your hands in proper position. Prepare to start and good luck!"
 msgstr ""
 
-#: src/components/Trainer/TrainerInstruction.tsx:35
+#: src/components/Trainer/TrainerInstruction.tsx:40
 msgctxt "TrainerInstruction"
 msgid "Press space bar to start"
+msgstr ""
+
+#: src/components/Trainer/TrainerInstruction.tsx:48
+msgctxt "TrainerInstruction"
+msgid "You are in familiarization with keys mode. Your metronome should be configured by you manually to suit your needs. Remember that proper keypress is better then quick. If you are training some sort of touch typing, do not forget to revert the finger to initial position each time after nice press. Do not hurry. This is time for your fingers to remember all proper movements from the base position to the proper key. This is most important in the first part of the lesson, when you are working with the single key only. It could be very easy to quickly type all the keys just with one finter staying over the proper key. This is wrong. Try to move finger to proper key from the base position, press the key, and return the finger back to the base position carefully and with the proper tempo. If you make a lot of mistakes, decrease your metronome tempo to comfortable level, so it not hurry you."
+msgstr ""
+
+#: src/components/Trainer/TrainerInstruction.tsx:44
+msgctxt "TrainerInstruction"
+msgid "You are in speed training mode. Your metronome will automatically increase the tempo when you will be making some number of nice key presses in a row, and will decrease it if you will make errors. Please, do not hurry, proper keypress with right finger is better then quickly typed keys with a lot of errors. Speed will come to you automatically when fingers will remember proper keys positions."
 msgstr ""
 
 #: src/components/Trainer/TrainerLine.tsx:120
