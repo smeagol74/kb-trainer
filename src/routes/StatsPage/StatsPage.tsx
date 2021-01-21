@@ -11,7 +11,6 @@ import { useContext } from 'preact/hooks';
 import { i18nContext, UserContext } from '../../App';
 import { useUserKeyboardStats } from '../../components/Trainer/useUserKeyboardStats';
 import { useKeyboard } from '../../components/Db/effects/useKeyboard';
-import { KeyboardCalc } from '../../components/Db/Keyboard';
 import _ from 'lodash';
 import { userKeyboard } from '../../utils/user';
 import { keyStrokesWithErrors, StudyStats } from '../../components/Trainer/StudyStats';
@@ -24,8 +23,7 @@ interface IStatsPageProps extends RoutableProps {
 function _extendStats(keys: string[], values?: Dict<number>): Dict<number> {
 	const result: Dict<number> = {};
 	_.each(keys, (key) => {
-		const v = values?.[key] ?? 0;
-		result[key] = v;
+		result[key] = values?.[key] ?? 0;
 	});
 	return result;
 }
@@ -49,7 +47,7 @@ export const StatsPage: FunctionComponent<IStatsPageProps> = ({ className, id })
 	const [stats] = useUserKeyboardStats(user, keyboard);
 
 	const uKey = userKeyboard(user, keyboard);
-	const keys = KeyboardCalc.keys(keyboard) ?? [];
+	const keys = keyboard?.keys ?? [];
 	const errors = _extendStats(keys, stats?.errors ?? {});
 	const strokes = _extendStats(keys, _normalizeStrokes(stats?.strokes, stats?.errors, uKey.error.extraStrokes));
 

@@ -3,7 +3,6 @@ import type { FunctionalComponent } from 'preact';
 import { h } from 'preact';
 import type { Keyboard } from '../../components/Db/Keyboard';
 import { Icon } from '../../components/Icon/Icon';
-import _ from 'lodash';
 import clsx from 'clsx';
 import { route } from 'preact-router';
 import { url } from '../sitemap';
@@ -37,7 +36,7 @@ export const MyKeyboard: FunctionalComponent<IMyKeyboardProps> = ({ keyboard, cl
 			</div>
 			<div className="MyKeyboard__block">
 				<div className="MyKeyboard__block-label">{_p('MyKeyboard', 'keys:')}</div>
-				<div className="MyKeyboard__block-value">{_(keyboard.lessons).flatten().size()}</div>
+				<div className="MyKeyboard__block-value">{keyboard.keys.length}</div>
 			</div>
 		</div>
 		{stats && <KeyboardProgress {...{

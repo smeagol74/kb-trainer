@@ -111,7 +111,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		{TrainerState.PAUSED === state && _p('Trainer', 'Paused. ')}
 		<LessonLabel {...{
 			keyboard: keyboard.name,
-			lesson: study.getLesson(),
+			lesson: [study.getLesson()],
 			lessonNumber: study.getLessonNumber(),
 			lessonsIncomplete: study.areLessonsIncomplete(),
 		}} />
@@ -129,6 +129,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		}} />}
 		{TrainerState.IN_LESSON !== state && <TrainerInstruction {...{
 			onStart: _onStart,
+			speedTraining: !study?.areLessonsIncomplete(),
 		}} >
 			<div className="Trainer__header">{sessionLabel}</div>
 			{study && study.areLessonsIncomplete() && <LessonProgress {...{
@@ -136,7 +137,7 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				stats: study.getStats(),
 				strokes: study.getConfig().strokes,
 				extraStrokes: study.getConfig().error.extraStrokes,
-				keys: study.getLesson(),
+				keys: [study.getLesson()],
 			}} />}
 			{study && <KeyboardProgress {...{
 				className: 'Trainer__progress',

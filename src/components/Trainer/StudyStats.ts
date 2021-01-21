@@ -1,7 +1,6 @@
 import type { UserKeyboard } from '../Db/User';
 import _ from 'lodash';
 import { ensureNumber } from '../../utils/stats';
-import type { KeyboardLesson } from '../Db/Keyboard';
 
 export interface StudyStats {
 	strokes: Dict<number>;
@@ -36,15 +35,15 @@ export function isTrainingComplete(cfg: UserKeyboard, stats: StudyStats, keys: s
 	return isComplete(stats, cfg.error.extraStrokes, cfg.strokes.complete, keys);
 }
 
-export function firstIncompleteLesson(cfg: UserKeyboard, stats: StudyStats, lessons: KeyboardLesson[]): number {
+export function firstIncompleteLesson(cfg: UserKeyboard, stats: StudyStats, keys: string[]): number {
 	let result = 0;
 	let complete = true;
-	_.each(lessons, (lesson) => {
-		if (complete && isLessonComplete(cfg, stats, lesson)) {
+	_.each(keys, (key) => {
+		if (complete && isLessonComplete(cfg, stats, [key])) {
 			result++;
 		} else {
 			complete = false;
 		}
 	});
-	return Math.min(result, lessons.length - 1);
+	return Math.min(result, keys.length - 1);
 }

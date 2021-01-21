@@ -1,4 +1,4 @@
-import type { Keyboard, KeyboardLesson } from '../Db/Keyboard';
+import type { Keyboard } from '../Db/Keyboard';
 import type { User, UserKeyboard } from '../Db/User';
 import type { StateUpdater } from 'preact/hooks';
 import _ from 'lodash';
@@ -84,16 +84,15 @@ export class StudyCourse {
 			keys: [],
 			shift: 0,
 		};
-		const lesson = this.getLesson();
+		const lesson = [this.getLesson()];
 		if (this._isInitialLessonComplete(lesson)) {
-			result.keys = _(this.keyboard.lessons).slice(0, this.lessonIdx + 1).flatten().value();
+			result.keys = _(this.keyboard.keys).slice(0, this.lessonIdx + 1).value();
 		} else {
 			result.keys = lesson;
 		}
 		if (_.indexOf(result.keys, Key.shift) > -1) {
 			const strokes = _.map(result.keys, k => this._statsKeyStrokesWithErrors(k));
 			const shift = this._statsKeyStrokesWithErrors(Key.shift);
-			const total = _.sum(strokes);
 			const max = _.max(strokes) ?? 0;
 			if (max > 0) {
 				result.shift = (max - shift) / (max * 2);
@@ -144,8 +143,8 @@ export class StudyCourse {
 		return this.text;
 	}
 
-	getLesson(): KeyboardLesson {
-		return this.keyboard.lessons[this.lessonIdx];
+	getLesson(): string {
+		return this.keyboard.keys[this.lessonIdx];
 	}
 
 	getLessonNumber(): number {
@@ -185,8 +184,7 @@ export class StudyCourse {
 	}
 
 	private _isLessonsComplete(): boolean {
-		const keys = _(this.keyboard.lessons).flatten().value();
-		return isLessonComplete(this.config, this.stats, keys);
+		return isLessonComplete(this.config, this.stats, this.keyboard.keys);
 	}
 
 	private _incHotStreak(value: number, errors: number) {
@@ -216,11 +214,11 @@ export class StudyCourse {
 	}
 
 	private _selectBestLesson(errors: number) {
-		let idx = firstIncompleteLesson(this.config, this.stats, this.keyboard.lessons);
+		let idx = firstIncompleteLesson(this.config, this.stats, this.keyboard.keys);
 		if ((idx === this.lessonIdx + 1) && errors > 0) {
 			idx = this.lessonIdx;
 		}
-		idx = Math.min(idx, this.keyboard.lessons.length - 1);
+		idx = Math.min(idx, this.keyboard.keys.length - 1);
 		this.lessonIdx = idx;
 	}
 
@@ -240,8 +238,8 @@ export class StudyCourse {
 
 		this.text = [];
 		this.lastStats = res;
-		if (this.lessonIdx > this.keyboard.lessons.length) {
-			this.lessonIdx = this.keyboard.lessons.length - 1;
+		if (this.lessonIdx > this.keyboard.keys.length) {
+			this.lessonIdx = this.keyboard.keys.length - 1;
 		}
 		this._saveConfig();
 	}
@@ -251,7 +249,7 @@ export class StudyCourse {
 	}
 
 	summary(): ISummaryData {
-		const keys = _(this.keyboard.lessons).slice(0, this.lessonIdx + 1).flatten().value();
+		const keys = _(this.keyboard.keys).slice(0, this.lessonIdx + 1).value();
 		const result: ISummaryData = {
 			keys,
 			total: {

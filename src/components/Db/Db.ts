@@ -51,9 +51,9 @@ class DexieDb extends Dexie {
 							.then(keyboards => {
 								return {
 									...keyboard,
-									lessons: [
-										..._(keyboards).map('lessons').flatten().value(),
-										...keyboard.lessons,
+									keys: [
+										..._(keyboards).map('keys').flatten().value(),
+										...keyboard.keys,
 									],
 								};
 							});

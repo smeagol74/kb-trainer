@@ -5,5 +5,5 @@ export const pack_ru: Keyboard = {
 	name: 'Всё Русское (пакет)',
 	description: 'Все клавиатуры русской раскладки в одном пакете.',
 	keyboards: ['ru', 'numbers', 'punct_ru', 'specials'],
-	lessons: [],
+	keys: [],
 };

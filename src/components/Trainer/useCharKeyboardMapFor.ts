@@ -15,7 +15,7 @@ export function useCharKeyboardMapFor(keyboard: Keyboard): Dict<string> {
 				Promise.all(promises).then(keyboards => {
 					const res: Dict<string> = {};
 					_.each(keyboards, keyboard => {
-						_(keyboard?.lessons).flatten().each(key => {
+						_(keyboard?.keys).each(key => {
 							res[key] = keyboard!.id;
 						});
 					});

@@ -43,10 +43,10 @@ export function useUserKeyboardStats(user?: User, keyboard?: Keyboard): [StudySt
 	useEffect(() => {
 		if (user && keyboard) {
 			_getUserKeyboardStats(user!.id, KeyboardCalc.keyboards(keyboard!))
-				.then(([stats, lesson]) => {
+				.then(([stats]) => {
 					setStats(stats);
 					const cfg = userKeyboard(user, keyboard);
-					setLesson(firstIncompleteLesson(cfg, stats, keyboard.lessons));
+					setLesson(firstIncompleteLesson(cfg, stats, keyboard.keys));
 				});
 		}
 	}, [user, keyboard, setStats, setLesson]);

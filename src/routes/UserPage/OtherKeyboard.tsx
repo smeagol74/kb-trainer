@@ -31,7 +31,7 @@ export const OtherKeyboard: FunctionalComponent<IOtherKeyboardProps> = ({ keyboa
 		</div>
 		<div className="OtherKeyboard__block">
 			<div className="OtherKeyboard__block-label">{_p('OtherKeyboard', 'keys:')}</div>
-			<div className="OtherKeyboard__block-value">{_(keyboard.lessons).flatten().size()}</div>
+			<div className="OtherKeyboard__block-value">{_.size(keyboard.keys)}</div>
 		</div>
 	</div>;
 };

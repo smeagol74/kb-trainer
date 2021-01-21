@@ -1,5 +1,4 @@
 import { Fragment, FunctionalComponent, h } from 'preact';
-import type { KeyboardLesson } from '../Db/Keyboard';
 import { Icon } from '../Icon/Icon';
 import _ from 'lodash';
 import { useContext } from 'preact/hooks';
@@ -8,12 +7,17 @@ import { keyName } from '../../utils/keyboard';
 
 export interface ILessonLabelProps {
 	keyboard: string;
-	lesson: KeyboardLesson;
+	lesson: string[];
 	lessonNumber: number;
 	lessonsIncomplete: boolean;
 }
 
-export const LessonLabel: FunctionalComponent<ILessonLabelProps> = ({ keyboard, lesson, lessonNumber, lessonsIncomplete }) => {
+export const LessonLabel: FunctionalComponent<ILessonLabelProps> = ({
+																																			keyboard,
+																																			lesson,
+																																			lessonNumber,
+																																			lessonsIncomplete,
+																																		}) => {
 	const { _p } = useContext(i18nContext);
 
 	return <Fragment>

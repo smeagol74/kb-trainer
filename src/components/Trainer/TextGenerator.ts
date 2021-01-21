@@ -25,6 +25,10 @@ export const TextGenerator = {
 	generate(vocab: string, chars: string[], shift: number, length: number, minWordLen: number, maxWordLen: number): string[] {
 		const voc = vocabulary[vocab] ?? vocabulary.random;
 		const result: string[] = [];
+		if (_.uniq(chars).length === 1) {
+			minWordLen = 1;
+			maxWordLen = 3;
+		}
 		for (let i = 0; i < length; i++) {
 			_(voc(chars, shift, minWordLen, maxWordLen)).each(c => result.push(c));
 			if (i !== length - 1) {

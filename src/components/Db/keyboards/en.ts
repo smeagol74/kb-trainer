@@ -2,23 +2,7 @@ import type { Keyboard } from '../Keyboard';
 
 export const en: Keyboard = {
 	id: 'en',
-	name: 'English QWERTY',
+	name: 'English',
 	description: 'Generic English letters.',
-	lessons: [
-		['f', 'j', 'g', 'h'],
-		['d', 'k'],
-		['s', 'l'],
-		['a'],
-		['t', 'y'],
-		['r', 'u'],
-		['b', 'n'],
-		['v', 'm'],
-		['e', 'i'],
-		['c'],
-		['w', 'o'],
-		['x'],
-		['q', 'p'],
-		['z'],
-		['Shift'],
-	],
+	keys: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'Shift'],
 };

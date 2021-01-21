@@ -12,7 +12,7 @@ import { Db } from '../../components/Db/Db';
 import _ from 'lodash';
 import { OtherKeyboard } from '../UserPage/OtherKeyboard';
 import { url } from '../sitemap';
-import Logger from 'js-logger';
+//import Logger from 'js-logger';
 import { Intro, IntroContainerClass } from '../../components/Intro/Intro';
 import clsx from 'clsx';
 import { inputNumberValue } from '../../utils/dom';
@@ -21,7 +21,7 @@ import { LessonRow } from './LessonRow';
 import { KeyboardProgress } from './KeyboardProgress';
 import { userKeyboard } from '../../utils/user';
 
-const log = Logger.get('KeyboardPage');
+//const log = Logger.get('KeyboardPage');
 
 export interface IKeyboardPageProps extends RoutableProps {
 	id?: string;
@@ -115,10 +115,10 @@ export const KeyboardPage: FunctionalComponent<IKeyboardPageProps> = ({ id }) =>
 				</div>}
 				<div className="KeyboardPage__details">
 					<div className="KeyboardPage__details-view">
-						{_.map(keyboard?.lessons, (s, idx) => <LessonRow {...{
+						{_.map(keyboard?.keys, (s, idx) => <LessonRow {...{
 							key: idx,
 							lesson: idx,
-							keys: s,
+							keys: [s],
 							current: lesson,
 							stats: stats,
 							strokes: uKey.strokes,
