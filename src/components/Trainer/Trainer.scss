@@ -31,4 +31,12 @@
 			margin-right: $margin-sm;
 		}
 	}
+
+	.Trainer__info {
+		margin: 8px 0 0 0;
+	}
+
+	.Trainer__hot-streak--good {
+		color: $color-green;
+	}
 }

@@ -18,6 +18,7 @@ import { LessonProgress } from '../../routes/KeyboardPage/LessonProgress';
 import { KeyboardProgress } from '../../routes/KeyboardPage/KeyboardProgress';
 import type { Progress } from '../Db/Progress';
 import { useCharKeyboardMapFor } from './useCharKeyboardMapFor';
+import clsx from 'clsx';
 
 const log = jsLogger.get('Trainer');
 
@@ -41,6 +42,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 	const { user, setUser } = useContext(UserContext);
 
 	const [stats, lesson] = useUserKeyboardStats(user, keyboard);
+
+	const [noErrors, setNoErrors] = useState<boolean>(false);
 
 	const charKeyboardMap = useCharKeyboardMapFor(keyboard);
 
@@ -101,6 +104,8 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 		Db.progress.bulkPut(progress);
 		setState(TrainerState.BETWEEN_LESSONS);
 		study?.complete(res);
+		const errors = _(res.errors).values().sum();
+		setNoErrors(errors === 0);
 	}
 
 	function _onStart() {
@@ -146,8 +151,9 @@ export const Trainer: FunctionalComponent<ITrainerProps> = ({ state, setState, k
 				extraStrokes: study.getConfig().error.extraStrokes,
 				label: study.areLessonsIncomplete() ? _p('Trainer', 'keyboard:') : '',
 			}} />}
-			{study && <div>
-				{_p('Trainer', 'Hot streak: %1 / %2', study.getConfig().error.hotStreak, study.getConfig().error.bestHotStreak)}{' '}
+			{study && <div className={'Trainer__info'}>
+				<span
+					className={clsx('Trainer__hot-streak', { 'Trainer__hot-streak--good': noErrors })}>{_p('Trainer', 'Hot streak: %1 / %2', study.getConfig().error.hotStreak, study.getConfig().error.bestHotStreak)}</span>{' '}
 				{_p('Trainer', 'Metronome Tempo: %1', study.getConfig().metronome.tempo)}
 				{!study.areLessonsIncomplete() &&
 				<span>{' '}{_p('Trainer', 'Hot streak: %1', study.getConfig().metronome.hotStreak)}</span>}
